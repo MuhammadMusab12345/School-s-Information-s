@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions Guide - School's Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <!-- INTERNAL CSS -->
+  <style>
+    /* =============================================
+       GOOGLE FONTS & GLOBAL
+    ============================================= */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Sora:wght@300;400;500;600;700&display=swap');
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: #f5f7fb;
+      position: relative;
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .custom-navbar {
+      width: 100%; 
+      padding: 18px 0;
+      background: rgba(255, 255, 255, 0.97);
+      position: sticky; 
+      top: 0; 
+      z-index: 1000;
+      box-shadow: 0 2px 16px rgba(16, 59, 140, .07);
+    }
+    
+    .logo-img { 
+      width: 90px; 
+      height: 90px; 
+      object-fit: cover; 
+      margin-right: 16px; 
+    }
+    
+    .logo-text-area { 
+      display: flex; 
+      align-items: center; 
+      gap: 16px; 
+    }
+    
+    .logo-title {
+      font-family: 'Sora', sans-serif; 
+      font-size: 30px;
+      font-weight: 700; 
+      color: #103b8c; 
+      margin-bottom: 0;
+    }
+    
+    .logo-tagline {
+      font-size: 11px; 
+      color: #116b11; 
+      line-height: 1.6; 
+      margin-bottom: 0;
+      border-left: 2px solid #5e5e5e; 
+      padding-left: 12px;
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+    }
+    
+    .top-icons { 
+      display: flex; 
+      gap: 22px; 
+      margin-bottom: 10px; 
+    }
+    
+    .icon-box {
+      text-decoration: none; 
+      color: #111;
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+      transition: .3s;
+    }
+    
+    .icon-box:hover { 
+      color: #05880b; 
+    }
+    
+    .navbar-nav { 
+      gap: 24px; 
+    }
+    
+    .nav-link {
+      position: relative; 
+      font-size: 16px; 
+      font-weight: 500;
+      color: #103b8c; 
+      transition: .3s;
+    }
+    
+    .nav-link:hover { 
+      color: #05880b; 
+    }
+    
+    .nav-link::after {
+      content: ""; 
+      position: absolute; 
+      left: 0; 
+      bottom: -4px;
+      width: 0%; 
+      height: 2px; 
+      background: #05880b; 
+      transition: .4s;
+    }
+    
+    .nav-link:hover::after { 
+      width: 100%; 
+    }
+    
+    .navbar-toggler { 
+      border: none; 
+      box-shadow: none; 
+    }
+
+    @media (min-width: 992px) {
+      .navbar-collapse {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 0;
+      }
+    }
+
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        align-items: stretch;
+      }
+      .navbar-nav {
+        width: 100%;
+        text-align: center;
+        gap: 15px;
+        margin-top: 10px;
+      }
+      .nav-link {
+        display: block;
+        padding: 8px 0;
+      }
+      .nav-link::after {
+        display: none;
+      }
+    }
+
+    /* ===== DIAMOND MENU ===== */
+    .diamond-menu { 
+      position: fixed; 
+      right: 40px; 
+      bottom: 40px; 
+      width: 220px; 
+      height: 220px; 
+      z-index: 9999; 
+      pointer-events: none;
+    }
+    
+    .diamond { 
+      position: absolute; 
+      width: 68px; 
+      height: 68px; 
+      transform: rotate(45deg); 
+      border: 2px solid white; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-decoration: none; 
+      transition: 0.4s; 
+      pointer-events: auto;
+    }
+    
+    .diamond i { 
+      transform: rotate(-45deg); 
+      color: white; 
+      font-size: 28px; 
+      transition: 0.4s; 
+    }
+    
+    .diamond span { 
+      position: absolute; 
+      transform: rotate(-45deg); 
+      color: white; 
+      font-size: 13px; 
+      font-weight: 600; 
+      opacity: 0; 
+      transition: 0.4s; 
+    }
+    
+    .diamond:hover { 
+      transform: rotate(45deg) scale(1.1); 
+    }
+    
+    .diamond:hover i { 
+      opacity: 0; 
+    }
+    
+    .diamond:hover span { 
+      opacity: 1; 
+    }
+    
+    .diamond-blue   { background: #0d6efd; left: 30px; top: 95px; }
+    .diamond-yellow { background: #f1c40f; left: 90px; top: 40px; }
+    .diamond-green  { background: #198754; right: 5px; top: 95px; }
+    .diamond-orange { background: #fd7e14; left: 90px; bottom: 0; }
+
+    /* ===== SHARED UTILITIES ===== */
+    .adm-sublabel {
+      font-size: 11px; font-weight: 700; letter-spacing: 4px;
+      color: rgba(255, 255, 255, 0.65); text-transform: uppercase;
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    
+    .adm-sublabel-dark {
+      font-size: 11px; font-weight: 700; letter-spacing: 4px;
+      color: #05880b; text-transform: uppercase; margin-bottom: 12px;
+      display: block; text-align: center;
+    }
+    
+    .adm-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #7fffd4; display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: 0.5; } }
+
+    .adm-sec-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 800; color: #103b8c;
+      line-height: 1.1; margin-bottom: 14px; letter-spacing: -0.5px;
+    }
+    
+    .adm-sec-title.white { color: #ffffff; }
+    .adm-sec-sub { font-size: 16px; color: #666; max-width: 560px; margin: 0 auto; line-height: 1.75; }
+    .adm-sec-head { margin-bottom: 60px; }
+
+    /* ===== BUTTONS ===== */
+    .adm-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 32px; border-radius: 50px;
+      font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700;
+      text-decoration: none; transition: all 0.3s ease; cursor: pointer;
+    }
+    
+    .adm-btn i { font-size: 16px; transition: transform 0.3s; }
+    .adm-btn:hover i { transform: translateX(4px); }
+
+    .adm-btn-primary {
+      background: #fff; color: #103b8c; border: 2px solid #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    
+    .adm-btn-primary:hover {
+      background: #e8f0fe; color: #103b8c;
+      transform: translateY(-2px); box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+    }
+    
+    .adm-btn-outline {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+    }
+    
+    .adm-btn-outline:hover {
+      background: rgba(255, 255, 255, 0.15); border-color: #fff; color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    .adm-btn-dark {
+      background: #103b8c; color: #fff; border: 2px solid #103b8c;
+      box-shadow: 0 8px 24px rgba(16, 59, 140, 0.3);
+    }
+    
+    .adm-btn-dark:hover {
+      background: #0d6efd; border-color: #0d6efd; color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    .adm-btn-outline-white {
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+    }
+    
+    .adm-btn-outline-white:hover {
+      background: #fff; color: #103b8c;
+      transform: translateY(-2px);
+    }
+
+    /* ================================================
+       DECORATIVE SHAPES
+    ================================================ */
+    .sec-shape {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 1;
+    }
+
+    /* ================================================
+       1. HERO
+    ================================================ */
+    .adm-hero {
+      position: relative; min-height: 58vh;
+      display: flex; align-items: center;
+      overflow: hidden; padding: 80px 0;
+      background: linear-gradient(135deg, #0a1f6e 0%, #0d4f8c 40%, #0a8a7a 100%);
+    }
+    
+    .adm-hero .sec-shape.sh1 { width: 500px; height: 500px; background: rgba(255, 19, 2, 0.3); top: -150px; right: -80px; }
+    .adm-hero .sec-shape.sh2 { width: 220px; height: 220px; background: rgba(253, 4, 129, 0.15); bottom: 60px; left: 40%; border-radius: 0; transform: rotate(45deg); }
+    .adm-hero .sec-shape.sh3 { width: 120px; height: 120px; background: rgba(9, 247, 9, 0.15); top: 80px; left: 6%; }
+    .adm-hero .sec-shape.sh4 { width: 300px; height: 300px; background: rgba(241, 123, 13, 0.2); bottom: -80px; right: 15%; }
+
+    .adm-hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    
+    .adm-hero-content {
+      position: relative; z-index: 5; max-width: 680px;
+      padding: 0 15px;
+    }
+    
+    .adm-hero-h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700; color: #fff;
+      line-height: 1.08; margin-bottom: 22px; letter-spacing: -1.5px;
+    }
+    
+    .adm-hero-accent {
+      position: relative; display: inline;
+      background: linear-gradient(90deg, #7fffd4, #38bdf8);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .adm-hero-para {
+      font-size: 17px; line-height: 1.8;
+      color: rgba(255, 255, 255, 0.75); max-width: 500px; margin-bottom: 40px;
+    }
+    
+    .adm-hero-btns { display: flex; gap: 18px; flex-wrap: wrap; }
+
+    /* ================================================
+       2. STEPS
+    ================================================ */
+    .adm-steps {
+      padding: 80px 0;
+      background: #ffffff;
+      position: relative; overflow: hidden;
+    }
+    
+    .adm-steps::before {
+      content: ''; position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(16, 59, 140, 0.05), rgba(10, 138, 122, 0.05));
+      top: -200px; right: -150px; pointer-events: none;
+    }
+    
+    .steps-grid {
+      display: grid; 
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px; 
+      position: relative;
+      overflow: visible;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .step-card {
+      background: #f8faff; border-radius: 18px;
+      padding: 36px 26px; position: relative;
+      border: 1.5px solid rgba(16, 59, 140, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: visible;
+    }
+    
+    .step-card::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #103b8c, #0a8a7a);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    
+    .step-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(16, 59, 140, 0.12); }
+    .step-card:hover::after { transform: scaleX(1); }
+    
+    .step-num {
+      font-family: 'Sora', sans-serif; font-size: 52px; font-weight: 800;
+      color: rgba(16, 59, 140, 0.07); line-height: 1; margin-bottom: -10px; letter-spacing: -2px;
+    }
+    
+    .step-icon-wrap {
+      width: 58px; height: 58px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    }
+    
+    .step-icon-wrap i { font-size: 26px; }
+    
+    .step-card h3 {
+      font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 700;
+      color: #103b8c; margin-bottom: 10px;
+    }
+    
+    .step-card p { font-size: 14px; color: #555; line-height: 1.7; }
+    
+    .step-arrow {
+      position: absolute; right: -19px; top: 50%;
+      transform: translateY(-50%);
+      width: 34px; height: 34px;
+      background: linear-gradient(135deg, #103b8c, #0a8a7a);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(16, 59, 140, 0.35);
+    }
+    
+    .step-arrow.last { display: none; }
+    .step-arrow i { color: #fff; font-size: 14px; }
+
+    /* ================================================
+       3. WHAT TO LOOK FOR
+    ================================================ */
+    .adm-lookfor {
+      position: relative; padding: 80px 0; overflow: hidden;
+      background: linear-gradient(135deg, #0a2a5e 0%, #0a6e7a 50%, #047a6a 100%);
+    }
+    
+    .adm-lookfor .sec-shape.sh1 { width: 400px; height: 400px; background: rgba(240, 39, 39, 0.3); top: -100px; right: -60px; }
+    .adm-lookfor .sec-shape.sh2 { width: 200px; height: 200px; background: rgba(88, 97, 10, 0.4); bottom: 40px; left: 15%; border-radius: 0; transform: rotate(30deg); }
+    .adm-lookfor .sec-shape.sh3 { width: 150px; height: 150px; background: rgba(221, 31, 126, 0.3); top: 60px; left: 48%; }
+    
+    .adm-lookfor::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background-image: repeating-linear-gradient(
+        -45deg, transparent, transparent 40px,
+        rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 42px
+      );
+    }
+    
+    .adm-lookfor-inner {
+      position: relative; z-index: 3;
+      display: flex; gap: 80px; align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .lf-left { flex: 0 0 300px; }
+    .lf-para { font-size: 15px; color: rgba(255, 255, 255, 0.72); line-height: 1.8; margin-bottom: 28px; }
+    
+    .lf-right {
+      flex: 1; display: grid;
+      grid-template-columns: repeat(2, 1fr); gap: 18px;
+    }
+    
+    .lf-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 14px; padding: 22px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+      transition: background 0.3s, transform 0.3s;
+      backdrop-filter: blur(10px);
+    }
+    
+    .lf-card:hover { background: rgba(255, 255, 255, 0.14); transform: translateY(-3px); }
+    
+    .lf-card-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    
+    .lf-card-icon i { color: #fff; font-size: 20px; }
+    .lf-card-text h4 { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+    .lf-card-text p { font-size: 13px; color: rgba(255, 255, 255, 0.68); line-height: 1.6; }
+
+    /* ================================================
+       4. DOCUMENTS
+    ================================================ */
+    .adm-docs {
+      padding: 80px 0; position: relative; overflow: hidden;
+      background: linear-gradient(160deg, #eef4ff 0%, #e6f8f5 100%);
+    }
+    
+    .adm-docs::before {
+      content: ''; position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 59, 140, 0.07), transparent 70%);
+      top: -200px; left: -100px; pointer-events: none;
+    }
+    
+    .adm-docs::after {
+      content: ''; position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(10, 138, 122, 0.07), transparent 70%);
+      bottom: -150px; right: -50px; pointer-events: none;
+    }
+    
+    .docs-grid {
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 24px;
+      position: relative; z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .doc-item {
+      background: #fff; border-radius: 18px; padding: 36px 26px;
+      border: 1.5px solid rgba(16, 59, 140, 0.08);
+      transition: transform 0.3s, box-shadow 0.3s; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    
+    .doc-item::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #103b8c, #0a8a7a);
+    }
+    
+    .doc-item:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(16, 59, 140, 0.12); }
+    
+    .doc-icon {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, #103b8c, #0a8a7a);
+      border-radius: 50%; margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    
+    .doc-icon i { color: #fff; font-size: 28px; }
+    .doc-item h4 { font-family: 'Sora', sans-serif; font-size: 17px; font-weight: 700; color: #103b8c; margin-bottom: 10px; }
+    .doc-item p { font-size: 14px; color: #555; line-height: 1.7; }
+
+    /* ================================================
+       5. FAQ
+    ================================================ */
+    .adm-faq {
+      position: relative; padding: 80px 0; overflow: hidden;
+      background: linear-gradient(135deg, #080e3a 0%, #0a3060 45%, #0a5a6e 100%);
+    }
+    
+    .adm-faq .sec-shape.sh1 { width: 450px; height: 450px; background: rgba(238, 71, 30, 0.4); top: -120px; right: -80px; }
+    .adm-faq .sec-shape.sh2 { width: 180px; height: 180px; background: rgba(250, 247, 47, 0.2); bottom: 60px; left: 5%; border-radius: 0; transform: rotate(45deg); }
+    
+    .adm-faq::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background-image:
+        radial-gradient(circle at 80% 20%, rgba(10, 138, 122, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(16, 59, 140, 0.2) 0%, transparent 50%);
+    }
+    
+    .adm-faq-inner {
+      position: relative; z-index: 3;
+      display: flex; gap: 80px; align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    .faq-left { flex: 0 0 280px; }
+    .faq-right { flex: 1; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    
+    .faq-q {
+      width: 100%; background: transparent; border: none;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; font-family: 'Sora', sans-serif;
+      font-size: 16px; font-weight: 600; color: #fff;
+      cursor: pointer; text-align: left; gap: 16px; transition: color 0.3s;
+    }
+    
+    .faq-q:hover { color: #7fffd4; }
+    .faq-q i { font-size: 18px; flex-shrink: 0; transition: transform 0.3s; }
+    .faq-item.open .faq-q { color: #7fffd4; }
+    .faq-item.open .faq-q i { transform: rotate(180deg); }
+    
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+      font-size: 15px; color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+    }
+    
+    .faq-item.open .faq-a { padding-bottom: 22px; }
+
+    /* ================================================
+       6. CTA
+    ================================================ */
+    .adm-cta {
+      position: relative; padding: 80px 0;
+      overflow: hidden; text-align: center;
+      background: #f5f7fb;
+    }
+    
+    .adm-cta::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background-image:
+        linear-gradient(rgba(16, 59, 140, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 59, 140, 0.03) 1px, transparent 1px);
+      background-size: 55px 55px;
+    }
+    
+    .cta-shape {
+      position: absolute; pointer-events: none; z-index: 2; border-radius: 50%;
+    }
+    
+    .cs1 { width: 350px; height: 350px; background: rgba(228, 7, 7, 0.356); top: -100px; left: -60px; }
+    .cs2 { width: 250px; height: 250px; background: rgba(218, 192, 46, 0.342); bottom: -60px; right: 8%; border-radius: 0; transform: rotate(45deg); }
+
+    .adm-cta-content { 
+      position: relative; z-index: 3; 
+      padding: 0 15px;
+    }
+    
+    .adm-cta-heading {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 800; color: #103b8c;
+      line-height: 1.1; margin-bottom: 18px; letter-spacing: -1px;
+    }
+    
+    .adm-cta-para {
+      font-size: 17px; color: #116b11;
+      max-width: 480px; margin: 0 auto 20px; line-height: 1.75;
+    }
+
+    .adm-cta-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    
+    .adm-btn-white {
+      background: #103b8c; color: #fff; border: 2px solid #103b8c;
+      box-shadow: 0 8px 24px rgba(16, 59, 140, 0.2);
+    }
+    
+    .adm-btn-white:hover {
+      background: #0d6efd; border-color: #0d6efd;
+      transform: translateY(-2px);
+    }
+
+    /* =============================================
+       MODERN FOOTER
+    ============================================= */
+    .modern-footer {
+      position: relative; 
+      width: 100%;
+      padding: 80px 0 30px; 
+      overflow: hidden;
+    }
+    
+    .modern-footer::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 2;
+    }
+
+    .modern-footer-bg {
+      position: absolute; 
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      z-index: 1;
+    }
+    
+    .modern-footer-content { 
+      position: relative; 
+      z-index: 5; 
+    }
+
+    .footer-top-row {
+      display: flex; 
+      justify-content: space-between;
+      gap: 60px; 
+      margin-bottom: 40px; 
+      flex-wrap: wrap;
+    }
+    
+    .footer-left { 
+      flex: 1; 
+      min-width: 260px; 
+    }
+    
+    .footer-brand {
+      display: flex; 
+      align-items: center;
+      gap: 18px; 
+      margin-bottom: 12px; 
+      flex-wrap: wrap;
+    }
+    
+    .footer-brand-logo { 
+      width: 85px; 
+      flex-shrink: 0; 
+    }
+    
+    .footer-brand-text { 
+      display: flex; 
+      align-items: center; 
+      gap: 16px; 
+      flex-wrap: wrap; 
+    }
+    
+    .footer-brand-text h2 {
+      color: white; 
+      font-size: clamp(24px, 3vw, 36px);
+      font-family: 'Sora', sans-serif; 
+      margin-bottom: 0;
+    }
+    
+    .footer-brand-text p {
+      color: #fff; 
+      margin-bottom: 0;
+      padding-left: 16px; 
+      border-left: 2px solid rgba(255, 255, 255, .5);
+      font-size: 11px; 
+      line-height: 1.7; 
+      text-transform: uppercase; 
+      letter-spacing: 1px;
+    }
+    
+    .footer-description {
+      max-width: 480px; 
+      color: rgba(255, 255, 255, .75);
+      font-size: 14px; 
+      line-height: 1.9;
+    }
+    
+    .footer-right { 
+      min-width: 220px; 
+    }
+    
+    .footer-right h4 {
+      color: white; 
+      font-size: clamp(20px, 2.5vw, 28px);
+      margin-bottom: 22px; 
+      font-family: 'Sora', sans-serif; 
+      margin-top: 16px;
+    }
+    
+    .footer-links-grid {
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 12px 48px;
+    }
+    
+    .footer-links-grid a {
+      text-decoration: none; 
+      color: rgba(255, 255, 255, .8);
+      font-size: clamp(14px, 1.5vw, 18px); 
+      transition: .4s;
+    }
+    
+    .footer-links-grid a:hover { 
+      color: #ffd500; 
+      transform: translateX(6px); 
+    }
+
+    .footer-contact-row {
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 14px; 
+      margin-bottom: 35px;
+    }
+    
+    .footer-contact-box {
+      display: flex; 
+      align-items: center; 
+      gap: 12px;
+      padding: 10px 20px; 
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(255, 255, 255, .07); 
+      backdrop-filter: blur(10px);
+      border-radius: 50px; 
+      color: white; 
+      transition: .4s;
+      flex: 1; 
+      min-width: 200px;
+    }
+    
+    .footer-contact-box:hover { 
+      transform: translateY(-4px); 
+      border-color: #ffd500; 
+    }
+    
+    .footer-contact-box i { 
+      color: #ffd500; 
+      font-size: 18px; 
+      flex-shrink: 0; 
+    }
+    
+    .footer-contact-box span { 
+      font-size: clamp(13px, 1.4vw, 16px); 
+    }
+
+    .footer-social-area {
+      display: flex; 
+      justify-content: center;
+      gap: 20px; 
+      margin-bottom: 20px; 
+      flex-wrap: wrap;
+    }
+    
+    .footer-social-area a {
+      width: 52px; 
+      height: 52px; 
+      border-radius: 50%;
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      text-decoration: none; 
+      color: white;
+      border: 1px solid rgba(255, 255, 255, .2);
+      background: rgba(255, 255, 255, .07); 
+      transition: .4s;
+    }
+    
+    .footer-social-area a:hover { 
+      background: #ffd500; 
+      color: #111; 
+      transform: translateY(-6px); 
+    }
+    
+    .footer-social-area i { 
+      font-size: 20px; 
+    }
+
+    .footer-bottom-line { 
+      width: 100%; 
+      height: 1px; 
+      background: rgba(255, 255, 255, 0.15); 
+      margin-bottom: 20px; 
+    }
+    
+    .footer-copyright {
+      text-align: center; 
+      color: rgba(255, 255, 255, .65);
+      font-size: 14px; 
+      letter-spacing: 1px;
+    }
+
+    /* ================================================
+       RESPONSIVE MEDIA QUERIES
+    ================================================ */
+    @media(max-width: 991px) {
+      .logo-img { width: 70px; height: 70px; }
+      .logo-title { font-size: 22px; }
+      .logo-tagline { font-size: 9px; }
+      .navbar-collapse { align-items: flex-start; margin-top: 8px; }
+      .navbar-nav { gap: 4px; }
+      .top-icons { display: none !important; }
+
+      /* How it works grid */
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .step-arrow { display: none; }
+      
+      /* Checklist & FAQ layouts */
+      .adm-lookfor-inner, .adm-faq-inner { flex-direction: column; gap: 40px; }
+      .lf-left, .faq-left { flex: none; width: 100%; }
+      .lf-right { grid-template-columns: 1fr; }
+      
+      /* Documents grid */
+      .docs-grid { grid-template-columns: repeat(2, 1fr); }
+      
+      /* Diamond Menu */
+      .diamond-menu { transform: scale(0.72); right: -10px; bottom: -10px; }
+
+      /* Footer */
+      .footer-top-row { flex-direction: column; gap: 40px; }
+      .footer-brand { flex-direction: column; align-items: flex-start; }
+      .footer-brand-text { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .footer-brand-text p { border-left: none; padding-left: 0; }
+      .footer-links-grid { grid-template-columns: 1fr; }
+      .footer-contact-row { flex-direction: column; gap: 12px; }
+      .footer-contact-box { width: 100%; }
+    }
+
+    @media(max-width: 576px) {
+      /* Hero alignment details */
+      .adm-hero { min-height: auto; padding: 60px 0; }
+      
+      /* Single column grids */
+      .steps-grid, .docs-grid { grid-template-columns: 1fr; }
+      
+      .adm-hero-h1 { font-size: 32px; }
+      .adm-sec-title { font-size: 28px; }
+      .adm-cta-heading { font-size: 28px; }
+      .adm-btn { padding: 12px 24px; font-size: 13px; }
+    }
+
+    @media(max-width: 480px) {
+      .diamond-menu { display: none; }
+      .footer-social-area a { width: 44px; height: 44px; }
+      .footer-social-area i { font-size: 16px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================
+              NAVBAR
+  ====================================== -->
+  <nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/home logo .png" alt="" class="logo-img">
+        <div class="logo-text-area">
+          <h1 class="logo-title">School's Info</h1>
+          <p class="logo-tagline">Learn Today <br>Lead Tomorrow</p>
+        </div>
+      </a>
+      <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+        <div class="top-icons d-lg-flex d-none">
+          <a href="programs.html" class="icon-box">
+            <i class="bi bi-box-arrow-up-right"></i><span> Programs</span>
+          </a>
+          <a href="login.html" class="icon-box">
+            <i class="bi bi-person-circle"></i><span> Log In</span>
+          </a>
+        </div>
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about .html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="explore school.html">Explore Schools</a></li>
+          <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- DIAMOND MENU -->
+  <div class="diamond-menu">
+    <a href="admissions.html" class="diamond diamond-blue"><i class="bi bi-file-earmark-text"></i><span>Admissions</span></a>
+    <a href="about .html" class="diamond diamond-yellow"><i class="bi bi-info-circle"></i><span>Info</span></a>
+    <a href="explore school.html" class="diamond diamond-green"><i class="bi bi-pencil"></i><span>Explore</span></a>
+    <a href="programs.html" class="diamond diamond-orange"><i class="bi bi-briefcase"></i><span>Programs</span></a>
+  </div>
+
+  <!-- =============================================
+       1. HERO SECTION
+  ============================================= -->
+  <section class="adm-hero">
+    <!-- Floating shapes -->
+    <div class="sec-shape sh1"></div>
+    <div class="sec-shape sh2"></div>
+    <div class="sec-shape sh3"></div>
+    <div class="sec-shape sh4"></div>
+
+    <div class="container">
+      <div class="adm-hero-content">
+        <p class="adm-sublabel">
+          <span class="adm-dot"></span>
+          ADMISSIONS GUIDE
+        </p>
+        <h1 class="adm-hero-h1">
+          Everything You Need<br>
+          to Know About<br>
+          <span class="adm-hero-accent">School Admissions</span>
+        </h1>
+        <p class="adm-hero-para">
+          We help parents and students find the perfect school — compare facilities, locations, curriculums and more, all in one place.
+        </p>
+        <div class="adm-hero-btns">
+          <a href="explore school.html" class="adm-btn adm-btn-primary">
+            <i class="bi bi-search"></i> Explore Schools
+          </a>
+          <a href="#how-it-works" class="adm-btn adm-btn-outline">
+            How It Works <i class="bi bi-arrow-down"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       2. HOW IT WORKS — 4 STEPS
+  ============================================= -->
+  <section class="adm-steps" id="how-it-works">
+    <div class="container">
+      <div class="adm-sec-head text-center">
+        <p class="adm-sublabel-dark">THE PROCESS</p>
+        <h2 class="adm-sec-title">How It Works</h2>
+        <p class="adm-sec-sub">Finding the right school is simple — follow these 4 easy steps.</p>
+      </div>
+
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon-wrap" style="background:#e8f0fe;">
+            <i class="bi bi-search" style="color:#103b8c;"></i>
+          </div>
+          <h3>Search Schools</h3>
+          <p>Browse our extensive database of listed schools across Pakistan. Filter by city, curriculum, grade level or fees.</p>
+          <div class="step-arrow"><i class="bi bi-arrow-right"></i></div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon-wrap" style="background:#e8f8ee;">
+            <i class="bi bi-bar-chart-line" style="color:#05880b;"></i>
+          </div>
+          <h3>Compare &amp; Shortlist</h3>
+          <p>Compare facilities, fee structures, teacher qualifications and student reviews side by side to shortlist your top choices.</p>
+          <div class="step-arrow"><i class="bi bi-arrow-right"></i></div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon-wrap" style="background:#fff7e6;">
+            <i class="bi bi-geo-alt" style="color:#fb8c00;"></i>
+          </div>
+          <h3>Check Location &amp; Visit</h3>
+          <p>View the school's exact location on the map, check transport routes and plan a physical visit to see facilities firsthand.</p>
+          <div class="step-arrow"><i class="bi bi-arrow-right"></i></div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon-wrap" style="background:#fce8f3;">
+            <i class="bi bi-telephone" style="color:#e53935;"></i>
+          </div>
+          <h3>Contact School Directly</h3>
+          <p>Once you have decided, contact the school directly through their listed number or email to begin the admission process.</p>
+          <div class="step-arrow last"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       3. WHAT TO LOOK FOR
+  ============================================= -->
+  <section class="adm-lookfor">
+    <div class="sec-shape sh1"></div>
+    <div class="sec-shape sh2"></div>
+    <div class="sec-shape sh3"></div>
+    <div class="container">
+      <div class="adm-lookfor-inner">
+        <!-- LEFT TEXT -->
+        <div class="lf-left">
+          <p class="adm-sublabel">PARENT'S CHECKLIST</p>
+          <h2 class="adm-sec-title white">What to Look<br>For in a School</h2>
+          <p class="lf-para">Choosing the right school is one of the most important decisions for your child's future. Here are the key factors every parent should consider.</p>
+          <a href="explore school.html" class="adm-btn adm-btn-primary" style="margin-top:10px;">
+            Start Exploring <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- RIGHT CHECKLIST CARDS -->
+        <div class="lf-right">
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#103b8c;">
+              <i class="bi bi-book"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Curriculum Type</h4>
+              <p>Check if the school offers Cambridge (O/A Levels), Matric, IB or other boards that suit your child's goals.</p>
+            </div>
+          </div>
+
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#05880b;">
+              <i class="bi bi-geo-alt"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Location &amp; Transport</h4>
+              <p>Consider distance from home, availability of school transport and safety of the route.</p>
+            </div>
+          </div>
+
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#fb8c00;">
+              <i class="bi bi-building"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Facilities</h4>
+              <p>Look for labs, library, sports grounds, computer rooms, art studios and medical facilities.</p>
+            </div>
+          </div>
+
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#e53935;">
+              <i class="bi bi-cash-coin"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Fee Structure</h4>
+              <p>Compare monthly fees, admission charges, annual fees and any hidden costs before deciding.</p>
+            </div>
+          </div>
+
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#8e24aa;">
+              <i class="bi bi-people"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Teacher Quality</h4>
+              <p>Qualified, experienced teachers with low student-to-teacher ratios make a huge difference.</p>
+            </div>
+          </div>
+
+          <div class="lf-card">
+            <div class="lf-card-icon" style="background:#1e88e5;">
+              <i class="bi bi-star"></i>
+            </div>
+            <div class="lf-card-text">
+              <h4>Reputation &amp; Results</h4>
+              <p>Research the school's academic results, alumni success stories and overall reputation in the community.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       4. GENERAL DOCUMENTS REQUIRED
+  ============================================= -->
+  <section class="adm-docs">
+    <div class="container">
+      <div class="adm-sec-head text-center">
+        <p class="adm-sublabel-dark">BE PREPARED</p>
+        <h2 class="adm-sec-title">General Documents<br>Most Schools Require</h2>
+        <p class="adm-sec-sub">These are the most commonly requested documents. Always confirm with the specific school as requirements may vary.</p>
+      </div>
+
+      <div class="docs-grid">
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-file-earmark-person"></i></div>
+          <h4>Birth Certificate</h4>
+          <p>Original + photocopy of the child's B-Form or birth certificate issued by NADRA.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-file-earmark-text"></i></div>
+          <h4>Previous Result Card</h4>
+          <p>Last year's report card or leaving certificate from the previous school.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-camera"></i></div>
+          <h4>Passport Size Photos</h4>
+          <p>Usually 4–6 recent passport size photographs of the student.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-heart-pulse"></i></div>
+          <h4>Medical / Vaccination Record</h4>
+          <p>Vaccination history or a basic medical fitness certificate may be required.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-person-vcard"></i></div>
+          <h4>Parent's CNIC Copy</h4>
+          <p>Photocopy of both parents' CNICs for verification and contact purposes.</p>
+        </div>
+
+        <div class="doc-item">
+          <div class="doc-icon"><i class="bi bi-pen"></i></div>
+          <h4>Filled Application Form</h4>
+          <p>The school's own admission form, filled completely and signed by a parent or guardian.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       5. FAQ
+  ============================================= -->
+  <section class="adm-faq">
+    <div class="sec-shape sh1"></div>
+    <div class="sec-shape sh2"></div>
+    <div class="container">
+      <div class="adm-faq-inner">
+        <div class="faq-left">
+          <p class="adm-sublabel">COMMON QUESTIONS</p>
+          <h2 class="adm-sec-title white">Frequently Asked<br>Questions</h2>
+          <p class="lf-para">Still have questions? Browse the most common queries from parents just like you.</p>
+          <a href="contact.html" class="adm-btn adm-btn-outline-white" style="margin-top:14px;">
+            Ask Us Anything <i class="bi bi-chat-dots"></i>
+          </a>
+        </div>
+
+        <div class="faq-right">
+          <div class="faq-list" id="faqList">
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                When do schools usually open admissions?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                Most schools in Pakistan open admissions between January and March for the new academic year starting in April. However, some schools accept applications year-round. Always check the individual school's page on our platform for current dates.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Can I apply to multiple schools at once?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                Yes, absolutely. We recommend shortlisting 3–5 schools and applying to them simultaneously. This increases your chances and gives you options to compare once offers are received.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Is there an entry test for admissions?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                Many private schools conduct entry tests in English, Maths and General Knowledge. Some schools also conduct an interview with the student and parents. Check each school's admission policy on our platform.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                What is the difference between Cambridge and Matric?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                Cambridge (O/A Levels) is an internationally recognised British curriculum, while Matric (SSC) is the national Pakistani board system. Cambridge is generally considered more globally recognised, but both are valid. Your choice depends on your child's future goals and budget.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                How do I contact a school through School's Info?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                Every school listed on our platform has a dedicated profile page with their phone number, email address, website link and physical location on the map. Simply visit the school's page and use any of those contact methods to reach them directly.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-q" onclick="toggleFaq(this)">
+                Are fees listed on School's Info accurate?
+                <i class="bi bi-plus-lg"></i>
+              </button>
+              <div class="faq-a">
+                We try our best to keep fee information up to date, but school fees can change each year. We recommend confirming the latest fee structure directly with the school before making any decisions.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       6. CTA SECTION
+  ============================================= -->
+  <section class="adm-cta">
+    <div class="cta-shape cs1"></div>
+    <div class="cta-shape cs2"></div>
+
+    <div class="container text-center">
+      <div class="adm-cta-content">
+        <p class="adm-sublabel">READY TO BEGIN?</p>
+        <h2 class="adm-cta-heading">Find the Perfect School<br>for Your Child Today</h2>
+        <p class="adm-cta-para">Browse our listed schools across Pakistan — compare, shortlist and connect in minutes.</p>
+        <div class="adm-cta-btns">
+          <a href="explore school.html" class="adm-btn adm-btn-white">
+            <i class="bi bi-search"></i> Explore Schools
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================
+              MODERN FOOTER
+  ====================================== -->
+  <footer class="modern-footer">
+    <img src="images/footer bg.png" alt="" class="modern-footer-bg">
+    <div class="container modern-footer-content">
+      <div class="footer-top-row">
+        <div class="footer-left">
+          <div class="footer-brand">
+            <img src="images/footer logo.png" alt="" class="footer-brand-logo">
+            <div class="footer-brand-text">
+              <h2>School's Info</h2>
+              <p>Learn Today <br> Lead Tomorrow</p>
+            </div>
+          </div>
+          <div class="footer-description">
+            Helping students and parents explore, compare, and choose the best schools for a brighter future.
+          </div>
+        </div>
+        <div class="footer-right">
+          <h4>Quick Links</h4>
+          <div class="footer-links-grid">
+            <a href="index.html">Home</a>
+            <a href="about .html">About Us</a>
+            <a href="explore school.html">Explore Schools</a>
+            <a href="programs.html">Programs</a>
+            <a href="admissions.html">Admissions</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact row (responsive flex) -->
+      <div class="footer-contact-row">
+        <div class="footer-contact-box">
+          <i class="bi bi-telephone-fill"></i>
+          <span>+92 300 1234567</span>
+        </div>
+        <div class="footer-contact-box">
+          <i class="bi bi-envelope-fill"></i>
+          <span>schoolsinfo@gmail.com</span>
+        </div>
+        <div class="footer-contact-box">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span>Karachi, Pakistan</span>
+        </div>
+      </div>
+
+      <div class="footer-social-area">
+        <a href="https://www.facebook.com/share/1JXEBGpL6t/"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/dse_elementary?igsh=MXJ4d2ZoM29rY2hrdw=="><i class="bi bi-instagram"></i></a>
+        <a href="https://spokaneschools.org/LetsTalk"><i class="bi bi-twitter-x"></i></a>
+        <a href="https://youtube.com/@spokaneschools?si=wqzTrPZozbnx_qSQ"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.linkedin.com/redir/redirect?url=http%3A%2F%2Fwww%2Espokaneschools%2Eorg&urlhash=XptG&trk=about_website"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+      <div class="footer-bottom-line"></div>
+      <div class="footer-copyright">© 2026 School's Info — All Rights Reserved</div>
+    </div>
+  </footer>   
+
+  <!-- BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    function toggleFaq(btn) {
+      const item   = btn.parentElement;
+      const answer = item.querySelector('.faq-a');
+      const icon   = btn.querySelector('i');
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = '0';
+        i.querySelector('i').className = 'bi bi-plus-lg';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        icon.className = 'bi bi-dash-lg';
+      }
+    }
+  </script>
+</body>
+
+</html>

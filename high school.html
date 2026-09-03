@@ -1,0 +1,2762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High School · Grade 10–12 · Schools Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700&family=Syne:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    /* ============================================================
+   ROOT
+============================================================ */
+    :root {
+      --coral: #FF6B6B;
+      --coral-d: #e85555;
+      --sky: #38B6FF;
+      --sky-d: #1f9fe0;
+      --lime: #C8F135;
+      --green: #00C896;
+      --orange: #FF9A3C;
+      --purple: #7C4DFF;
+      --pink: #FF4DC4;
+      --yellow: #FFD93D;
+      --white: #ffffff;
+      --light: #F8FAFF;
+      --text: #1C1C2E;
+      --muted: #6B7280;
+    }
+
+    /* ============================================================
+   GLOBAL
+============================================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: #fff;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--coral);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: background .2s;
+    }
+
+    .cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 2px solid var(--coral);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, border-color .3s, background .3s;
+    }
+
+    .cursor-ring.ring-grow {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 107, 107, .08);
+      border-color: var(--sky);
+    }
+
+    .cursor-dot.dot-hide {
+      opacity: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ============================================================
+   TYPOGRAPHY HELPERS
+============================================================ */
+    .txt-coral {
+      color: var(--coral);
+    }
+
+    .txt-sky {
+      color: var(--sky);
+    }
+
+    .sec-title {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: .5rem;
+    }
+
+    .sec-title em {
+      font-style: italic;
+      color: var(--coral);
+    }
+
+    .st-dark {
+      color: var(--text);
+    }
+
+    .st-white {
+      color: #fff;
+    }
+
+    .st-white em {
+      color: var(--yellow);
+    }
+
+    .sec-sub {
+      color: var(--muted);
+      font-size: .97rem;
+    }
+
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .sp-coral {
+      background: var(--coral);
+      color: #fff;
+    }
+
+    .sp-white {
+      background: rgba(255, 255, 255, .25);
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, .4);
+    }
+
+    .sp-sky {
+      background: var(--sky);
+      color: #fff;
+    }
+
+    /* ============================================================
+   SCROLL REVEAL
+============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .85s cubic-bezier(.22, 1, .36, 1), transform .85s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal-left.active,
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ============================================================
+   BUTTONS
+============================================================ */
+    .btn-coral {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--coral);
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: none;
+      box-shadow: 0 8px 28px rgba(255, 107, 107, .38);
+      transition: transform .3s, box-shadow .3s, background .3s;
+    }
+
+    .btn-coral:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 16px 40px rgba(255, 107, 107, .5);
+      background: var(--coral-d);
+    }
+
+    .btn-sky-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--sky);
+      padding: 13px 28px;
+      border-radius: 50px;
+      border: 2.5px solid var(--sky);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: none;
+      transition: all .3s;
+    }
+
+    .btn-sky-outline:hover {
+      background: var(--sky);
+      color: #fff;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(56, 182, 255, .35);
+    }
+
+    /* ============================================================
+   HERO — Pure white
+============================================================ */
+    .hero {
+      background: #fff;
+      padding-bottom: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-shape {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: .52;
+    }
+
+    .hs1 {
+      width: 500px;
+      height: 500px;
+      background: var(--coral);
+      top: -100px;
+      right: -150px;
+    }
+
+    .hs2 {
+      width: 350px;
+      height: 350px;
+      background: var(--sky);
+      bottom: 100px;
+      left: -100px;
+    }
+
+    .hs3 {
+      width: 200px;
+      height: 200px;
+      background: var(--yellow);
+      top: 40%;
+      right: 20%;
+      opacity: .55;
+    }
+
+    .hs4 {
+      width: 150px;
+      height: 150px;
+      background: var(--green);
+      top: 20%;
+      left: 30%;
+      opacity: .55;
+    }
+
+    .hero-top {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Nav */
+    .hero-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 0 10px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hn-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text);
+    }
+
+    .hn-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--coral);
+      border-radius: 50%;
+      animation: dotBlink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes dotBlink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
+    }
+
+    .hn-sep {
+      color: #ccc;
+    }
+
+    .hn-grade {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--sky);
+      color: #fff;
+      padding: 7px 18px;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 700;
+    }
+
+    /* Headline block */
+    .hero-headline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 40px 0 0;
+    }
+
+    .hhl-eyebrow {
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--coral);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hhl-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 2px;
+      background: var(--coral);
+      display: inline-block;
+    }
+
+    .hhl-title {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .hhl-title em {
+      font-style: italic;
+      color: var(--sky);
+    }
+
+    .hhl-desc {
+      font-size: .97rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 28px;
+    }
+
+    .hhl-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hhl-right {
+      position: relative;
+    }
+
+    /* Lottie card */
+    .hero-lottie-card {
+      background: var(--light);
+      border-radius: 28px;
+      padding: 20px;
+      border: 1.5px solid rgba(0, 0, 0, .06);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+      transition: transform .4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .hero-lottie-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+    }
+
+    .hlc-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1.5px solid rgba(0, 0, 0, .06);
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .hlc-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: dotBlink 2s infinite;
+    }
+
+    /* Stat chips */
+    .hero-chip {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 12px 18px;
+      box-shadow: 0 10px 36px rgba(0, 0, 0, .12);
+      font-size: .82rem;
+      border: 1.5px solid rgba(0, 0, 0, .06);
+      animation: chipFloat 4s ease-in-out infinite alternate;
+      white-space: nowrap;
+    }
+
+    .hero-chip i {
+      font-size: 1.2rem;
+    }
+
+    .hero-chip strong {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      display: block;
+      line-height: 1;
+    }
+
+    .hero-chip span {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    .hc1 {
+      top: -20px;
+      left: -30px;
+      animation-delay: 0s;
+    }
+
+    .hc1 i {
+      color: var(--coral);
+    }
+
+    .hc2 {
+      bottom: 60px;
+      left: -40px;
+      animation-delay: 1s;
+    }
+
+    .hc2 i {
+      color: var(--sky);
+    }
+
+    .hc3 {
+      top: 40px;
+      right: -30px;
+      animation-delay: 2s;
+    }
+
+    .hc3 i {
+      color: var(--yellow);
+    }
+
+    @keyframes chipFloat {
+      0% {
+        transform: translateY(0)
+      }
+
+      100% {
+        transform: translateY(-10px)
+      }
+    }
+
+    /* ============================================================
+   SUBJECT TILES — Beautiful designed background
+============================================================ */
+    .hscroll-wrapper {
+      margin-top: 50px;
+      position: relative;
+      /* Beautiful layered background */
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 50%, rgba(255, 107, 107, 0.288) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 90% 30%, rgba(56, 182, 255, 0.418)0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 100%, rgba(255, 216, 61, 0.342) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 70% 60%, rgba(0, 200, 150, .07) 0%, transparent 55%),
+        linear-gradient(180deg, #fff 0%, #F4F8FF 40%, #FFF4F4 75%, #F0FFF8 100%);
+      padding-bottom: 20px;
+      overflow: hidden;
+    }
+
+    /* Decorative SVG wave top */
+    .hscroll-wave-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #fff;
+      clip-path: ellipse(52% 100% at 50% 0%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Floating geometric deco shapes behind tiles */
+    .hscroll-deco {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hsd1 {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.322), rgba(255, 154, 60, .08));
+      top: 10%;
+      left: 2%;
+      animation: decoFloat1 8s ease-in-out infinite alternate;
+    }
+
+    .hsd2 {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(56, 182, 255, 0.329), rgba(0, 200, 150, .08));
+      top: 20%;
+      right: 3%;
+      animation: decoFloat2 10s ease-in-out infinite alternate;
+    }
+
+    .hsd3 {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, rgba(255, 216, 61, 0.39), rgba(255, 107, 196, .08));
+      border-radius: 30px;
+      transform: rotate(25deg);
+      bottom: 15%;
+      left: 15%;
+      animation: decoFloat3 7s ease-in-out infinite alternate;
+    }
+
+    .hsd4 {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(124, 77, 255, 0.363);
+      bottom: 20%;
+      right: 12%;
+      animation: decoFloat1 9s ease-in-out infinite alternate;
+    }
+
+    .hsd5 {
+      width: 60px;
+      height: 60px;
+      border: 3px dashed rgba(255, 107, 107, 0.432);
+      border-radius: 50%;
+      top: 50%;
+      left: 46%;
+      animation: spinSlow 20s linear infinite;
+    }
+
+    .hsd6 {
+      width: 100px;
+      height: 100px;
+      border: 3px dashed rgba(56, 182, 255, 0.411);
+      border-radius: 20px;
+      transform: rotate(15deg);
+      top: 5%;
+      left: 35%;
+      animation: spinSlow 25s linear infinite reverse;
+    }
+
+    /* Diagonal stripe pattern overlay */
+    .hscroll-pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .4;
+      background-image: repeating-linear-gradient(-45deg,
+          transparent 0px, transparent 30px,
+          rgba(255, 107, 107, .025) 30px, rgba(255, 107, 107, .025) 31px);
+    }
+
+    /* Dot grid pattern */
+    .hscroll-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: .6;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, .06) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    @keyframes decoFloat1 {
+      0% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      100% {
+        transform: translate(10px, -15px) scale(1.05)
+      }
+    }
+
+    @keyframes decoFloat2 {
+      0% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      100% {
+        transform: translate(-12px, 10px) scale(.95)
+      }
+    }
+
+    @keyframes decoFloat3 {
+      0% {
+        transform: rotate(25deg) translate(0, 0)
+      }
+
+      100% {
+        transform: rotate(35deg) translate(8px, -10px)
+      }
+    }
+
+    @keyframes spinSlow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .hscroll-label {
+      text-align: center;
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      z-index: 5;
+      padding-top: 30px;
+    }
+
+    .hscroll-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 50px 40px 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hscroll-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hscroll-track.dragging {
+      cursor: grabbing;
+    }
+
+    .hst-tile {
+      flex-shrink: 0;
+      width: 240px;
+      background: rgba(255, 255, 255, .85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid rgba(255, 255, 255, .9);
+      border-radius: 24px;
+      padding: 24px 20px 16px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), border-color .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .08), 0 2px 8px rgba(0, 0, 0, .04);
+    }
+
+    .hst-tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--tc, var(--coral));
+      border-radius: 24px 24px 0 0;
+      transform: scaleX(0);
+      transition: transform .35s;
+    }
+
+    .hst-tile:hover::before,
+    .hst-tile.hst-active::before {
+      transform: scaleX(1);
+    }
+
+    .hst-tile:hover {
+      transform: translateY(-12px) scale(1.03);
+      border-color: var(--tc, var(--coral));
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .15), 0 0 0 3px color-mix(in srgb, var(--tc) 15%, transparent);
+      background: rgba(255, 255, 255, .98);
+    }
+
+    .hst-tile.hst-active {
+      border-color: var(--tc, var(--coral));
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, .05);
+    }
+
+    .hst-icon {
+      width: 46px;
+      height: 46px;
+      background: var(--tc, var(--coral));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+      transition: transform .3s;
+    }
+
+    .hst-tile:hover .hst-icon {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .hst-tile h4 {
+      font-size: .97rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .hst-tile p {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
+
+    .hst-tag {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      background: var(--tc, var(--coral));
+      color: #fff;
+      padding: 3px 12px;
+      border-radius: 50px;
+      width: fit-content;
+    }
+
+    /* Bottom wave after tiles */
+    .hscroll-wave-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ============================================================
+   WHY US — Coral bg
+============================================================ */
+    .why-section {
+      background: var(--coral);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(60px);
+      opacity: .2;
+    }
+
+    .wb1 {
+      width: 400px;
+      height: 400px;
+      background: #fff;
+      top: -100px;
+      right: -80px;
+    }
+
+    .wb2 {
+      width: 300px;
+      height: 300px;
+      background: var(--sky);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .why-header {
+      margin-bottom: 48px;
+    }
+
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .why-card {
+      height: 360px;
+      perspective: 1000px;
+      cursor: none;
+      position: relative;
+    }
+
+    .why-card.flipped .wc-front {
+      transform: rotateY(-180deg);
+    }
+
+    .why-card.flipped .wc-back {
+      transform: rotateY(0deg);
+    }
+
+    .wc-front,
+    .wc-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 24px;
+      padding: 28px 22px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: transform .7s cubic-bezier(.4, 0, .2, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .wc-front {
+      background: var(--wc, #fff);
+      transform: rotateY(0deg);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .12);
+    }
+
+    .wc-back {
+      background: var(--wc, var(--sky));
+      transform: rotateY(180deg);
+      color: #fff;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .2);
+    }
+
+    .wc-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(0, 0, 0, .06);
+      line-height: 1;
+      position: absolute;
+      top: 12px;
+      right: 16px;
+    }
+
+    .wc-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--coral);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .wc-back .wc-icon {
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .wc-front h4 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .wc-front p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .wc-back h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    .wc-back p {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .85);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .wc-hover-hint {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .72rem;
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: auto;
+    }
+
+    .wc-hover-hint i {
+      font-size: .65rem;
+      animation: spinSlow2 3s linear infinite;
+    }
+
+    @keyframes spinSlow2 {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    /* ============================================================
+   PROGRAMMES — White
+============================================================ */
+    .prog-section {
+      background: #fff;
+      padding: 90px 0;
+    }
+
+    .prog-header {
+      margin-bottom: 40px;
+    }
+
+    .prog-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .ptab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 50px;
+      border: 2px solid rgba(0, 0, 0, .1);
+      background: #fff;
+      color: var(--muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      cursor: none;
+      transition: all .3s;
+    }
+
+    .ptab i {
+      font-size: .6rem;
+      color: transparent;
+    }
+
+    .ptab.active {
+      background: var(--coral);
+      color: #fff;
+      border-color: var(--coral);
+      box-shadow: 0 8px 24px rgba(255, 107, 107, .35);
+    }
+
+    .ptab.active i {
+      color: #fff;
+    }
+
+    .ptab:not(.active):hover {
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+
+    .prog-panel {
+      display: none;
+      animation: fadePanel .4s ease;
+    }
+
+    .prog-panel.active {
+      display: block;
+    }
+
+    @keyframes fadePanel {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .pp-lottie-box {
+      border-radius: 28px;
+      padding: 24px;
+      overflow: hidden;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, .08);
+    }
+
+    .prog-lottie-1 {
+      width: 100%;
+      height: 300px;
+      display: block;
+      background: transparent;
+    }
+
+    .prog-lottie-2 {
+      width: 100%;
+      height: 280px;
+      display: block;
+      background: transparent;
+    }
+
+    .prog-lottie-3 {
+      width: 100%;
+      height: 300px;
+      display: block;
+      background: transparent;
+    }
+
+    .pp-grade-tag {
+      display: inline-block;
+      background: var(--coral);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+    }
+
+    .pp-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .pp-desc {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .pp-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .pp-subjects span {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 700;
+      background: color-mix(in srgb, var(--sc) 12%, white);
+      color: var(--sc, var(--coral));
+      border: 1.5px solid color-mix(in srgb, var(--sc) 30%, white);
+      transition: all .2s;
+    }
+
+    .pp-subjects span:hover {
+      background: var(--sc, var(--coral));
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .pp-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(255, 107, 107, .06);
+      border-left: 3px solid var(--coral);
+      border-radius: 0 12px 12px 0;
+      padding: 12px 16px;
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .pp-note i {
+      color: var(--coral);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+   FACILITIES — Sky Blue bg
+============================================================ */
+    .fac-section {
+      background: var(--sky);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fac-wave-top {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #fff;
+      clip-path: ellipse(55% 100% at 50% 0%);
+    }
+
+    .fac-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .2;
+      pointer-events: none;
+    }
+
+    .fb1 {
+      width: 400px;
+      height: 400px;
+      background: #fff;
+      top: -100px;
+      right: -100px;
+    }
+
+    .fb2 {
+      width: 300px;
+      height: 300px;
+      background: var(--coral);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .fac-header {
+      margin-bottom: 48px;
+    }
+
+    .fac-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .fac-card {
+      background: rgba(255, 255, 255, .15);
+      border: 1.5px solid rgba(255, 255, 255, .3);
+      border-radius: 22px;
+      overflow: hidden;
+      height: 220px;
+      position: relative;
+      cursor: none;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+      backdrop-filter: blur(8px);
+    }
+
+    .fac-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, .15);
+    }
+
+    .fac-card:hover .fch-front {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    .fac-card:hover .fch-back {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fch-front,
+    .fch-back {
+      position: absolute;
+      inset: 0;
+      padding: 22px 18px;
+      transition: opacity .35s, transform .35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fch-front {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fch-back {
+      opacity: 0;
+      transform: translateY(20px);
+      background: var(--fc, #fff);
+      color: #fff;
+    }
+
+    .fch-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, .2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 12px;
+      flex-shrink: 0;
+    }
+
+    .fch-front h5 {
+      color: #fff;
+      font-size: .97rem;
+      margin-bottom: 4px;
+    }
+
+    .fch-front p {
+      color: rgba(255, 255, 255, .75);
+      font-size: .78rem;
+      margin: 0;
+    }
+
+    .fch-num {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, .1);
+      pointer-events: none;
+    }
+
+    .fch-back p {
+      font-size: .82rem;
+      line-height: 1.7;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, .9);
+    }
+
+    /* Capacity bar */
+    .cap-bar {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .1);
+    }
+
+    .cb-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .cb-item i {
+      font-size: 1.1rem;
+      color: var(--coral);
+      margin-bottom: 4px;
+    }
+
+    .cb-item strong {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .cb-item span {
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .cb-div {
+      width: 1px;
+      height: 40px;
+      background: rgba(0, 0, 0, .1);
+    }
+
+    /* ============================================================
+   CTA — Coral gradient
+============================================================ */
+    .cta-section {
+      background: linear-gradient(135deg, var(--coral) 0%, #ff4444 40%, #ff8a50 100%);
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .cta-s {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+
+    .cs1 {
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, .1);
+      top: -100px;
+      right: -100px;
+    }
+
+    .cs2 {
+      width: 300px;
+      height: 300px;
+      background: rgba(56, 182, 255, .15);
+      bottom: -80px;
+      left: -60px;
+    }
+
+    .cs3 {
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 217, 61, .12);
+      top: 40%;
+      left: 50%;
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .8);
+      margin-bottom: 18px;
+    }
+
+    .cta-line {
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: rgba(255, 255, 255, .4);
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .cta-title em {
+      font-style: italic;
+      color: var(--yellow);
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, .8);
+      font-size: .97rem;
+      max-width: 500px;
+      margin: 0 auto 28px;
+      line-height: 1.75;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .ctab-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      border-radius: 50px;
+      background: #fff;
+      color: var(--coral);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      border: none;
+      cursor: none;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .15);
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .ctab-white:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .2);
+    }
+
+    .ctab-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, .5);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: .95rem;
+      cursor: none;
+      transition: all .3s;
+    }
+
+    .ctab-outline-white:hover {
+      background: rgba(255, 255, 255, .22);
+      transform: translateY(-4px);
+    }
+
+    /* ============================================================
+   ADMISSIONS — White bg
+============================================================ */
+    .admit-section {
+      background: #fff;
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admit-deco {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: .08;
+    }
+
+    .ad1 {
+      width: 500px;
+      height: 500px;
+      background: var(--coral);
+      top: -150px;
+      right: -150px;
+    }
+
+    .ad2 {
+      width: 300px;
+      height: 300px;
+      background: var(--sky);
+      bottom: -80px;
+      left: -80px;
+    }
+
+    .admit-header {
+      margin-bottom: 50px;
+    }
+
+    .admit-steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .asq-step {
+      background: var(--light);
+      border-radius: 22px;
+      padding: 26px 22px;
+      border: 1.5px solid rgba(0, 0, 0, .06);
+      border-top: 4px solid var(--sc, var(--coral));
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .35s;
+      cursor: default;
+    }
+
+    .asq-step:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
+    }
+
+    .asqs-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .asqs-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--sc, var(--coral));
+      line-height: 1;
+    }
+
+    .asqs-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--sc, var(--coral));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: #fff;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .asq-step h5 {
+      font-size: .97rem;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .asq-step p {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .admit-docs-card {
+      background: var(--light);
+      border-radius: 28px;
+      padding: 32px 26px;
+      height: 100%;
+      border: 1.5px solid rgba(0, 0, 0, .06);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .07);
+    }
+
+    .adc-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      padding-bottom: 16px;
+      border-bottom: 2px dashed rgba(0, 0, 0, .08);
+      margin-bottom: 18px;
+    }
+
+    .adc-top i {
+      color: var(--coral);
+      font-size: 1.2rem;
+    }
+
+    .adc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .adc-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .88rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .adc-bullet {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .75rem;
+      color: #fff;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .adc-contacts {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 2px dashed rgba(0, 0, 0, .08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .adc-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .adc-contact-item:hover {
+      color: var(--coral);
+    }
+
+    /* ============================================================
+   MAP
+============================================================ */
+    .map-section {
+      background: var(--light);
+      padding: 90px 0;
+    }
+
+    .map-contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .mcc-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 18px;
+      border: 1.5px solid rgba(0, 0, 0, .06);
+      transition: transform .3s, border-color .3s;
+    }
+
+    .mcc-item:hover {
+      transform: translateX(6px);
+      border-color: var(--coral);
+    }
+
+    .mcc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+
+    .mcc-item:hover .mcc-icon {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .mcc-item>div:last-child {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mcc-l {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+    }
+
+    .mcc-v {
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .map-frame {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .1);
+      border: 3px solid rgba(255, 107, 107, .15);
+    }
+
+    /* ============================================================
+   BOTTOM NAV
+============================================================ */
+    .bnav-section {
+      background: #fff;
+      padding: 44px 0 52px;
+      border-top: 1.5px solid rgba(0, 0, 0, .07);
+    }
+
+    .bnav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .bnav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--text);
+    }
+
+    .bnav-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--coral);
+      border-radius: 50%;
+    }
+
+    .bnav-sep {
+      color: #ccc;
+    }
+
+    .bnav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 50px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      text-decoration: none;
+      cursor: none;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .bnav-btn:hover {
+      transform: translateY(-4px);
+    }
+
+    .bnav-coral {
+      background: var(--coral);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(255, 107, 107, .3);
+    }
+
+    .bnav-coral:hover {
+      box-shadow: 0 14px 36px rgba(255, 107, 107, .5);
+      color: #fff;
+    }
+
+    .bnav-sky {
+      background: var(--sky);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(56, 182, 255, .3);
+    }
+
+    .bnav-sky:hover {
+      box-shadow: 0 14px 36px rgba(56, 182, 255, .5);
+      color: #fff;
+    }
+
+    /* ============================================================
+   FULL RESPONSIVE
+============================================================ */
+    @media (max-width:1199px) {
+      .why-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fac-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hst-tile {
+        width: 210px;
+      }
+    }
+
+    @media (max-width:991px) {
+      .hero-headline {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .hhl-right {
+        margin-top: 10px;
+      }
+
+      .hero-chip {
+        display: none;
+      }
+
+      .why-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fac-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .prog-tabs {
+        gap: 8px;
+      }
+
+      .ptab {
+        padding: 9px 16px;
+        font-size: .8rem;
+      }
+
+      .hst-tile {
+        width: 200px;
+      }
+
+      .cap-bar {
+        padding: 20px 20px;
+        gap: 12px;
+      }
+
+      .cb-div {
+        display: none;
+      }
+    }
+
+    @media (max-width:767px) {
+      .hero-shape {
+        opacity: .25;
+      }
+
+      .hs1 {
+        width: 280px;
+        height: 280px;
+        top: -60px;
+        right: -80px;
+      }
+
+      .hs2 {
+        width: 200px;
+        height: 200px;
+        bottom: 60px;
+        left: -60px;
+      }
+
+      .hs3,
+      .hs4 {
+        display: none;
+      }
+
+      .hero-nav {
+        padding: 18px 0 6px;
+      }
+
+      .hhl-title {
+        font-size: clamp(2.4rem, 8vw, 3.5rem);
+      }
+
+      .hhl-desc {
+        font-size: .9rem;
+      }
+
+      .why-card {
+        height: auto;
+      }
+
+      .wc-front,
+      .wc-back {
+        position: static;
+      }
+
+      .why-card.flipped .wc-front {
+        display: none;
+      }
+
+      .why-card.flipped .wc-back {
+        display: flex;
+      }
+
+      .why-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .fac-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .fac-card {
+        height: 180px;
+      }
+
+      .admit-steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .prog-tabs {
+        flex-direction: column;
+      }
+
+      .ptab {
+        border-radius: 14px;
+      }
+
+      .hscroll-track {
+        padding: 10px 20px 40px;
+      }
+
+      .hst-tile {
+        width: 200px;
+      }
+
+      .cta-section {
+        padding: 60px 16px;
+      }
+
+      .bnav-wrap {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .map-section {
+        padding: 60px 0;
+      }
+
+      .map-frame {
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width:480px) {
+      .hst-tile {
+        width: 180px;
+        padding: 18px 14px 12px;
+      }
+
+      .fac-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .why-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .cap-bar {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hhl-title {
+        font-size: 2.4rem;
+      }
+
+      .hscroll-label {
+        font-size: .68rem;
+      }
+
+      .hero-lottie-card {
+        padding: 14px;
+      }
+
+      .admit-docs-card {
+        padding: 22px 18px;
+      }
+
+      .bnav-section {
+        padding: 30px 0 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ============================================================
+     GO BACK BUTTON (top right)
+============================================================ -->
+  <div style="position: absolute; top: 20px; right: 30px; z-index: 20;">
+    <a href="explore school.html" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    padding: 10px 18px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a2e;
+    text-decoration: none;
+    border: 1.5px solid #e8e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.2s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  " onmouseover="this.style.background='#f3f0ff'; this.style.borderColor='#FF6B6B';"
+      onmouseout="this.style.background='rgba(255,255,255,0.85)'; this.style.borderColor='#e8e8f0';">
+      <i class="fas fa-arrow-left" style="color: #FF6B6B;"></i> Go Back
+    </a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-shape hs1"></div>
+    <div class="hero-shape hs2"></div>
+    <div class="hero-shape hs3"></div>
+    <div class="hero-shape hs4"></div>
+
+    <div class="container hero-top">
+      <div class="hero-nav reveal active">
+        <div class="hn-brand">
+          <div class="hn-dot"></div>
+          <span>Schools Info</span>
+          <span class="hn-sep">·</span>
+          <span>High School</span>
+        </div>
+      </div>
+
+      <div class="hero-headline reveal active">
+        <div class="hhl-left">
+          <p class="hhl-eyebrow">The School That Changes Everything</p>
+          <h1 class="hhl-title">
+            Your <span class="txt-coral">Best</span><br />
+            Years<span class="txt-sky"> Start</span><br />
+            <em>Right Here.</em>
+          </h1>
+          <p class="hhl-desc">Grade 10-12 students discover their potential through a curriculum that blends academic
+            excellence, creative thinking and real-world readiness.</p>
+          <div class="hhl-btns">
+            <a href="explore school.html" class="btn-coral" id="exploreBtn">Explore Now <i
+                class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="hhl-right">
+          <div class="hero-lottie-card reveal active" style="animation-delay:.2s">
+            <lottie-player src="images/cbed03b4-116a-11ee-9b23-b7580ea7d941.json" background="transparent" speed="1"
+              loop autoplay style="width:100%;height:260px">
+            </lottie-player>
+            <div class="hlc-footer">
+              <div class="hlc-dot"></div>
+              <span>Academic Excellence · Grade 10-12</span>
+            </div>
+          </div>
+          <div class="hero-chip hc1 reveal active" style="animation-delay:.3s">
+            <i class="fas fa-trophy"></i>
+            <div><strong id="cnt1">0</strong><span>Graduates</span></div>
+          </div>
+          <div class="hero-chip hc2 reveal active" style="animation-delay:.4s">
+            <i class="fas fa-university"></i>
+            <div><strong id="cnt2">0</strong><span>Uni Placements</span></div>
+          </div>
+          <div class="hero-chip hc3 reveal active" style="animation-delay:.5s">
+            <i class="fas fa-award"></i>
+            <div><strong id="cnt3">0</strong><span>Awards Won</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBJECTS SECTION WITH BEAUTIFUL BACKGROUND -->
+    <div class="hscroll-wrapper">
+      <!-- decorative background elements -->
+      <div class="hscroll-dots"></div>
+      <div class="hscroll-pattern"></div>
+      <div class="hscroll-deco hsd1"></div>
+      <div class="hscroll-deco hsd2"></div>
+      <div class="hscroll-deco hsd3"></div>
+      <div class="hscroll-deco hsd4"></div>
+      <div class="hscroll-deco hsd5"></div>
+      <div class="hscroll-deco hsd6"></div>
+      <!-- wave top -->
+      <div class="hscroll-wave-top"></div>
+
+      <div class="hscroll-label">
+        <i class="fas fa-chevron-left"></i> Swipe Subjects <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <div class="hscroll-track" id="hscrollTrack">
+
+        <div class="hst-tile" style="--tc:#FF6B6B" data-subject="Mathematics">
+          <div class="hst-icon"><i class="fas fa-square-root-alt"></i></div>
+          <h4>Mathematics</h4>
+          <p>Pure & Applied Maths, Statistics and Further Maths pathways</p>
+          <div class="hst-tag">Core Subject</div>
+          <lottie-player src="images/d34f0fba-1176-11ee-bef9-5786872e585d.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#38B6FF" data-subject="Sciences">
+          <div class="hst-icon"><i class="fas fa-flask"></i></div>
+          <h4>Sciences</h4>
+          <p>Physics, Chemistry & Biology with lab sessions every week</p>
+          <div class="hst-tag">Core Subject</div>
+          <lottie-player src="images/5e5be768-117c-11ee-b23a-4344ea344fa9.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#FF9A3C" data-subject="English">
+          <div class="hst-icon"><i class="fas fa-pen-nib"></i></div>
+          <h4>English</h4>
+          <p>Language, Literature, creative writing and public speaking</p>
+          <div class="hst-tag">Core Subject</div>
+          <lottie-player src="images/4f42ce9e-1178-11ee-b9c1-abc2c8f5094a.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#7C4DFF" data-subject="Computer Science">
+          <div class="hst-icon"><i class="fas fa-laptop-code"></i></div>
+          <h4>Computer Science</h4>
+          <p>Programming, AI foundations, databases and cybersecurity</p>
+          <div class="hst-tag">Elective</div>
+          <lottie-player src="images/3f9cf38a-116d-11ee-b74f-03d8ed1ed29e.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#00C896" data-subject="Business">
+          <div class="hst-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>Business Studies</h4>
+          <p>Economics, accounting and entrepreneurship for future leaders</p>
+          <div class="hst-tag">Elective</div>
+          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json" background="transparent"
+            speed="1" loop autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#FF4DC4" data-subject="Creative Arts">
+          <div class="hst-icon"><i class="fas fa-palette"></i></div>
+          <h4>Creative Arts</h4>
+          <p>Fine art, graphic design, photography and digital media</p>
+          <div class="hst-tag">Elective</div>
+          <lottie-player src="images/8ee0bab0-1179-11ee-88a2-770347df11be.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#FFD93D" data-subject="History">
+          <div class="hst-icon"><i class="fas fa-landmark"></i></div>
+          <h4>History &amp; Civics</h4>
+          <p>Pakistan Studies, World History and Political Science</p>
+          <div class="hst-tag">Elective</div>
+          <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_yd8fbnml.json" background="transparent"
+            speed="1" loop autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+        <div class="hst-tile" style="--tc:#FF6B6B" data-subject="Languages">
+          <div class="hst-icon"><i class="fas fa-language"></i></div>
+          <h4>Languages</h4>
+          <p>Urdu, Arabic and French — bilingual pathways available</p>
+          <div class="hst-tag">Core Subject</div>
+          <lottie-player src="images/d532fb98-1180-11ee-a4b6-ab6e8a3c17ac.json" background="transparent" speed="1" loop
+            autoplay style="width:100%;height:100px;margin-top:auto">
+          </lottie-player>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section" id="whyus">
+    <div class="why-blob wb1"></div>
+    <div class="why-blob wb2"></div>
+    <div class="container">
+      <div class="why-header reveal">
+        <div class="section-pill sp-white"><i class="fas fa-lightbulb"></i> Why Choose Us</div>
+        <h2 class="sec-title st-white">Four Things That Make<br /><em>Us Extraordinary</em></h2>
+      </div>
+      <div class="why-cards reveal">
+        <div class="why-card wc-flip" data-index="0">
+          <div class="wc-front" style="--wc:#fff">
+            <div class="wc-num">01</div>
+            <div class="wc-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h4>Academic Rigour</h4>
+            <p>O/A-Level prep, university counselling and a 98% placement rate to top global universities.</p>
+            <div class="wc-hover-hint">Hover to learn more <i class="fas fa-sync-alt"></i></div>
+          </div>
+          <div class="wc-back" style="--wc:#FF6B6B"><lottie-player
+              src="images/c0834300-116d-11ee-b606-a371d58d42a2.json" background="transparent" speed="1" loop autoplay
+              style="width:100%;height:160px"></lottie-player>
+            <h4>Academic Rigour</h4>
+            <p>Dedicated subject mentors, mock exam series, personal statement workshops & UCAS/SAT coaching.</p>
+          </div>
+        </div>
+        <div class="why-card wc-flip" data-index="1">
+          <div class="wc-front" style="--wc:#fff">
+            <div class="wc-num">02</div>
+            <div class="wc-icon"><i class="fas fa-flask"></i></div>
+            <h4>Research & Innovation</h4>
+            <p>Fully-funded innovation lab, national science competitions and independent research projects.</p>
+            <div class="wc-hover-hint">Hover to learn more <i class="fas fa-sync-alt"></i></div>
+          </div>
+          <div class="wc-back" style="--wc:#38B6FF"><lottie-player
+              src="images/5e5be768-117c-11ee-b23a-4344ea344fa9.json" background="transparent" speed="1" loop autoplay
+              style="width:100%;height:160px"></lottie-player>
+            <h4>Research & Innovation</h4>
+            <p>Students publish research papers, build prototypes and present at inter-school science fairs.</p>
+          </div>
+        </div>
+        <div class="why-card wc-flip" data-index="2">
+          <div class="wc-front" style="--wc:#fff">
+            <div class="wc-num">03</div>
+            <div class="wc-icon"><i class="fas fa-users"></i></div>
+            <h4>Leadership & Character</h4>
+            <p>Model UN, debate championship, community service and industry mentorship every semester.</p>
+            <div class="wc-hover-hint">Hover to learn more <i class="fas fa-sync-alt"></i></div>
+          </div>
+          <div class="wc-back" style="--wc:#FF9A3C"><lottie-player
+              src="images/0a51d070-116c-11ee-8416-5f22190d7225.json" background="transparent" speed="1" loop autoplay
+              style="width:100%;height:160px"></lottie-player>
+            <h4>Leadership & Character</h4>
+            <p>Student council, social entrepreneurship projects and a 12-month mentorship with industry leaders.</p>
+          </div>
+        </div>
+        <div class="why-card wc-flip" data-index="3">
+          <div class="wc-front" style="--wc:#fff">
+            <div class="wc-num">04</div>
+            <div class="wc-icon"><i class="fas fa-palette"></i></div>
+            <h4>Creative Expression</h4>
+            <p>Theatre, literary magazine, digital arts studio and architecture club — talent in every form.</p>
+            <div class="wc-hover-hint">Hover to learn more <i class="fas fa-sync-alt"></i></div>
+          </div>
+          <div class="wc-back" style="--wc:#7C4DFF"><lottie-player
+              src="images/d532fb98-1180-11ee-a4b6-ab6e8a3c17ac.json" background="transparent" speed="1" loop autoplay
+              style="width:100%;height:160px"></lottie-player>
+            <h4>Creative Expression</h4>
+            <p>Annual arts gala, drama productions, literary magazine publication and inter-school art competitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMMES -->
+  <section class="prog-section" id="programmes">
+    <div class="container">
+      <div class="prog-header reveal">
+        <div class="section-pill sp-coral"><i class="fas fa-book-open"></i> Academic Programmes</div>
+        <h2 class="sec-title st-dark">Built for the<br /><em>World Stage</em></h2>
+      </div>
+      <div class="prog-tabs reveal">
+        <button class="ptab active" data-tab="0"><i class="fas fa-circle-dot"></i> Grade 10 — O-Level</button>
+        <button class="ptab" data-tab="1"><i class="fas fa-circle-dot"></i> Grade 11–12 — A-Level</button>
+        <button class="ptab" data-tab="2"><i class="fas fa-circle-dot"></i> Enrichment & Co-Curricular</button>
+      </div>
+
+      <div class="prog-panel active" data-panel="0">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 reveal-left">
+            <div class="pp-lottie-box" style="background:#FFF0EE"><lottie-player
+                src="images/f5ddf9bc-1165-11ee-8072-d3d0bddd396e.json" background="transparent" speed="1" loop autoplay
+                class="prog-lottie-1"></lottie-player></div>
+          </div>
+          <div class="col-lg-7 reveal-right">
+            <div class="pp-grade-tag">GRADE 10</div>
+            <h3 class="pp-title">O-Level Foundations</h3>
+            <p class="pp-desc">A rigorous Cambridge O-Level programme across Sciences, Mathematics, Humanities and
+              Languages — giving students the strongest academic base for advanced study.</p>
+            <div class="pp-subjects">
+              <span style="--sc:#FF6B6B">Mathematics</span><span style="--sc:#38B6FF">Physics</span><span
+                style="--sc:#00C896">Chemistry</span><span style="--sc:#FF9A3C">Biology</span><span
+                style="--sc:#7C4DFF">English Lit.</span><span style="--sc:#FFD93D">Urdu</span><span
+                style="--sc:#FF4DC4">Computer Sc.</span><span style="--sc:#FF6B6B">History</span>
+            </div>
+            <div class="pp-note"><i class="fas fa-info-circle"></i>All O-Level subjects taught by Cambridge-trained
+              faculty with weekly assessments and mock papers.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-panel" data-panel="1">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 reveal-left">
+            <div class="pp-lottie-box" style="background:#EEF6FF"><lottie-player
+                src="https://assets1.lottiefiles.com/packages/lf20_yd8fbnml.json" background="transparent" speed="1"
+                loop autoplay class="prog-lottie-2"></lottie-player></div>
+          </div>
+          <div class="col-lg-7 reveal-right">
+            <div class="pp-grade-tag" style="background:#38B6FF">GRADE 11–12</div>
+            <h3 class="pp-title">A-Level Specialisation</h3>
+            <p class="pp-desc">Three A-Level subjects from eight discipline streams, with dedicated university
+              preparation, personal statement workshops and entrance exam coaching for international institutions.</p>
+            <div class="pp-subjects">
+              <span style="--sc:#38B6FF">Further Maths</span><span style="--sc:#FF6B6B">Economics</span><span
+                style="--sc:#7C4DFF">Psychology</span><span style="--sc:#00C896">Law</span><span
+                style="--sc:#FF4DC4">Art & Design</span><span style="--sc:#FF9A3C">Business</span><span
+                style="--sc:#FFD93D">Sociology</span><span style="--sc:#38B6FF">Media Studies</span>
+            </div>
+            <div class="pp-note" style="border-color:#38B6FF"><i class="fas fa-info-circle"
+                style="color:#38B6FF"></i>University counselling starts from Grade 11 with one-on-one sessions every
+              term.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-panel" data-panel="2">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5 reveal-left">
+            <div class="pp-lottie-box" style="background:#EEFFF8"><lottie-player
+                src="images/4f788aec-117e-11ee-9153-777cd8ea31ba.json" background="transparent" speed="1" loop autoplay
+                class="prog-lottie-3"></lottie-player></div>
+          </div>
+          <div class="col-lg-7 reveal-right">
+            <div class="pp-grade-tag" style="background:#00C896;color:#fff">ALL GRADES</div>
+            <h3 class="pp-title">Enrichment & Co-Curricular</h3>
+            <p class="pp-desc">Every student graduates with a portfolio of leadership roles, creative achievements and
+              community impact — because the world's best universities look far beyond grades alone.</p>
+            <div class="pp-subjects">
+              <span style="--sc:#00C896">Model UN</span><span style="--sc:#FF6B6B">Debate Club</span><span
+                style="--sc:#7C4DFF">Drama Society</span><span style="--sc:#38B6FF">Robotics</span><span
+                style="--sc:#FF9A3C">Literary Mag</span><span style="--sc:#FFD93D">Entrepreneurship</span><span
+                style="--sc:#FF4DC4">Sports Varsity</span><span style="--sc:#00C896">Community Service</span>
+            </div>
+            <div class="pp-note" style="border-color:#00C896"><i class="fas fa-info-circle"
+                style="color:#00C896"></i>Each student completes 50 community service hours per year as part of the
+              graduation requirement.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section class="fac-section" id="facilities">
+    <div class="fac-wave-top"></div>
+    <div class="fac-blob fb1"></div>
+    <div class="fac-blob fb2"></div>
+    <div class="container">
+      <div class="fac-header reveal">
+        <div class="section-pill sp-white"><i class="fas fa-building"></i> Campus & Facilities</div>
+        <h2 class="sec-title st-dark">Every Space Built<br />to <em>Inspire</em></h2>
+        <p class="sec-sub" style="color:#555">Hover over each card to explore what awaits you on campus</p>
+      </div>
+      <div class="fac-grid reveal">
+        <div class="fac-card fc-hover" style="--fc:#FF6B6B">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-flask"></i></div>
+            <h5>Science Labs</h5>
+            <p>Physics · Chemistry · Biology</p><span class="fch-num">01</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/5e5be768-117c-11ee-b23a-4344ea344fa9.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Research-grade equipment, weekly lab sessions and an innovation incubator for student projects.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#7C4DFF">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-laptop-code"></i></div>
+            <h5>Digital Centre</h5>
+            <p>80 workstations · VR · AI</p><span class="fch-num">02</span>
+          </div>
+          <div class="fch-back"><lottie-player src="https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>3D printers, VR headsets, AI workstations and a maker space for digital innovators.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#FF9A3C">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-book-open"></i></div>
+            <h5>Library & Archives</h5>
+            <p>8,000+ books · E-journals</p><span class="fch-num">03</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/a00285ea-1178-11ee-be7d-bbdbedd3bc5d.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Quiet research suites, digital archives, e-journal access and collaborative study pods.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#00C896">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-theater-masks"></i></div>
+            <h5>Performing Arts</h5>
+            <p>800-seat Auditorium</p><span class="fch-num">04</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/e35b4c54-116f-11ee-ba08-1fdea117457c.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Professional sound, lighting rig, green room and a dedicated rehearsal studio for drama and music.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#FF9A3C">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-futbol"></i></div>
+            <h5>Sports Complex</h5>
+            <p>Gym · Pool · Track</p><span class="fch-num">05</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/4ff9f046-117e-11ee-91cd-a7c320a7bee0.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Olympic standard gym, heated swimming pool, 400m track and squash courts.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#FF4DC4">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-utensils"></i></div>
+            <h5>Dining Hall</h5>
+            <p>Nutritionist-approved menu</p><span class="fch-num">06</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/58acf3a4-117f-11ee-b60d-fba5a9f091f2.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Allergen-free zones, hot and cold options, outdoor terrace dining and weekly chef specials.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#FFD93D">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-bus"></i></div>
+            <h5>Transport</h5>
+            <p>GPS-tracked · City-wide</p><span class="fch-num">07</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/e2b2489e-117d-11ee-b9d3-27e1efc21b18.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Fleet of GPS-tracked buses covering all major city routes with trained staff on every vehicle.</p>
+          </div>
+        </div>
+        <div class="fac-card fc-hover" style="--fc:#FF6B6B">
+          <div class="fch-front">
+            <div class="fch-icon"><i class="fas fa-home"></i></div>
+            <h5>Boarding</h5>
+            <p>Optional · Supervised</p><span class="fch-num">08</span>
+          </div>
+          <div class="fch-back"><lottie-player src="images/87a67404-1185-11ee-a293-6ba50a2e6b61.json"
+              background="transparent" speed="1" loop autoplay style="width:100%;height:100px"></lottie-player>
+            <p>Safe on-campus boarding with 24/7 supervision, study halls, meal plans and weekend activities.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cap-bar reveal">
+        <div class="cb-item"><i class="fas fa-users"></i><strong id="cnt4">0</strong><span>Max Students</span></div>
+        <div class="cb-div"></div>
+        <div class="cb-item"><i class="fas fa-chalkboard-teacher"></i><strong>12:1</strong><span>Student–Teacher</span>
+        </div>
+        <div class="cb-div"></div>
+        <div class="cb-item"><i class="fas fa-clock"></i><strong>8:00 AM</strong><span>School Starts</span></div>
+        <div class="cb-div"></div>
+        <div class="cb-item"><i class="fas fa-star"></i><strong>A+</strong><span>Board Results</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="download">
+    <div class="cta-shapes">
+      <div class="cta-s cs1"></div>
+      <div class="cta-s cs2"></div>
+      <div class="cta-s cs3"></div>
+    </div>
+    <div class="container cta-inner reveal">
+      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json" background="transparent"
+        speed="1" loop autoplay style="width:100px;height:100px;margin:0 auto 16px"></lottie-player>
+      <div class="cta-eyebrow"><span class="cta-line"></span>Admissions Open — Grade 10 to 12<span
+          class="cta-line"></span></div>
+      <h2 class="cta-title">Download the<br /><em>Complete School Guide</em></h2>
+      <p>Curriculum, faculty bios, fee structure, facilities tour & step-by-step admission process — all in one place.
+      </p>
+      <div class="cta-btns">
+        <a href="images/High_School_Facilities.docx" class="ctab-outline-white"><i class="fas fa-download"></i> Download
+          Brochure</a>
+        <!-- NEW "Apply Now" button -->
+        <a href="adm 3.html" class="ctab-white"
+          style="background: #fff; color: #FF6B6B; border: none; box-shadow: 0 6px 24px rgba(255,107,107,.25);">
+          <i class="fas fa-pen-fancy"></i> Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSIONS -->
+  <section class="admit-section" id="admissions">
+    <div class="admit-deco ad1"></div>
+    <div class="admit-deco ad2"></div>
+    <div class="container">
+      <div class="admit-header reveal">
+        <div class="section-pill sp-coral"><i class="fas fa-file-alt"></i> Admissions</div>
+        <h2 class="sec-title st-dark">Your Journey<br />Begins <em>Here</em></h2>
+      </div>
+      <div class="row g-5 align-items-stretch">
+        <div class="col-lg-7 reveal-left">
+          <div class="admit-steps-grid">
+            <div class="asq-step" style="--sc:#FF6B6B">
+              <div class="asqs-header">
+                <div class="asqs-num">01</div>
+                <div class="asqs-icon"><i class="fas fa-file-alt"></i></div>
+              </div>
+              <h5>Apply</h5>
+              <p>Fill the online form or visit our admissions office. Prospectus is free to collect.</p>
+            </div>
+            <div class="asq-step" style="--sc:#38B6FF">
+              <div class="asqs-header">
+                <div class="asqs-num">02</div>
+                <div class="asqs-icon"><i class="fas fa-pencil-alt"></i></div>
+              </div>
+              <h5>Assessment</h5>
+              <p>Written aptitude test in English, Maths, Science & General Aptitude for Grade 10 level.</p>
+            </div>
+            <div class="asq-step" style="--sc:#FF9A3C">
+              <div class="asqs-header">
+                <div class="asqs-num">03</div>
+                <div class="asqs-icon"><i class="fas fa-comments"></i></div>
+              </div>
+              <h5>Interview</h5>
+              <p>One-on-one session with the Head of Admissions — a conversation, not a test.</p>
+            </div>
+            <div class="asq-step" style="--sc:#00C896">
+              <div class="asqs-header">
+                <div class="asqs-num">04</div>
+                <div class="asqs-icon"><i class="fas fa-check-circle"></i></div>
+              </div>
+              <h5>Enrol</h5>
+              <p>Receive your offer letter, submit documents, confirm payment — you're in!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 reveal-right">
+          <div class="admit-docs-card">
+            <div class="adc-top"><i class="fas fa-folder-open"></i><span>Required Documents</span></div>
+            <ul class="adc-list">
+              <li><span class="adc-bullet" style="background:#FF6B6B">①</span>Completed application form</li>
+              <li><span class="adc-bullet" style="background:#FF9A3C">②</span>School leaving certificate</li>
+              <li><span class="adc-bullet" style="background:#7C4DFF">③</span>Birth certificate (attested copy)</li>
+              <li><span class="adc-bullet" style="background:#00C896">④</span>4 passport-size photographs</li>
+              <li><span class="adc-bullet" style="background:#FF4DC4">⑤</span>Parent / Guardian CNIC copy</li>
+              <li><span class="adc-bullet" style="background:#FFD93D">⑥</span>Character certificate from prev. school
+              </li>
+            </ul>
+            <div class="adc-contacts">
+              <a class="adc-contact-item" href="mailto:admissions@highschool.edu.pk"><i class="fas fa-envelope"
+                  style="color:#FF6B6B"></i>admissions@highschool.edu.pk</a>
+              <a class="adc-contact-item" href="tel:+9221"><i class="fas fa-phone"
+                  style="color:#38B6FF"></i>+92-21-XXXXXXX</a>
+              <div class="adc-contact-item"><i class="fas fa-clock" style="color:#FF9A3C"></i>Mon–Fri, 9:00 AM – 3:00 PM
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section" id="location">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-md-5 reveal-left">
+          <div class="section-pill sp-sky" style="margin-bottom:18px"><i class="fas fa-map-pin"></i> Find Us</div>
+          <h2 class="sec-title st-dark" style="margin-bottom:14px">Our<br /><em>Campus</em></h2>
+          <p style="color:#666;line-height:1.8;font-size:.95rem;margin-bottom:24px">A thoughtfully designed campus in a
+            prime educational corridor — green, spacious and built for focused learning.</p>
+          <div class="map-contact-cards">
+            <div class="mcc-item">
+              <div class="mcc-icon" style="background:#FF6B6B"><i class="fas fa-map-marker-alt"></i></div>
+              <div><span class="mcc-l">Address</span><span class="mcc-v">12 Academy Road, Scholar\'s District,
+                  Karachi</span></div>
+            </div>
+            <div class="mcc-item">
+              <div class="mcc-icon" style="background:#38B6FF"><i class="fas fa-phone"></i></div>
+              <div><span class="mcc-l">Phone</span><span class="mcc-v">+92-21-XXXXXXX</span></div>
+            </div>
+            <div class="mcc-item">
+              <div class="mcc-icon" style="background:#00C896"><i class="fas fa-envelope"></i></div>
+              <div><span class="mcc-l">Email</span><span class="mcc-v">info@highschool.edu.pk</span></div>
+            </div>
+          </div>
+          <button class="btn-coral" style="margin-top:8px"><span>Get Directions</span> <i
+              class="fas fa-directions"></i></button>
+        </div>
+        <div class="col-md-7 reveal-right">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835!2d144.953!3d-37.816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b65f5a1b2b3b4b5%3A0x2b3b4b5a6b7c8d9e!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
+              width="100%" height="420" style="border:0;display:block" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <section class="bnav-section">
+    <div class="container bnav-wrap">
+      <div class="bnav-brand">
+        <div class="bnav-dot"></div>
+        <span>High School · Grade 10–12</span>
+        <span class="bnav-sep">·</span>
+        <span style="color:#aaa">Schools Info</span>
+      </div>
+      <div class="d-flex gap-3 flex-wrap justify-content-center">
+        <a href="explore school.html" class="bnav-btn bnav-coral"><i class="fas fa-th-large"></i> Explore Schools</a>
+        <a href="middle school.html" class="bnav-btn bnav-sky">Next School <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script>
+    const DOCX_B64 = "''' + hs_b64 + '''";
+
+    /* Custom cursor */
+    const dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
+    let rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; });
+    document.querySelectorAll('button,a,.hst-tile,.fac-card,.why-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.classList.add('ring-grow'); dot.classList.add('dot-hide'); });
+      el.addEventListener('mouseleave', () => { ring.classList.remove('ring-grow'); dot.classList.remove('dot-hide'); });
+    });
+    (function animRing() {
+      rx += (parseFloat(dot.style.left || 0) - rx) * .12;
+      ry += (parseFloat(dot.style.top || 0) - ry) * .12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    /* Scroll Reveal */
+    const revEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); ro.unobserve(e.target); } });
+    }, { threshold: .08 });
+    revEls.forEach(el => ro.observe(el));
+
+    /* Counters */
+    function countUp(id, target, suffix, dur) {
+      const el = document.getElementById(id); if (!el) return;
+      let s = 0, step = Math.ceil(target / (dur / 30));
+      const t = setInterval(() => { s = Math.min(s + step, target); el.textContent = s + suffix; if (s >= target) clearInterval(t); }, 30);
+    }
+    window.addEventListener('load', () => {
+      countUp('cnt1', 1200, '+', 1800);
+      countUp('cnt2', 98, '%', 1000);
+      countUp('cnt3', 45, '+', 900);
+      countUp('cnt4', 350, '+', 1600);
+    });
+
+    /* Horizontal scroll drag */
+    const track = document.getElementById('hscrollTrack');
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener('mousedown', e => { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
+    track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+    track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+    track.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; track.scrollLeft = scrollLeft - (x - startX) * 1.8; });
+
+    /* Tile click */
+    document.querySelectorAll('.hst-tile').forEach(tile => {
+      tile.addEventListener('click', function () {
+        document.querySelectorAll('.hst-tile').forEach(t => t.classList.remove('hst-active'));
+        this.classList.add('hst-active');
+      });
+    });
+
+    /* Programme tabs */
+    document.querySelectorAll('.ptab').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.prog-panel').forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        document.querySelector(`.prog-panel[data-panel="${this.dataset.tab}"]`).classList.add('active');
+      });
+    });
+
+    /* Why card flip */
+    document.querySelectorAll('.why-card').forEach(card => {
+      card.addEventListener('mouseenter', () => card.classList.add('flipped'));
+      card.addEventListener('mouseleave', () => card.classList.remove('flipped'));
+    });
+
+    /* Docx */
+    function b64Blob(b64) { const raw = atob(b64), arr = new Uint8Array(raw.length); for (let i = 0; i < raw.length; i++)arr[i] = raw.charCodeAt(i); return new Blob([arr], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }); }
+    function dlDoc() { const a = document.createElement('a'); a.href = URL.createObjectURL(b64Blob(DOCX_B64)); a.download = 'High_School_Details.docx'; a.click(); }
+    function viewDoc() { window.open(URL.createObjectURL(b64Blob(DOCX_B64)), '_blank'); }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art & Science Academy · Schools Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+    /* ================================================================
+   ROOT
+================================================================ */
+    :root {
+      --offwhite: #F5F0E8;
+      --offwhite2: #EDE8DC;
+      --red: #E63946;
+      --red-d: #C1121F;
+      --navy: #023E8A;
+      --navy-l: #0353A4;
+      --cyan: #4CC9F0;
+      --white: #FFFFFF;
+      --dark: #1A1A2E;
+      --text: #1A1A2E;
+      --muted: #6B6560;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Karla', sans-serif;
+      background: var(--offwhite);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .5px;
+    }
+
+    em {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* SCROLL PROGRESS */
+    .scroll-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red), var(--navy));
+      z-index: 9999;
+      transition: width .1s linear;
+    }
+
+    /* CUSTOM CURSOR */
+    .cur-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: background .4s, opacity .3s;
+    }
+
+    .cur-ring {
+      width: 36px;
+      height: 36px;
+      border: 2.5px solid var(--red);
+      border-radius: 50%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9997;
+      transform: translate(-50%, -50%);
+      transition: width .3s, height .3s, border-color .4s, background .3s;
+    }
+
+    .cur-ring.cr-big {
+      width: 54px;
+      height: 54px;
+      background: rgba(230, 57, 70, .07);
+    }
+
+    /* WORLD INDICATOR */
+    .world-indicator {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 500;
+    }
+
+    .wi-art,
+    .wi-sci {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: .72rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, .7);
+      backdrop-filter: blur(8px);
+      color: var(--muted);
+      border: 1.5px solid rgba(0, 0, 0, .1);
+      transition: all .4s cubic-bezier(.22, 1, .36, 1);
+      cursor: default;
+    }
+
+    .wi-art.wi-active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+      box-shadow: 0 6px 20px rgba(230, 57, 70, .4);
+    }
+
+    .wi-sci.wi-active {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+      box-shadow: 0 6px 20px rgba(2, 62, 138, .4);
+    }
+
+    .wi-divider {
+      font-size: .85rem;
+      color: rgba(0, 0, 0, .2);
+      text-align: center;
+    }
+
+    /* PILL LABELS */
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-family: 'Karla', sans-serif;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .pl-red {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(230, 57, 70, .3);
+    }
+
+    .pl-blue {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(2, 62, 138, .3);
+    }
+
+    .pl-white {
+      background: rgba(255, 255, 255, .2);
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, .35);
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .9s cubic-bezier(.22, 1, .36, 1), transform .9s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .reveal-left.active,
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* BUTTONS */
+    .btn-red-solid {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red);
+      color: #fff;
+      padding: 14px 30px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 6px 6px 0 var(--red-d);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn-red-solid:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--red-d);
+      color: #fff;
+    }
+
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--dark);
+      padding: 13px 28px;
+      border-radius: 6px;
+      border: 2.5px solid var(--dark);
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .2s;
+    }
+
+    .btn-outline-dark:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* ================================================================
+   ART BG ICONS
+================================================================ */
+    .art-bg-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .abi {
+      position: absolute;
+      font-size: 2.2rem;
+      opacity: 0;
+      animation: abiAnim 6s ease-in-out infinite;
+      color: var(--red);
+    }
+
+    @keyframes abiAnim {
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+      }
+
+      20% {
+        opacity: 0.18;
+      }
+
+      80% {
+        opacity: 0.18;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) rotate(20deg);
+      }
+    }
+
+    .abi-1 {
+      top: 6%;
+      left: 2%;
+      font-size: 2.8rem;
+      animation-delay: 0s;
+      animation-duration: 7s;
+      color: rgba(230, 57, 70, .25);
+    }
+
+    .abi-2 {
+      top: 12%;
+      left: 12%;
+      font-size: 1.8rem;
+      animation-delay: 1s;
+      animation-duration: 9s;
+      color: rgba(2, 62, 138, .2);
+    }
+
+    .abi-3 {
+      top: 5%;
+      left: 22%;
+      font-size: 2.4rem;
+      animation-delay: 2s;
+      animation-duration: 8s;
+      color: rgba(230, 57, 70, .2);
+    }
+
+    .abi-4 {
+      top: 20%;
+      left: 35%;
+      font-size: 1.6rem;
+      animation-delay: .5s;
+      animation-duration: 6s;
+      color: rgba(2, 62, 138, .18);
+    }
+
+    .abi-5 {
+      top: 8%;
+      right: 30%;
+      font-size: 2rem;
+      animation-delay: 3s;
+      animation-duration: 10s;
+      color: rgba(230, 57, 70, .22);
+    }
+
+    .abi-6 {
+      top: 35%;
+      left: 5%;
+      font-size: 2.2rem;
+      animation-delay: 1.5s;
+      animation-duration: 7s;
+      color: rgba(2, 62, 138, .15);
+    }
+
+    .abi-7 {
+      top: 50%;
+      left: 18%;
+      font-size: 1.5rem;
+      animation-delay: 4s;
+      animation-duration: 8s;
+      color: rgba(230, 57, 70, .18);
+    }
+
+    .abi-8 {
+      bottom: 30%;
+      left: 8%;
+      font-size: 2.5rem;
+      animation-delay: 2.5s;
+      animation-duration: 9s;
+      color: rgba(2, 62, 138, .2);
+    }
+
+    .abi-9 {
+      bottom: 20%;
+      left: 25%;
+      font-size: 1.8rem;
+      animation-delay: .8s;
+      animation-duration: 6s;
+      color: rgba(230, 57, 70, .2);
+    }
+
+    .abi-10 {
+      bottom: 10%;
+      left: 42%;
+      font-size: 2rem;
+      animation-delay: 3.5s;
+      animation-duration: 11s;
+      color: rgba(2, 62, 138, .15);
+    }
+
+    .abi-11 {
+      top: 70%;
+      right: 38%;
+      font-size: 1.6rem;
+      animation-delay: 1.2s;
+      animation-duration: 7s;
+      color: rgba(230, 57, 70, .18);
+    }
+
+    .abi-12 {
+      top: 40%;
+      right: 42%;
+      font-size: 2.2rem;
+      animation-delay: 2.2s;
+      animation-duration: 8s;
+      color: rgba(2, 62, 138, .17);
+    }
+
+    /* ART MOSAIC */
+    .art-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 14px;
+      position: relative;
+    }
+
+    .am-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 2px solid rgba(230, 57, 70, .12);
+      box-shadow: 6px 6px 0 rgba(230, 57, 70, .1);
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .35s;
+      position: relative;
+    }
+
+    .am-card:hover {
+      transform: translate(-3px, -5px);
+      box-shadow: 10px 12px 0 rgba(230, 57, 70, .16);
+    }
+
+    .am-card-large {
+      grid-column: 1 / -1;
+    }
+
+    .am-card-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 14px;
+      font-size: .75rem;
+      font-weight: 800;
+      color: var(--red);
+      border-top: 2px solid rgba(230, 57, 70, .1);
+      background: #fffaf9;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .am-card-label i {
+      font-size: .7rem;
+    }
+
+    .am-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--navy));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .am-card:hover::before {
+      opacity: 1;
+    }
+
+    /* ================================================================
+   S1 — HERO
+================================================================ */
+    .s1-hero {
+      background: var(--offwhite);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 30px 0 60px;
+    }
+
+    .s1-bg-word {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 22vw, 380px);
+      color: rgba(230, 57, 70, .05);
+      bottom: -30px;
+      right: -20px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+
+    .art-scatter {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .as-el {
+      position: absolute;
+      font-size: 2rem;
+      animation: asFloat 5s ease-in-out infinite alternate;
+    }
+
+    .ae1 {
+      top: 8%;
+      left: 4%;
+      color: rgba(230, 57, 70, .2);
+      font-size: 2.5rem;
+      animation-delay: 0s;
+    }
+
+    .ae2 {
+      top: 15%;
+      right: 6%;
+      color: rgba(2, 62, 138, .15);
+      font-size: 1.8rem;
+      animation-delay: .7s;
+    }
+
+    .ae3 {
+      bottom: 25%;
+      left: 3%;
+      color: rgba(230, 57, 70, .18);
+      font-size: 1.5rem;
+      animation-delay: 1.4s;
+    }
+
+    .ae4 {
+      bottom: 15%;
+      right: 10%;
+      color: rgba(2, 62, 138, .15);
+      font-size: 2rem;
+      animation-delay: 2s;
+    }
+
+    .ae5 {
+      top: 45%;
+      left: 48%;
+      color: rgba(230, 57, 70, .12);
+      font-size: 1.6rem;
+      animation-delay: 2.8s;
+    }
+
+    @keyframes asFloat {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      100% {
+        transform: translateY(-16px) rotate(12deg);
+      }
+    }
+
+    .school-ribbon-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 0 8px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+    }
+
+    .sr-pip {
+      width: 10px;
+      height: 10px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pipB 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pipB {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: .3;
+        transform: scale(1.6);
+      }
+    }
+
+    .s1-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 40px 0 0;
+    }
+
+    .s1-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+    }
+
+    .ey-line {
+      display: inline-block;
+      width: 30px;
+      height: 2px;
+      background: currentColor;
+      flex-shrink: 0;
+    }
+
+    .s1-title {
+      font-size: clamp(3rem, 8vw, 8rem);
+      line-height: .9;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .t-outline {
+      -webkit-text-stroke: 3px var(--red);
+      color: transparent;
+      font-size: 1.1em;
+    }
+
+    .t-filled {
+      color: var(--dark);
+      font-size: .8em;
+    }
+
+    .t-red {
+      color: var(--red);
+      font-size: .95em;
+    }
+
+    .s1-desc {
+      font-size: .97rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 26px;
+    }
+
+    .s1-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .s1-stats {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .s1s-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .s1s-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .s1s-item span {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+    }
+
+    .s1s-sep {
+      font-size: 1.4rem;
+      color: rgba(0, 0, 0, .15);
+    }
+
+    .s1-right {
+      position: relative;
+    }
+
+    .s1-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 48px;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+    }
+
+    .sh-arrow {
+      width: 36px;
+      height: 36px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      animation: arrowBob 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes arrowBob {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(6px);
+      }
+    }
+
+    /* ================================================================
+   S2 — TRANSITION  (FIXED)
+================================================================ */
+    .s2-transition {
+      background: var(--offwhite2);
+      padding: 60px 20px;
+      position: relative;
+      overflow: hidden;
+      border-top: 3px solid rgba(0, 0, 0, .08);
+      border-bottom: 3px solid rgba(0, 0, 0, .08);
+    }
+
+    .s2-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .s2lt-small,
+    .s2rt-small {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      display: block;
+    }
+
+    .s2lt-big,
+    .s2rt-big {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: .9;
+      display: block;
+    }
+
+    .s2lt-big {
+      color: var(--red);
+    }
+
+    .s2rt-big {
+      color: var(--navy);
+    }
+
+    .s2-morphbar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+      justify-content: center;
+      min-width: 220px;
+    }
+
+    .s2mb-art,
+    .s2mb-sci {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 22px;
+      font-weight: 800;
+      font-size: 1rem;
+      transition: all .4s;
+    }
+
+    .s2mb-art {
+      background: var(--red);
+      color: #fff;
+      border-radius: 8px 0 0 8px;
+    }
+
+    .s2mb-sci {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* KEY: clip-path so it never overflows as a diagonal bar */
+    .s2mb-divider {
+      background: var(--dark);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      z-index: 2;
+      flex-shrink: 0;
+      animation: divSpin 8s linear infinite;
+      overflow: hidden;
+    }
+
+    @keyframes divSpin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .s2-morph-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(230, 57, 70, .08), rgba(2, 62, 138, .08));
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    /* ================================================================
+   S3 — SCIENCE
+================================================================ */
+    .s3-science {
+      background: linear-gradient(145deg, var(--navy) 0%, #012a5e 50%, #001845 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    .s3-bg-word {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(120px, 22vw, 380px);
+      color: rgba(255, 255, 255, .03);
+      bottom: -30px;
+      left: -20px;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -8px;
+    }
+
+    .sci-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .sp-dot {
+      position: absolute;
+      background: var(--cyan);
+      border-radius: 50%;
+      animation: spFloat linear infinite;
+      opacity: .4;
+    }
+
+    @keyframes spFloat {
+      0% {
+        transform: translateY(0);
+        opacity: .4;
+      }
+
+      100% {
+        transform: translateY(-60px);
+        opacity: 0;
+      }
+    }
+
+    .sci-formulas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .sf-el {
+      position: absolute;
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      color: var(--cyan);
+      opacity: .12;
+      animation: sfF 7s ease-in-out infinite alternate;
+    }
+
+    .sf1 {
+      font-size: 2rem;
+      top: 8%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .sf2 {
+      font-size: 2.5rem;
+      top: 15%;
+      right: 8%;
+      animation-delay: .8s;
+    }
+
+    .sf3 {
+      font-size: 1.8rem;
+      top: 40%;
+      left: 2%;
+      animation-delay: 1.5s;
+    }
+
+    .sf4 {
+      font-size: 3rem;
+      bottom: 20%;
+      right: 5%;
+      animation-delay: 2s;
+    }
+
+    .sf5 {
+      font-size: 1.6rem;
+      top: 65%;
+      left: 10%;
+      animation-delay: 2.8s;
+    }
+
+    .sf6 {
+      font-size: 2.2rem;
+      bottom: 10%;
+      right: 15%;
+      animation-delay: 3.5s;
+    }
+
+    @keyframes sfF {
+      0% {
+        transform: translateY(0);
+        opacity: .12;
+      }
+
+      100% {
+        transform: translateY(-20px);
+        opacity: .22;
+      }
+    }
+
+    .s3-inner {
+      position: relative;
+      z-index: 5;
+    }
+
+    .s3-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .s3-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: 16px;
+    }
+
+    .ey-blue {
+      background: var(--cyan);
+    }
+
+    .s3-title {
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      line-height: .9;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .st-outline-w {
+      -webkit-text-stroke: 3px rgba(255, 255, 255, .6);
+      color: transparent;
+      font-size: 1em;
+    }
+
+    .st-filled-w {
+      color: rgba(255, 255, 255, .5);
+      font-size: .75em;
+    }
+
+    .st-accent {
+      color: var(--cyan);
+      font-size: .9em;
+    }
+
+    .s3-desc {
+      font-size: .96rem;
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.8;
+      max-width: 440px;
+      margin-bottom: 22px;
+    }
+
+    .s3-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .s3-pills span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(76, 201, 240, .12);
+      color: var(--cyan);
+      border: 1.5px solid rgba(76, 201, 240, .25);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: .8rem;
+      font-weight: 700;
+      transition: all .2s;
+      cursor: default;
+    }
+
+    .s3-pills span:hover {
+      background: var(--cyan);
+      color: var(--navy);
+    }
+
+    .s3-lottie-frame {
+      background: rgba(255, 255, 255, .07);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1.5px solid rgba(76, 201, 240, .2);
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, .2);
+      padding: 16px;
+      position: relative;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .s3-lottie-frame:hover {
+      transform: translate(-4px, -6px);
+      box-shadow: 12px 14px 0 rgba(0, 0, 0, .25);
+    }
+
+    .s3lf-data {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 12px 8px 4px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .s3d-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .s3d-item strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--cyan);
+      line-height: 1;
+    }
+
+    .s3d-item span {
+      font-size: .66rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .5);
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .s3d-sep {
+      width: 1px;
+      height: 30px;
+      background: rgba(255, 255, 255, .15);
+    }
+
+    .s3-left {
+      position: relative;
+    }
+
+    .s3-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 70px;
+      padding-top: 50px;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+    }
+
+    .s3br-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .s3br-text h3 em {
+      font-family: 'Libre Baskerville', serif;
+      color: var(--cyan);
+      font-style: italic;
+    }
+
+    .s3br-text p {
+      font-size: .92rem;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .s3br-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .s3br-stat {
+      background: rgba(76, 201, 240, .1);
+      border: 1.5px solid rgba(76, 201, 240, .2);
+      border-radius: 10px;
+      padding: 12px 18px;
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .s3br-stat strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--cyan);
+      display: block;
+      line-height: 1;
+    }
+
+    .s3br-stat span {
+      font-size: .65rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, .45);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .s3br-lottie-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .s3br-lottie-card {
+      background: rgba(255, 255, 255, .06);
+      border: 1.5px solid rgba(76, 201, 240, .18);
+      border-radius: 16px;
+      overflow: hidden;
+      padding: 10px;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .s3br-lottie-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .s3br-lottie-card-label {
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 8px 4px 4px;
+    }
+
+    /* ================================================================
+   S4 — DUAL PILLARS
+================================================================ */
+    .s4-pillars {
+      background: var(--offwhite);
+      padding: 90px 0;
+    }
+
+    .s4-wave-top {
+      height: 60px;
+      background: linear-gradient(145deg, var(--navy), #012a5e);
+      clip-path: ellipse(55% 100% at 50% 0%);
+      margin-bottom: 0;
+    }
+
+    .s4-header {
+      padding-top: 30px;
+      margin-bottom: 50px;
+    }
+
+    .s4-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .s4-title .t-normal {
+      color: var(--dark);
+    }
+
+    .s4-title em {
+      color: var(--red);
+    }
+
+    .s4-title .em-blue {
+      color: var(--navy);
+    }
+
+    .s4-poster-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .s4-card {
+      border-radius: 12px;
+      padding: 28px 22px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 2px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+      cursor: default;
+    }
+
+    .s4c-art {
+      background: #fff;
+      border-color: rgba(230, 57, 70, .15);
+    }
+
+    .s4c-sci {
+      background: var(--offwhite2);
+      border-color: rgba(2, 62, 138, .12);
+    }
+
+    .s4-card:hover {
+      border-color: var(--red);
+    }
+
+    .s4c-sci:hover {
+      border-color: var(--navy);
+    }
+
+    .s4c-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4.5rem;
+      color: rgba(0, 0, 0, .04);
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .s4c-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+
+    .s4c-art .s4c-icon {
+      background: var(--red);
+    }
+
+    .s4c-sci .s4c-icon {
+      background: var(--navy);
+    }
+
+    .s4-card:hover .s4c-icon {
+      transform: rotate(-8deg) scale(1.12);
+    }
+
+    .s4-card h4 {
+      font-size: 1rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .s4c-art h4 {
+      color: var(--red);
+    }
+
+    .s4c-sci h4 {
+      color: var(--navy);
+    }
+
+    .s4-card p {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .s4c-lottie {
+      width: 100%;
+      display: block;
+      background: transparent;
+      height: 80px;
+    }
+
+    .s4c-tag {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      background: var(--red);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 4px;
+      width: fit-content;
+      margin-top: auto;
+    }
+
+    .s4ct-blue {
+      background: var(--navy);
+    }
+
+    /* ================================================================
+   S5 — TIMELINE
+================================================================ */
+    .s5-timeline {
+      background: linear-gradient(145deg, var(--navy) 0%, #012a5e 60%, #001845 100%);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s5-noise {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+
+    .s5-header {
+      margin-bottom: 60px;
+    }
+
+    .s5-title {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 10px;
+    }
+
+    .s5-title em {
+      color: var(--cyan);
+    }
+
+    .s5-sub {
+      color: rgba(255, 255, 255, .55);
+      font-size: .95rem;
+    }
+
+    .tl-outer {
+      position: relative;
+    }
+
+    .tl-rail {
+      height: 3px;
+      background: rgba(255, 255, 255, .12);
+      border-radius: 2px;
+      margin: 0 50px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .tl-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red), var(--cyan));
+      transition: width 1.5s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .tl-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .tl-card {
+      background: rgba(255, 255, 255, .05);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 18px 14px;
+      border: 1.5px solid rgba(255, 255, 255, .1);
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), background .3s;
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tl-card:hover {
+      background: rgba(255, 255, 255, .1);
+      transform: translateY(-10px);
+    }
+
+    .tlc-art {
+      border-top: 3px solid var(--red);
+    }
+
+    .tlc-sci {
+      border-top: 3px solid var(--cyan);
+    }
+
+    .tlc-gold {
+      border-top: 3px solid #FFD166;
+      background: rgba(255, 209, 102, .06) !important;
+    }
+
+    .tlc-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, .1);
+      flex-shrink: 0;
+    }
+
+    .tlc-grade {
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .tlc-lottie {
+      width: 100%;
+      display: block;
+      background: transparent;
+      height: 80px;
+    }
+
+    .tl-card h5 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #fff;
+      margin: 8px 0 5px;
+      text-align: center;
+    }
+
+    .tl-card p {
+      font-size: .73rem;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1.6;
+      margin: 0 0 8px;
+      text-align: center;
+    }
+
+    .tlc-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      margin-top: auto;
+    }
+
+    .tlc-chips span {
+      font-size: .62rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .6);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* ================================================================
+   S6 — FACILITIES
+================================================================ */
+    .s6-facilities {
+      background: var(--offwhite);
+      padding: 90px 0 80px;
+      position: relative;
+    }
+
+    .s6-wave-top {
+      height: 60px;
+      background: linear-gradient(145deg, var(--navy), #001845);
+      clip-path: ellipse(55% 100% at 50% 0%);
+    }
+
+    .s6-header {
+      margin-bottom: 48px;
+      padding-top: 30px;
+    }
+
+    .s6-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .s6-title em {
+      color: var(--red);
+    }
+
+    .s6-title .em-blue {
+      color: var(--navy);
+    }
+
+    .s6-sub {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .s6-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .s6-card {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 0, 0, .07);
+      position: relative;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .35s, border-color .3s;
+      cursor: default;
+    }
+
+    .s6-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
+      border-color: var(--fc, var(--red));
+    }
+
+    .s6c-big {
+      grid-row: 1;
+    }
+
+    .s6c-sm {
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 4px solid var(--fc, var(--red));
+    }
+
+    .s6cf-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+
+    .s6cf-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .95rem;
+      color: #fff;
+      flex-shrink: 0;
+      background: var(--red);
+      transition: transform .3s;
+    }
+
+    .s6-card:hover .s6cf-icon {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .s6cf-label h5,
+    .s6c-sm h5 {
+      color: var(--text);
+      margin-bottom: 3px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: .95rem;
+    }
+
+    .s6cf-label p,
+    .s6c-sm p {
+      font-size: .78rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .s6c-icon-sm {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+      background: var(--fc, var(--red));
+      transition: transform .3s;
+    }
+
+    .s6-card:hover .s6c-icon-sm {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .s6c-num {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: rgba(0, 0, 0, .04);
+      pointer-events: none;
+    }
+
+    .s6-cap-strip {
+      background: linear-gradient(135deg, var(--red), var(--red-d));
+      border-radius: 12px;
+      padding: 24px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, .12);
+    }
+
+    .s6cs-i {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      color: #fff;
+    }
+
+    .s6cs-i i {
+      font-size: 1.1rem;
+      opacity: .8;
+      margin-bottom: 3px;
+    }
+
+    .s6cs-i strong {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .s6cs-i span {
+      font-size: .68rem;
+      font-weight: 700;
+      opacity: .7;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .s6cs-sep {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    /* ================================================================
+   S7 — CTA
+================================================================ */
+    .s7-cta-modern {
+      background: var(--offwhite);
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .s7m-left-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 22px;
+    }
+
+    .s7m-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .78rem;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .s7m-eyebrow span.em-line {
+      display: inline-block;
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .s7m-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 5.5rem);
+      line-height: .92;
+      color: var(--dark);
+    }
+
+    .s7m-title span.red {
+      color: var(--red);
+    }
+
+    .s7m-title span.blue {
+      color: var(--navy);
+    }
+
+    .s7m-desc {
+      font-size: .96rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+
+    .s7m-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .s7m-btn-red {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 var(--red-d);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .s7m-btn-red:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 var(--red-d);
+    }
+
+    .s7m-btn-navy {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      color: #fff;
+      padding: 13px 26px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      cursor: pointer;
+      box-shadow: 6px 6px 0 rgba(2, 62, 138, .4);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .s7m-btn-navy:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 8px 8px 0 rgba(2, 62, 138, .5);
+    }
+
+    .s7m-right-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .s7m-info-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      border: 2px solid rgba(0, 0, 0, .07);
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, .06);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      cursor: default;
+    }
+
+    .s7m-info-card:hover {
+      transform: translate(-3px, -4px);
+      border-color: var(--red);
+      box-shadow: 7px 7px 0 rgba(230, 57, 70, .15);
+    }
+
+    .s7m-info-card:nth-child(2):hover {
+      border-color: var(--navy);
+      box-shadow: 7px 7px 0 rgba(2, 62, 138, .15);
+    }
+
+    .s7m-ic-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .s7m-ic-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .s7m-ic-label {
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+    }
+
+    .s7m-ic-divider {
+      height: 1px;
+      background: rgba(0, 0, 0, .07);
+      margin: 12px 0;
+    }
+
+    .s7m-ic-text {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .s7m-wide-card {
+      grid-column: 1 / -1;
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 24px 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 6px 6px 0 rgba(2, 62, 138, .3);
+      transition: transform .3s;
+    }
+
+    .s7m-wide-card:hover {
+      transform: translate(-3px, -4px);
+    }
+
+    .s7m-wc-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(76, 201, 240, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--cyan);
+      flex-shrink: 0;
+    }
+
+    .s7m-wc-text h6 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .s7m-wc-text p {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, .6);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    .s7m-bg-deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .s7m-bg-deco::before {
+      content: 'GUIDE';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(100px, 15vw, 220px);
+      color: rgba(230, 57, 70, .04);
+      right: -20px;
+      bottom: -20px;
+      line-height: 1;
+      letter-spacing: -6px;
+      pointer-events: none;
+    }
+
+    /* ================================================================
+   S8 — ADMISSIONS
+================================================================ */
+    .s8-admit {
+      background: #fff;
+      padding: 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admit-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .06;
+      pointer-events: none;
+    }
+
+    .ab1 {
+      width: 500px;
+      height: 500px;
+      background: var(--red);
+      top: -150px;
+      right: -150px;
+    }
+
+    .ab2 {
+      width: 350px;
+      height: 350px;
+      background: var(--navy);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .s8-header {
+      margin-bottom: 48px;
+    }
+
+    .s8-title {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .s8-title em {
+      color: var(--red);
+    }
+
+    .admit-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .adm-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--offwhite);
+      border-radius: 12px;
+      padding: 20px 18px;
+      border-left: 4px solid var(--sc, var(--red));
+      transition: transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+
+    .adm-step:hover {
+      transform: translateX(8px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .08);
+    }
+
+    .adm-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--sc, var(--red));
+      line-height: 1;
+      width: 44px;
+      flex-shrink: 0;
+    }
+
+    .adm-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .adm-body h5 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .adm-body p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .admit-docs {
+      background: var(--offwhite);
+      border-radius: 16px;
+      padding: 30px 24px;
+      height: 100%;
+      border: 2px solid rgba(230, 57, 70, .15);
+      box-shadow: 6px 6px 0 rgba(230, 57, 70, .08);
+    }
+
+    .adoc-hdr {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      color: var(--dark);
+      padding-bottom: 14px;
+      border-bottom: 2px dashed rgba(0, 0, 0, .1);
+      margin-bottom: 16px;
+    }
+
+    .adoc-hdr i {
+      color: var(--red);
+    }
+
+    .adoc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .adoc-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .88rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .adl-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .72rem;
+      color: #fff;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .adoc-contact {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 2px dashed rgba(0, 0, 0, .1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .adoc-contact div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ================================================================
+   S9 — MAP
+================================================================ */
+    .s9-map {
+      background: var(--offwhite2);
+      padding: 90px 0;
+    }
+
+    .s9-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--dark);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .s9-title em {
+      color: var(--red);
+    }
+
+    .s9-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .s9c-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1.5px solid rgba(0, 0, 0, .07);
+      transition: transform .3s, border-color .3s;
+    }
+
+    .s9c-row:hover {
+      transform: translateX(6px);
+      border-color: var(--red);
+    }
+
+    .s9c-ic {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .88rem;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform .3s;
+    }
+
+    .s9c-row:hover .s9c-ic {
+      transform: rotate(-8deg) scale(1.1);
+    }
+
+    .s9c-row>div:last-child {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .s9c-l {
+      font-size: .64rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--muted);
+    }
+
+    .s9c-v {
+      font-size: .87rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .s9-map-frame {
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 rgba(0, 0, 0, .1);
+      border: 2px solid rgba(230, 57, 70, .15);
+    }
+
+    /* ================================================================
+   BOTTOM NAV
+================================================================ */
+    .bnav {
+      background: var(--offwhite);
+      padding: 42px 0 50px;
+      border-top: 2px solid rgba(0, 0, 0, .08);
+    }
+
+    .bnav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .bnav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: .92rem;
+      color: var(--text);
+    }
+
+    .bnav-art {
+      color: var(--red);
+    }
+
+    .bnav-sci {
+      color: var(--navy);
+    }
+
+    .bnav-sep {
+      color: #ccc;
+    }
+
+    .bnav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-family: 'Karla', sans-serif;
+      font-weight: 800;
+      font-size: .9rem;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 rgba(0, 0, 0, .12);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .bnav-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, .16);
+    }
+
+    .bnav-red {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .bnav-red:hover {
+      color: #fff;
+    }
+
+    .bnav-blue {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .bnav-blue:hover {
+      color: #fff;
+    }
+
+    /* ================================================================
+   RESPONSIVE — COMPLETE FIX
+================================================================ */
+
+    /* 1199px */
+    @media(max-width:1199px) {
+      .s1-title {
+        font-size: clamp(2.8rem, 7vw, 6rem);
+      }
+
+      .s3-title {
+        font-size: clamp(2.5rem, 6vw, 5.5rem);
+      }
+
+      .s6-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s6c-big {
+        grid-row: auto;
+      }
+    }
+
+    /* 991px */
+    @media(max-width:991px) {
+
+      /* cursor off */
+      .cur-dot,
+      .cur-ring,
+      .world-indicator {
+        display: none;
+      }
+
+      body {
+        cursor: auto;
+      }
+
+      button,
+      a {
+        cursor: pointer;
+      }
+
+      .s1-hero {
+        padding: 80px 0 40px;
+        min-height: auto;
+      }
+
+      .s1-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .s1-title {
+        font-size: clamp(3rem, 10vw, 5.5rem);
+      }
+
+      .s1-desc {
+        max-width: 100%;
+      }
+
+      .s1-scroll-hint {
+        justify-content: flex-start;
+      }
+
+      .art-mosaic {
+        grid-template-columns: 1fr;
+      }
+
+      .am-card-large {
+        grid-column: 1;
+      }
+
+      /* S2 TRANSITION FIX */
+      .s2-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .s2lt-text,
+      .s2-right-text {
+        text-align: center;
+      }
+
+      .s2-morphbar {
+        width: 100%;
+        max-width: 360px;
+        justify-content: center;
+      }
+
+      /* STOP SPINNING ON TABLET — prevents diagonal bar */
+      .s2mb-divider {
+        animation: none !important;
+        transform: none !important;
+      }
+
+      .s3-science {
+        padding: 60px 0;
+        min-height: auto;
+      }
+
+      .s3-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .s3-title {
+        font-size: clamp(2.5rem, 9vw, 5rem);
+      }
+
+      .s3-desc {
+        max-width: 100%;
+      }
+
+      .s3-bottom-row {
+        grid-template-columns: 1fr;
+        margin-top: 40px;
+        padding-top: 36px;
+        gap: 30px;
+      }
+
+      .s3br-lottie-wrap {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s4-pillars {
+        padding: 60px 0;
+      }
+
+      .s4-poster-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s4-header {
+        margin-bottom: 30px;
+      }
+
+      .s5-timeline {
+        padding: 60px 0;
+      }
+
+      .tl-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tl-rail {
+        display: none;
+      }
+
+      .s6-facilities {
+        padding: 60px 0 50px;
+      }
+
+      .s6-wave-top {
+        height: 40px;
+      }
+
+      .s6-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s6c-big {
+        grid-row: auto;
+      }
+
+      .s7-cta-modern {
+        padding: 60px 0;
+      }
+
+      .s7m-right-col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s7m-wide-card {
+        grid-column: 1 / -1;
+      }
+
+      .s7m-title {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+      }
+
+      .s8-admit {
+        padding: 60px 0;
+      }
+
+      .s9-map {
+        padding: 60px 0;
+      }
+
+      .bnav {
+        padding: 32px 0 40px;
+      }
+    }
+
+    /* 767px */
+    @media(max-width:767px) {
+
+      /* S2 TRANSITION — stack vertically, stop spinning */
+      .s2-transition {
+        padding: 40px 16px;
+      }
+
+      .s2-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .s2-morphbar {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-width: 100%;
+        align-items: stretch;
+      }
+
+      .s2mb-art {
+        border-radius: 8px 8px 0 0;
+        justify-content: center;
+      }
+
+      .s2mb-sci {
+        border-radius: 0 0 8px 8px;
+        justify-content: center;
+      }
+
+      /* THE MAIN FIX — flat bar, no spinning, no overflow */
+      .s2mb-divider {
+        width: 100% !important;
+        height: 40px !important;
+        border-radius: 0 !important;
+        animation: none !important;
+        transform: none !important;
+        flex-shrink: 0;
+        font-size: 1.1rem;
+      }
+
+      .s2lt-big,
+      .s2rt-big {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .s1-hero {
+        padding: 70px 0 30px;
+      }
+
+      .s1-title {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      }
+
+      .s1-btns {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn-red-solid,
+      .btn-outline-dark {
+        justify-content: center;
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .s1-stats {
+        gap: 12px;
+      }
+
+      .s1s-item strong {
+        font-size: 1.8rem;
+      }
+
+      .art-mosaic {
+        gap: 10px;
+      }
+
+      .am-card-label {
+        font-size: .68rem;
+        padding: 8px 12px;
+      }
+
+      .s3lf-data {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .s3d-sep {
+        display: none;
+      }
+
+      .s3br-stats {
+        gap: 8px;
+      }
+
+      .s3br-stat {
+        min-width: 80px;
+        padding: 10px 14px;
+      }
+
+      .s3br-lottie-wrap {
+        gap: 10px;
+      }
+
+      .s4-poster-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s6-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s6-cap-strip {
+        padding: 18px 20px;
+      }
+
+      .s6cs-i strong {
+        font-size: 1.4rem;
+      }
+
+      .s7m-right-col {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s7m-wide-card {
+        grid-column: 1 / -1;
+        flex-direction: row;
+      }
+
+      .s7m-btns {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .s7m-btn-red,
+      .s7m-btn-navy {
+        justify-content: center;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .adm-step {
+        gap: 12px;
+      }
+
+      .adm-num {
+        font-size: 1.6rem;
+        width: 34px;
+      }
+
+      .bnav-wrap {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .bnav-brand {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* 575px */
+    @media(max-width:575px) {
+      .s1-title {
+        font-size: clamp(2.5rem, 14vw, 3.8rem);
+      }
+
+      .s1-bg-word {
+        font-size: clamp(100px, 30vw, 200px);
+      }
+
+      /* S2 already handled at 767px — ensure it stays clean */
+      .s2mb-divider {
+        animation: none !important;
+        transform: none !important;
+        width: 100% !important;
+        height: 36px !important;
+        border-radius: 0 !important;
+      }
+
+      .s2lt-big,
+      .s2rt-big {
+        font-size: clamp(1.8rem, 10vw, 2.5rem);
+      }
+
+      .s3-title {
+        font-size: clamp(2.2rem, 11vw, 3.5rem);
+      }
+
+      .s3-bg-word {
+        font-size: clamp(100px, 30vw, 200px);
+      }
+
+      .s3br-lottie-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .s4-poster-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .s4-title {
+        font-size: clamp(1.8rem, 8vw, 3rem);
+      }
+
+      .tl-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .s5-title {
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+      }
+
+      .s6-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .s6-cap-strip {
+        flex-direction: column;
+        gap: 12px;
+        padding: 20px;
+      }
+
+      .s6cs-sep {
+        display: none;
+      }
+
+      .s7m-title {
+        font-size: clamp(2.2rem, 11vw, 3rem);
+      }
+
+      .s7m-right-col {
+        grid-template-columns: 1fr;
+      }
+
+      .s7m-wide-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+      }
+
+      .s7m-info-card {
+        padding: 18px 16px;
+      }
+
+      .s7m-ic-num {
+        font-size: 2.2rem;
+      }
+
+      .s8-title {
+        font-size: clamp(1.8rem, 9vw, 2.8rem);
+      }
+
+      .s9-title {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+      }
+
+      .s3br-stats {
+        justify-content: center;
+      }
+
+      .adoc-list li {
+        font-size: .82rem;
+      }
+
+      .tl-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .bnav-wrap {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .bnav-brand {
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      /* Landscape phones */
+      @media(orientation:landscape) {
+        .s1-hero {
+          min-height: auto;
+          padding: 60px 0 30px;
+        }
+
+        .s3-science {
+          min-height: auto;
+        }
+      }
+    }
+
+    /* Extra small 380px */
+    @media(max-width:380px) {
+      .s1-title {
+        font-size: clamp(2.2rem, 12vw, 3rem);
+      }
+
+      .s1-stats {
+        gap: 8px;
+      }
+
+      .s1s-item strong {
+        font-size: 1.5rem;
+      }
+
+      .s2mb-art,
+      .s2mb-sci {
+        padding: 12px 16px;
+        font-size: .9rem;
+      }
+
+      .s2mb-divider {
+        height: 32px !important;
+        font-size: 1rem;
+      }
+
+      .hero-ctas,
+      .s7m-btns {
+        flex-direction: column;
+      }
+
+      .tl-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .s4-poster-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .s3br-lottie-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body id="pageBody">
+
+  <!-- ============================================================
+  GO BACK BUTTON (top right)
+============================================================ -->
+  <div style="position: absolute; top: 20px; right: 30px; z-index: 20;">
+    <a href="explore school.html" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    padding: 10px 18px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a2e;
+    text-decoration: none;
+    border: 1.5px solid #e8e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.2s;
+    font-family: 'Karla', sans-serif;
+  " onmouseover="this.style.background='#f3f0ff'; this.style.borderColor='#E63946';"
+      onmouseout="this.style.background='rgba(255,255,255,0.85)'; this.style.borderColor='#e8e8f0';">
+      <i class="fas fa-arrow-left" style="color: #E63946;"></i> Go Back
+    </a>
+  </div>
+
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+  <div class="scroll-bar" id="scrollBar"></div>
+
+  <div class="world-indicator" id="worldIndicator">
+    <div class="wi-art" id="wiArt"><i class="fas fa-paint-brush"></i> Art World</div>
+    <div class="wi-divider">↕</div>
+    <div class="wi-sci" id="wiSci"><i class="fas fa-flask"></i> Science World</div>
+  </div>
+
+  <!-- S1 HERO -->
+  <section class="s1-hero scroll-section" id="s1" data-world="art">
+    <div class="s1-bg-word">ART</div>
+    <div class="art-bg-icons">
+      <span class="abi abi-1"><i class="fas fa-paint-brush"></i></span>
+      <span class="abi abi-2"><i class="fas fa-pencil-alt"></i></span>
+      <span class="abi abi-3"><i class="fas fa-palette"></i></span>
+      <span class="abi abi-4"><i class="fas fa-pen-nib"></i></span>
+      <span class="abi abi-5"><i class="fas fa-music"></i></span>
+      <span class="abi abi-6"><i class="fas fa-theater-masks"></i></span>
+      <span class="abi abi-7"><i class="fas fa-camera"></i></span>
+      <span class="abi abi-8"><i class="fas fa-film"></i></span>
+      <span class="abi abi-9"><i class="fas fa-guitar"></i></span>
+      <span class="abi abi-10"><i class="fas fa-feather-alt"></i></span>
+      <span class="abi abi-11"><i class="fas fa-star"></i></span>
+      <span class="abi abi-12"><i class="fas fa-shapes"></i></span>
+    </div>
+    <div class="art-scatter">
+      <div class="as-el ae1">✦</div>
+      <div class="as-el ae2">◉</div>
+      <div class="as-el ae3">▲</div>
+      <div class="as-el ae4">✺</div>
+      <div class="as-el ae5">◈</div>
+    </div>
+    <div class="container s1-inner">
+      <div class="school-ribbon-left reveal active">
+        <span class="sr-pip"></span>
+        Schools Info · Art &amp; Science Academy · All Grades
+      </div>
+      <div class="s1-grid">
+        <div class="s1-left">
+          <div class="s1-eyebrow reveal active"><span class="ey-line"></span>Where Every Child is a Creator</div>
+          <h1 class="s1-title reveal active">
+            <span class="t-outline">ART</span>
+            <span class="t-filled">MEETS</span>
+            <span class="t-red">SCIENCE.</span>
+          </h1>
+          <p class="s1-desc reveal active">A one-of-a-kind academy where the canvas and the laboratory live side by side
+            — and every student discovers that creativity and curiosity are the same superpower.</p>
+          <div class="s1-btns reveal active">
+            <a href="#s2-transition" class="btn-red-solid">Begin the Journey <i class="fas fa-arrow-down"></i></a>
+            <a href="#facilities" class="btn-outline-dark">Explore Campus</a>
+          </div>
+          <div class="s1-stats reveal active">
+            <div class="s1s-item"><strong id="cnt1">0</strong><span>Students</span></div>
+            <div class="s1s-sep">·</div>
+            <div class="s1s-item"><strong id="cnt2">0</strong><span>Faculty</span></div>
+            <div class="s1s-sep">·</div>
+            <div class="s1s-item"><strong>All</strong><span>Grades</span></div>
+            <div class="s1s-sep">·</div>
+            <div class="s1s-item"><strong id="cnt3">0</strong><span>Yrs of Excellence</span></div>
+          </div>
+        </div>
+        <div class="s1-right reveal active" style="animation-delay:.2s">
+          <div class="art-mosaic">
+            <div class="am-card am-card-large">
+              <lottie-player src="images/b8cf75a0-6bb8-492f-9e3f-68d61a39302f.json" background="transparent" speed="1"
+                loop autoplay style="width:100%;height:220px"></lottie-player>
+              <div class="am-card-label"><i class="fas fa-palette"></i> Creative Arts Programme</div>
+            </div>
+            <div class="am-card">
+              <lottie-player src="images/4ffb2a1b-2ff0-4401-8bed-8ca826969bd4.json" background="transparent" speed="1"
+                loop autoplay style="width:100%;height:150px"></lottie-player>
+              <div class="am-card-label"><i class="fas fa-music"></i> Music &amp; Performance</div>
+            </div>
+            <div class="am-card">
+              <lottie-player src="images/0c4b717c-1173-11ee-9cad-d7fdbc555ab7.json" background="transparent" speed="1"
+                loop autoplay style="width:100%;height:150px"></lottie-player>
+              <div class="am-card-label"><i class="fas fa-theater-masks"></i> Drama &amp; Writing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="s1-scroll-hint">
+        <div class="sh-arrow">↓</div>
+        <span>Scroll to enter the Science World</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- S2 TRANSITION -->
+  <section class="s2-transition" id="s2-transition" data-world="transition">
+    <div class="s2-inner">
+      <div class="s2-left-text">
+        <span class="s2lt-small">One Academy</span>
+        <span class="s2lt-big">Two<br />Worlds.</span>
+      </div>
+      <div class="s2-morphbar">
+        <div class="s2mb-art" id="s2mbArt"><i class="fas fa-paint-brush"></i><span>Art</span></div>
+        <div class="s2mb-divider" id="s2mbDiv">∞</div>
+        <div class="s2mb-sci" id="s2mbSci"><span>Science</span><i class="fas fa-flask"></i></div>
+      </div>
+      <div class="s2-right-text">
+        <span class="s2rt-small">Infinite Possibilities</span>
+        <span class="s2rt-big">One<br />Dream.</span>
+      </div>
+    </div>
+    <div class="s2-morph-bg" id="s2MorphBg"></div>
+  </section>
+
+  <!-- S3 SCIENCE -->
+  <section class="s3-science scroll-section" id="s3" data-world="sci">
+    <div class="s3-bg-word">SCI</div>
+    <div class="sci-particles" id="sciParticles"></div>
+    <div class="sci-formulas">
+      <span class="sf-el sf1">E=mc²</span>
+      <span class="sf-el sf2">∑∞</span>
+      <span class="sf-el sf3">H₂O</span>
+      <span class="sf-el sf4">π</span>
+      <span class="sf-el sf5">DNA</span>
+      <span class="sf-el sf6">∆v</span>
+    </div>
+    <div class="container s3-inner">
+      <div class="s3-grid">
+        <div class="s3-left reveal-left">
+          <div class="s3-lottie-frame">
+            <lottie-player src="images/7ec8c5d6-1166-11ee-a163-3b247377109b.json" background="transparent" speed="1"
+              loop autoplay style="width:100%;height:300px"></lottie-player>
+            <div class="s3lf-data">
+              <div class="s3d-item"><strong id="cntExp">0</strong><span>Experiments/yr</span></div>
+              <div class="s3d-sep"></div>
+              <div class="s3d-item"><strong id="cntAwd">0</strong><span>Science Awards</span></div>
+              <div class="s3d-sep"></div>
+              <div class="s3d-item"><strong id="cntLab">0</strong><span>Labs</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="s3-right reveal-right">
+          <div class="s3-eyebrow"><span class="ey-line ey-blue"></span>Where Curiosity Becomes Discovery</div>
+          <h2 class="s3-title">
+            <span class="st-outline-w">QUESTION</span>
+            <span class="st-filled-w">EVERY</span>
+            <span class="st-accent">THING.</span>
+          </h2>
+          <p class="s3-desc">From physics and chemistry to robotics, AI and space science — our Science programme turns
+            every student into a researcher, inventor and problem-solver, from early years to Grade 12.</p>
+          <div class="s3-pills">
+            <span><i class="fas fa-flask"></i> Chemistry</span>
+            <span><i class="fas fa-atom"></i> Physics</span>
+            <span><i class="fas fa-dna"></i> Biology</span>
+            <span><i class="fas fa-robot"></i> Robotics</span>
+            <span><i class="fas fa-laptop-code"></i> AI &amp; Coding</span>
+            <span><i class="fas fa-satellite"></i> Space Science</span>
+          </div>
+        </div>
+      </div>
+      <div class="s3-bottom-row">
+        <div class="s3br-text reveal-left">
+          <h3>Innovation Starts in the <em>Lab</em></h3>
+          <p>Our science students don't just study theories — they test them. Weekly lab sessions, inter-school
+            competitions and real independent research projects prepare every student for a world driven by discovery.
+          </p>
+          <div class="s3br-stats">
+            <div class="s3br-stat"><strong id="cntComp">0</strong><span>Competitions Won</span></div>
+            <div class="s3br-stat"><strong>100%</strong><span>Lab Access</span></div>
+            <div class="s3br-stat"><strong id="cntProj">0</strong><span>Research Projects</span></div>
+          </div>
+        </div>
+        <div class="s3br-lottie-wrap reveal-right">
+          <div class="s3br-lottie-card">
+            <lottie-player src="images/9ac5a6b6-1187-11ee-9631-975429ecc834.json" background="transparent" speed="1"
+              loop autoplay style="width:100%;height:160px"></lottie-player>
+            <div class="s3br-lottie-card-label">Robotics &amp; AI</div>
+          </div>
+          <div class="s3br-lottie-card">
+            <lottie-player src="images/9c8ef74a-1182-11ee-846e-6b342c7e9824.json" background="transparent" speed="1"
+              loop autoplay style="width:100%;height:160px"></lottie-player>
+            <div class="s3br-lottie-card-label">Space Science</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S4 DUAL PILLARS -->
+  <section class="s4-pillars" id="pillars">
+    <div class="s4-wave-top"></div>
+    <div class="container">
+      <div class="text-center s4-header reveal">
+        <div class="pill-label pl-red"><i class="fas fa-infinity"></i> Our Two Worlds</div>
+        <h2 class="s4-title"><span class="t-normal">Where </span><em>Art</em><span class="t-normal"> and </span><em
+            class="em-blue">Science</em><span class="t-normal"> Live Together</span></h2>
+      </div>
+      <div class="s4-poster-grid reveal">
+        <div class="s4-card s4c-art">
+          <div class="s4c-number">01</div>
+          <div class="s4c-icon"><i class="fas fa-palette"></i></div>
+          <h4>Fine Arts &amp; Sculpture</h4>
+          <p>Painting, drawing, ceramics and 3D art with a dedicated sunlit studio and annual gallery exhibitions open
+            to the public.</p><lottie-player src="images/2c69a3c4-116a-11ee-924a-2f11e463852d.json"
+            background="transparent" speed="1" loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag">Art Track</div>
+        </div>
+        <div class="s4-card s4c-sci">
+          <div class="s4c-number">02</div>
+          <div class="s4c-icon"><i class="fas fa-flask"></i></div>
+          <h4>Physics &amp; Chemistry Labs</h4>
+          <p>Research-grade equipment, weekly experiments, olympiad prep and a student innovation incubator running
+            year-round.</p><lottie-player src="images/cf152090-1164-11ee-9bf0-bf1327f87ed8.json"
+            background="transparent" speed="1" loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag s4ct-blue">Science Track</div>
+        </div>
+        <div class="s4-card s4c-art">
+          <div class="s4c-number">03</div>
+          <div class="s4c-icon"><i class="fas fa-music"></i></div>
+          <h4>Music &amp; Performance</h4>
+          <p>Instruments, recording studio, live concerts and an 800-seat theatre for drama productions every semester.
+          </p><lottie-player src="images/62b27dbe-1180-11ee-8bed-63ef131f2651.json" background="transparent" speed="1"
+            loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag">Art Track</div>
+        </div>
+        <div class="s4-card s4c-sci">
+          <div class="s4c-number">04</div>
+          <div class="s4c-icon"><i class="fas fa-robot"></i></div>
+          <h4>Robotics, AI &amp; Coding</h4>
+          <p>3D printers, VR headsets, robotics competition team and AI literacy programmes from early childhood to
+            Grade 12.</p><lottie-player src="images/6a415a70-1188-11ee-be8b-0385ff492bc8.json" background="transparent"
+            speed="1" loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag s4ct-blue">Science Track</div>
+        </div>
+        <div class="s4-card s4c-art">
+          <div class="s4c-number">05</div>
+          <div class="s4c-icon"><i class="fas fa-pen-nib"></i></div>
+          <h4>Creative Writing &amp; Drama</h4>
+          <p>Literary magazine, screenplay writing, poetry slams and full-scale theatre productions every academic year.
+          </p><lottie-player src="images/0c4b717c-1173-11ee-9cad-d7fdbc555ab7.json" background="transparent" speed="1"
+            loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag">Art Track</div>
+        </div>
+        <div class="s4-card s4c-sci">
+          <div class="s4c-number">06</div>
+          <div class="s4c-icon"><i class="fas fa-dna"></i></div>
+          <h4>Biology &amp; Life Sciences</h4>
+          <p>Microscopy, genetics projects, environmental field studies and inter-school biology competitions every
+            year.</p><lottie-player src="images/50b909a4-1165-11ee-817f-33db0be251cb.json" background="transparent"
+            speed="1" loop autoplay class="s4c-lottie"></lottie-player>
+          <div class="s4c-tag s4ct-blue">Science Track</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S5 TIMELINE -->
+  <section class="s5-timeline" id="timeline">
+    <div class="s5-noise"></div>
+    <div class="container">
+      <div class="text-center s5-header reveal">
+        <div class="pill-label pl-white"><i class="fas fa-route"></i> Student Journey</div>
+        <h2 class="s5-title">From First <em>Brushstroke</em><br />to Final <em>Discovery</em></h2>
+        <p class="s5-sub">Every grade is a new chapter — in art, in science, and in who you become.</p>
+      </div>
+      <div class="tl-outer reveal">
+        <div class="tl-rail">
+          <div class="tl-fill" id="tlFill"></div>
+        </div>
+        <div class="tl-cards">
+          <div class="tl-card tlc-art">
+            <div class="tlc-dot" style="background:#E63946"></div>
+            <div class="tlc-grade">Early Years</div><lottie-player
+              src="https://assets4.lottiefiles.com/packages/lf20_myejiggj.json" background="transparent" speed="1" loop
+              autoplay class="tlc-lottie"></lottie-player>
+            <h5>Explore &amp; Play</h5>
+            <p>Colour, sound, shape — the first sparks of art and science through joyful discovery.</p>
+            <div class="tlc-chips"><span>Drawing</span><span>Sounds</span></div>
+          </div>
+          <div class="tl-card tlc-sci">
+            <div class="tlc-dot" style="background:#4CC9F0"></div>
+            <div class="tlc-grade">Grade 1–4</div><lottie-player src="images/362cd622-1176-11ee-86f5-37f25bbb89e2.json"
+              background="transparent" speed="1" loop autoplay class="tlc-lottie"></lottie-player>
+            <h5>Foundation Skills</h5>
+            <p>Core science experiments and basic art techniques with a growing love of learning.</p>
+            <div class="tlc-chips"><span>Lab Basics</span></div>
+          </div>
+          <div class="tl-card tlc-art">
+            <div class="tlc-dot" style="background:#E63946"></div>
+            <div class="tlc-grade">Grade 5–7</div><lottie-player
+              src="https://assets1.lottiefiles.com/packages/lf20_yd8fbnml.json" background="transparent" speed="1" loop
+              autoplay class="tlc-lottie"></lottie-player>
+            <h5>Creative Curiosity</h5>
+            <p>First elective choices — studio arts or lab science — and independent projects begin.</p>
+            <div class="tlc-chips"><span>Electives</span></div>
+          </div>
+          <div class="tl-card tlc-sci">
+            <div class="tlc-dot" style="background:#4CC9F0"></div>
+            <div class="tlc-grade">Grade 8–10</div><lottie-player
+              src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json" background="transparent" speed="1" loop
+              autoplay class="tlc-lottie"></lottie-player>
+            <h5>Deep Expertise</h5>
+            <p>Advanced tracks, inter-school competitions, exhibitions and public showcases.</p>
+            <div class="tlc-chips"><span>Competitions</span></div>
+          </div>
+          <div class="tl-card tlc-gold">
+            <div class="tlc-dot" style="background:#FFD166"></div>
+            <div class="tlc-grade">Grade 11–12</div><lottie-player
+              src="https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1" loop
+              autoplay class="tlc-lottie"></lottie-player>
+            <h5>Mastery &amp; Legacy</h5>
+            <p>Final portfolio, university prep, national awards and a capstone project.</p>
+            <div class="tlc-chips"><span>Portfolio</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 FACILITIES -->
+  <section class="s6-facilities" id="facilities">
+    <div class="s6-wave-top"></div>
+    <div class="container">
+      <div class="s6-header reveal">
+        <div class="pill-label pl-blue"><i class="fas fa-building"></i> Campus &amp; Facilities</div>
+        <h2 class="s6-title">Spaces That <em>Spark</em><br /><em class="em-blue">Both Worlds</em></h2>
+        <p class="s6-sub">Hover every card to explore what awaits on campus</p>
+      </div>
+      <div class="s6-grid reveal">
+        <div class="s6-card s6c-big" style="--fc:#E63946"><lottie-player
+            src="images/1a38f6c0-1168-11ee-9a16-0b62feb73d0d.json" background="transparent" speed="1" loop autoplay
+            style="width:100%;height:180px"></lottie-player>
+          <div class="s6cf-label">
+            <div class="s6cf-icon"><i class="fas fa-palette"></i></div>
+            <div>
+              <h5>Grand Art Studio</h5>
+              <p>Sunlit studio with easels, pottery wheels and a gallery wall</p>
+            </div>
+          </div>
+          <div class="s6c-num">01</div>
+        </div>
+        <div class="s6-card s6c-big" style="--fc:#023E8A"><lottie-player
+            src="images/ed61a838-4612-11ee-8ebf-8fa3aa98ef69.json" background="transparent" speed="1" loop autoplay
+            style="width:100%;height:180px"></lottie-player>
+          <div class="s6cf-label">
+            <div class="s6cf-icon" style="background:#023E8A"><i class="fas fa-flask"></i></div>
+            <div>
+              <h5>Advanced Science Labs</h5>
+              <p>Physics, Chemistry &amp; Biology with research-grade equipment</p>
+            </div>
+          </div>
+          <div class="s6c-num">02</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#7B2D8B">
+          <div class="s6c-icon-sm"><i class="fas fa-music"></i></div>
+          <h5>Music Studio</h5>
+          <p>Instruments, recording gear &amp; soundproofed rooms</p>
+          <div class="s6c-num">03</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#E63946">
+          <div class="s6c-icon-sm" style="background:#E63946"><i class="fas fa-robot"></i></div>
+          <h5>Robotics Lab</h5>
+          <p>3D printers, VR headsets &amp; AI workstations</p>
+          <div class="s6c-num">04</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#023E8A">
+          <div class="s6c-icon-sm" style="background:#023E8A"><i class="fas fa-book-open"></i></div>
+          <h5>Library</h5>
+          <p>8,000+ books, e-journals &amp; research suites</p>
+          <div class="s6c-num">05</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#059669">
+          <div class="s6c-icon-sm" style="background:#059669"><i class="fas fa-theater-masks"></i></div>
+          <h5>Performing Arts Theatre</h5>
+          <p>800-seat stage with pro sound &amp; lighting</p>
+          <div class="s6c-num">06</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#D97706">
+          <div class="s6c-icon-sm" style="background:#D97706"><i class="fas fa-futbol"></i></div>
+          <h5>Sports Complex</h5>
+          <p>Gym, pool, track &amp; courts</p>
+          <div class="s6c-num">07</div>
+        </div>
+        <div class="s6-card s6c-sm" style="--fc:#E63946">
+          <div class="s6c-icon-sm"><i class="fas fa-utensils"></i></div>
+          <h5>Dining Hall</h5>
+          <p>Nutritionist-curated menu</p>
+          <div class="s6c-num">08</div>
+        </div>
+      </div>
+      <div class="s6-cap-strip reveal">
+        <div class="s6cs-i"><i class="fas fa-users"></i><strong id="capS">0</strong><span>Students</span></div>
+        <div class="s6cs-sep">✦</div>
+        <div class="s6cs-i"><i class="fas fa-chalkboard-teacher"></i><strong>12:1</strong><span>Student–Faculty</span>
+        </div>
+        <div class="s6cs-sep">✦</div>
+        <div class="s6cs-i"><i class="fas fa-paint-brush"></i><strong id="capA">0</strong><span>Art Studios</span></div>
+        <div class="s6cs-sep">✦</div>
+        <div class="s6cs-i"><i class="fas fa-flask"></i><strong id="capL">0</strong><span>Science Labs</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S7 CTA -->
+  <section class="s7-cta-modern" id="download">
+    <div class="s7m-bg-deco"></div>
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 reveal-left">
+          <div class="s7m-left-col">
+            <div class="s7m-eyebrow"><span class="em-line"></span> All Grades · Admissions Open</div>
+            <h2 class="s7m-title">GET THE<br /><span class="red">COMPLETE</span><br /><span class="blue">SCHOOL</span>
+              GUIDE</h2>
+            <p class="s7m-desc">Art &amp; Science programmes, faculty profiles, campus facilities, fee structure and
+              step-by-step admission process — all in one beautifully designed brochure.</p>
+            <div class="s7m-btns">
+              <a href="images/Art_and_Science_School_Facilities.docx" class="s7m-btn-navy"><i
+                  class="fas fa-download"></i> Download Brochure</a>
+              <!-- NEW "Apply Now" button -->
+              <a href="adm 6.html" class="s7m-btn-red"><i class="fas fa-pen-fancy"></i> Apply Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal-right">
+          <div class="s7m-right-col">
+            <div class="s7m-info-card">
+              <div class="s7m-ic-icon" style="background:#E63946"><i class="fas fa-palette"></i></div>
+              <div class="s7m-ic-num" style="color:#E63946" id="s7Art">0</div>
+              <div class="s7m-ic-label">Art Programmes</div>
+              <div class="s7m-ic-divider"></div>
+              <div class="s7m-ic-text">Fine Arts, Music, Drama, Creative Writing &amp; Photography</div>
+            </div>
+            <div class="s7m-info-card">
+              <div class="s7m-ic-icon" style="background:#023E8A"><i class="fas fa-flask"></i></div>
+              <div class="s7m-ic-num" style="color:#023E8A" id="s7Sci">0</div>
+              <div class="s7m-ic-label">Science Programmes</div>
+              <div class="s7m-ic-divider"></div>
+              <div class="s7m-ic-text">Physics, Chemistry, Biology, Robotics, AI &amp; Space Science</div>
+            </div>
+            <div class="s7m-wide-card">
+              <div class="s7m-wc-icon"><i class="fas fa-graduation-cap"></i></div>
+              <div class="s7m-wc-text">
+                <h6>University Placement Programme</h6>
+                <p>98% of our Grade 12 graduates secure places at top national &amp; international universities.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S8 ADMISSIONS -->
+  <section class="s8-admit" id="admissions">
+    <div class="admit-blob ab1"></div>
+    <div class="admit-blob ab2"></div>
+    <div class="container">
+      <div class="s8-header reveal">
+        <div class="pill-label pl-red"><i class="fas fa-file-alt"></i> Admissions</div>
+        <h2 class="s8-title">Begin Your<br /><em>Story Here</em></h2>
+      </div>
+      <div class="row g-5 align-items-stretch">
+        <div class="col-lg-7 reveal-left">
+          <div class="admit-steps">
+            <div class="adm-step" style="--sc:#E63946">
+              <div class="adm-num">01</div>
+              <div class="adm-icon" style="background:#E63946"><i class="fas fa-file-alt"></i></div>
+              <div class="adm-body">
+                <h5>Apply Online or In Person</h5>
+                <p>Fill the form online or visit our admissions desk. Prospectus is completely free of charge.</p>
+              </div>
+            </div>
+            <div class="adm-step" style="--sc:#023E8A">
+              <div class="adm-num">02</div>
+              <div class="adm-icon" style="background:#023E8A"><i class="fas fa-pencil-alt"></i></div>
+              <div class="adm-body">
+                <h5>Portfolio + Assessment</h5>
+                <p>Art applicants submit a creative portfolio. Science applicants complete an aptitude test in Maths
+                  &amp; Science.</p>
+              </div>
+            </div>
+            <div class="adm-step" style="--sc:#7B2D8B">
+              <div class="adm-num">03</div>
+              <div class="adm-icon" style="background:#7B2D8B"><i class="fas fa-comments"></i></div>
+              <div class="adm-body">
+                <h5>Interest Interview</h5>
+                <p>A warm conversation about your child's passions — art, science, or both. No pressure, just discovery.
+                </p>
+              </div>
+            </div>
+            <div class="adm-step" style="--sc:#059669">
+              <div class="adm-num">04</div>
+              <div class="adm-icon" style="background:#059669"><i class="fas fa-check-circle"></i></div>
+              <div class="adm-body">
+                <h5>Offer &amp; Enrolment</h5>
+                <p>Receive your offer letter, submit documents, confirm payment — your journey begins!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 reveal-right">
+          <div class="admit-docs">
+            <div class="adoc-hdr"><i class="fas fa-folder-open"></i> Required Documents</div>
+            <ul class="adoc-list">
+              <li><span class="adl-dot" style="background:#E63946">①</span>Completed application form</li>
+              <li><span class="adl-dot" style="background:#023E8A">②</span>Previous academic transcripts</li>
+              <li><span class="adl-dot" style="background:#7B2D8B">③</span>Art portfolio (for Art track applicants)</li>
+              <li><span class="adl-dot" style="background:#059669">④</span>School leaving / transfer certificate</li>
+              <li><span class="adl-dot" style="background:#D97706">⑤</span>Birth certificate (attested copy)</li>
+              <li><span class="adl-dot" style="background:#E63946">⑥</span>4 recent passport-size photographs</li>
+              <li><span class="adl-dot" style="background:#023E8A">⑦</span>Parent / Guardian CNIC copy</li>
+            </ul>
+            <div class="adoc-contact">
+              <div><i class="fas fa-envelope" style="color:#E63946"></i> admissions@artscience.edu.pk</div>
+              <div><i class="fas fa-phone" style="color:#023E8A"></i> +92-21-XXXXXXX</div>
+              <div><i class="fas fa-clock" style="color:#7B2D8B"></i> Mon–Fri, 9:00 AM – 3:00 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="s9-map" id="location">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-md-5 reveal-left">
+          <div class="pill-label pl-blue" style="margin-bottom:18px"><i class="fas fa-map-pin"></i> Find Us</div>
+          <h2 class="s9-title">Visit Our<br /><em>Campus</em></h2>
+          <p style="color:#555;line-height:1.8;font-size:.95rem;margin-bottom:24px">A campus where every corridor has
+            art on the walls and science in the air — creative the moment you walk in.</p>
+          <div class="s9-contacts">
+            <div class="s9c-row">
+              <div class="s9c-ic" style="background:#E63946"><i class="fas fa-map-marker-alt"></i></div>
+              <div><span class="s9c-l">Address</span><span class="s9c-v">1 Academy Blvd, Arts &amp; Science District,
+                  Karachi</span></div>
+            </div>
+            <div class="s9c-row">
+              <div class="s9c-ic" style="background:#023E8A"><i class="fas fa-phone"></i></div>
+              <div><span class="s9c-l">Phone</span><span class="s9c-v">+92-21-XXXXXXX</span></div>
+            </div>
+            <div class="s9c-row">
+              <div class="s9c-ic" style="background:#059669"><i class="fas fa-envelope"></i></div>
+              <div><span class="s9c-l">Email</span><span class="s9c-v">info@artscience.edu.pk</span></div>
+            </div>
+          </div>
+          <button class="btn-red-solid" style="margin-top:8px"><i class="fas fa-directions"></i> Get Directions</button>
+        </div>
+        <div class="col-md-7 reveal-right">
+          <div class="s9-map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28924.675710014442!2d67.28701086222718!3d25.0142320214683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb34a0522358bb9%3A0xe9cfd8e32eeff2b8!2sBahria%20Town%20Karachi!5e0!3m2!1sen!2s!4v1779521109954!5m2!1sen!2s"
+              width="100%" height="420" style="border:0;display:block" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <section class="bnav">
+    <div class="container bnav-wrap">
+      <div class="bnav-brand">
+        <span class="bnav-art"><i class="fas fa-paint-brush"></i></span>
+        Art &amp; Science Academy
+        <span class="bnav-sep">·</span>
+        <span style="color:#aaa;font-weight:400">Schools Info</span>
+        <span class="bnav-sci"><i class="fas fa-flask"></i></span>
+      </div>
+      <div class="d-flex gap-3 flex-wrap justify-content-center">
+        <a href="explore school.html" class="bnav-btn bnav-red"><i class="fas fa-th-large"></i> Explore Schools</a>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    /* Cursor */
+    const cDot = document.getElementById('curDot'), cRing = document.getElementById('curRing');
+    let rx = 0, ry = 0, mx = 0, my = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cDot.style.cssText = `left:${mx}px;top:${my}px`; });
+    (function loop() { rx += (mx - rx) * .1; ry += (my - ry) * .1; cRing.style.cssText = `left:${rx}px;top:${ry}px`; requestAnimationFrame(loop); })();
+    document.querySelectorAll('button,a,.s4-card,.s6-card,.tl-card,.am-card,.s7m-info-card,.s7m-wide-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { cRing.classList.add('cr-big'); cDot.style.opacity = '0'; });
+      el.addEventListener('mouseleave', () => { cRing.classList.remove('cr-big'); cDot.style.opacity = '1'; });
+    });
+
+    /* Scroll progress */
+    window.addEventListener('scroll', () => {
+      const st = window.scrollY, dh = document.body.scrollHeight - window.innerHeight;
+      document.getElementById('scrollBar').style.width = (st / dh * 100) + '%';
+    }, { passive: true });
+
+    /* Scroll reveal */
+    const revEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); ro.unobserve(e.target); } });
+    }, { threshold: .07 });
+    revEls.forEach(el => ro.observe(el));
+
+    /* World indicator */
+    const wiArt = document.getElementById('wiArt'), wiSci = document.getElementById('wiSci');
+    const body = document.getElementById('pageBody');
+    const s2Trans = document.getElementById('s2-transition');
+    const s3 = document.getElementById('s3');
+    function onScroll() {
+      const scrollY = window.scrollY;
+      const s2Top = s2Trans.offsetTop, s3Top = s3.offsetTop, s3H = s3.offsetHeight;
+      if (scrollY < s2Top) {
+        wiArt.classList.add('wi-active'); wiSci.classList.remove('wi-active');
+        cDot.style.background = '#E63946'; cRing.style.borderColor = '#E63946';
+      } else if (scrollY >= s3Top && scrollY < s3Top + s3H) {
+        wiSci.classList.add('wi-active'); wiArt.classList.remove('wi-active');
+        cDot.style.background = '#4CC9F0'; cRing.style.borderColor = '#4CC9F0';
+      } else {
+        wiArt.classList.remove('wi-active'); wiSci.classList.remove('wi-active');
+        cDot.style.background = '#333'; cRing.style.borderColor = '#333';
+      }
+      const tlEl = document.getElementById('tlFill'), tlSection = document.getElementById('timeline');
+      if (tlEl && tlSection) {
+        const tlTop = tlSection.offsetTop, tlH = tlSection.offsetHeight;
+        const tlProgress = Math.max(0, Math.min(1, (scrollY - tlTop + window.innerHeight * .6) / tlH));
+        tlEl.style.width = (tlProgress * 100) + '%';
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Counters */
+    function countUp(id, target, suf, dur) {
+      const el = document.getElementById(id); if (!el) return;
+      let s = 0, step = Math.ceil(target / (dur / 30));
+      const t = setInterval(() => { s = Math.min(s + step, target); el.textContent = s + suf; if (s >= target) clearInterval(t); }, 30);
+    }
+    window.addEventListener('load', () => {
+      countUp('cnt1', 680, '+', 1600); countUp('cnt2', 55, '+', 1200); countUp('cnt3', 22, '+', 900);
+      countUp('cntExp', 200, '+', 1400); countUp('cntAwd', 48, '+', 1100); countUp('cntLab', 6, '+', 800);
+      countUp('capS', 680, '+', 1500); countUp('capA', 8, '+', 800); countUp('capL', 6, '+', 800);
+      countUp('cntComp', 32, '+', 1000); countUp('cntProj', 85, '+', 1200);
+      countUp('s7Art', 5, '+', 900); countUp('s7Sci', 6, '+', 900);
+    });
+
+    /* Science particles */
+    const sp = document.getElementById('sciParticles');
+    if (sp) { for (let i = 0; i < 40; i++) { const d = document.createElement('div'); d.className = 'sp-dot'; d.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${2 + Math.random() * 4}px;height:${2 + Math.random() * 4}px;animation-delay:${Math.random() * 5}s;animation-duration:${4 + Math.random() * 6}s;`; sp.appendChild(d); } }
+
+    /* S4 card tilt */
+    document.querySelectorAll('.s4-card').forEach(card => {
+      card.addEventListener('mousemove', function (e) {
+        const r = this.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        this.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-8px) scale(1.02)`;
+      });
+      card.addEventListener('mouseleave', function () { this.style.transform = ''; });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

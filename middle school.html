@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Middle School · Grade 7–9 · Schools Info</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <!-- Playfair Display + Nunito -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <style>
+    /* ============================================================
+   ROOT VARIABLES
+============================================================ */
+:root {
+  --peach:      #FF8C5A;
+  --peach-dark: #E5693A;
+  --peach-light:#FFF0E8;
+  --green:      #3D9B6B;
+  --green-dark: #2A7A50;
+  --green-light:#E8F5EE;
+  --amber:      #F5A623;
+  --sky:        #56B4D3;
+  --purple:     #9B5DE5;
+  --pink:       #E85D9A;
+  --yellow:     #FFD93D;
+  --dark:       #1C1C2E;
+  --text:       #2d2d3a;
+  --muted:      #6b7280;
+  --white:      #ffffff;
+  --soft:       #FFFAF6;
+}
+
+/* ============================================================
+   GLOBAL RESET
+============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--soft);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; font-weight: 900; }
+
+/* ============================================================
+   CUSTOM CURSOR
+============================================================ */
+.cur-dot {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--peach);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  /* transition: opacity .2s; */
+}
+.cur-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 2px solid var(--peach);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .3s, height .3s, border-color .3s;
+  /* opacity: .7; */
+}
+.cur-ring.cr-grow {
+  width: 56px; height: 56px;
+  border-color: var(--green);
+  /* opacity: .5; */
+}
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity .8s cubic-bezier(.25,.46,.45,.94),
+              transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.active { opacity: 1; transform: none; }
+.reveal-left  { opacity: 0; transform: translateX(-60px); transition: opacity .8s ease, transform .8s ease; }
+.reveal-right { opacity: 0; transform: translateX(60px);  transition: opacity .8s ease, transform .8s ease; }
+.reveal-left.active, .reveal-right.active { opacity: 1; transform: none; }
+
+/* ============================================================
+   SHARED
+============================================================ */
+.section-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 22px; border-radius: 50px;
+  font-weight: 800; font-size: .8rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.sp-peach  { background: var(--peach-light); color: var(--peach-dark); }
+.sp-green  { background: var(--green-light); color: var(--green-dark); }
+
+.sec-title { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.05; margin-bottom: .5rem; }
+.sec-title em { font-style: italic; color: var(--peach); }
+.st-dark   { color: var(--dark); }
+.st-white  { color: var(--white); }
+.st-white em { color: var(--yellow); }
+
+.sec-sub       { color: var(--muted); font-size: 1rem; line-height: 1.75; }
+.sec-sub-white { color: rgba(255,255,255,.75); font-size: 1rem; line-height: 1.75; }
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #fff9f5 0%, #fff 40%, #f0faf5 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 30px 0 60px;
+}
+
+/* Organic blobs */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: blobDrift 18s ease-in-out infinite alternate;
+}
+.hb1 { width: 420px; height: 420px; background: rgba(255, 140, 90, 0.185); top: -130px; left: -120px; animation-duration: 16s; }
+.hb2 { width: 350px; height: 350px; background: rgba(61, 155, 106, 0.205);  top: -60px;  right: -100px; animation-duration: 20s; animation-delay: 2s; }
+.hb3 { width: 300px; height: 300px; background: rgba(245, 165, 35, 0.178);  bottom: -80px; left: 20%; animation-duration: 14s; animation-delay: 1s; }
+.hb4 { width: 260px; height: 260px; background: rgba(86, 180, 211, 0.247);  bottom: -60px; right: 10%; animation-duration: 22s; animation-delay: 3s; }
+@keyframes blobDrift {
+  0%   { transform: translate(0,0) scale(1); }
+  100% { transform: translate(30px,20px) scale(1.1); }
+}
+
+/* Decorative floating icons */
+.deco-icons { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.di {
+  position: absolute;
+  font-size: 1.4rem;
+  color: var(--peach);
+  opacity: .73; 
+  animation: diFloat 6s ease-in-out infinite alternate;
+}
+.di:nth-child(2)  { color: var(--green);  animation-duration: 7s; }
+.di:nth-child(3)  { color: var(--amber);  animation-duration: 5s; }
+.di:nth-child(4)  { color: var(--sky);    animation-duration: 8s; }
+.di:nth-child(5)  { color: var(--purple); animation-duration: 9s; }
+.di:nth-child(6)  { color: var(--pink);   animation-duration: 6s; }
+.di:nth-child(7)  { color: var(--yellow); animation-duration: 10s; font-size: 1.8rem; opacity: .4; }
+.di:nth-child(8)  { color: var(--green);  animation-duration: 7.5s; }
+@keyframes diFloat {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-22px) rotate(12deg); }
+}
+
+/* Top nav strip */
+.hero-container { position: relative; z-index: 5; width: 100%; }
+.hero-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0 30px;
+}
+.hn-left { display: flex; align-items: center; gap: 10px; }
+.hn-pip  {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  animation: pipPulse 2s ease-in-out infinite;
+}
+@keyframes pipPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,140,90,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(255,140,90,0); }
+}
+.hn-school { font-weight: 800; font-size: .85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.hn-sep    { color: #ccc; }
+.hn-name   { font-weight: 900; font-size: .85rem; color: var(--dark); text-transform: uppercase; letter-spacing: 1px; }
+.hn-badge  {
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  color: #fff; padding: 8px 20px; border-radius: 50px;
+  font-weight: 800; font-size: .8rem; letter-spacing: .5px;
+  box-shadow: 0 6px 20px rgba(255,140,90,.35);
+}
+
+/* ============================================================
+   QUIZ WRAPPER
+============================================================ */
+.quiz-wrap {
+  min-height: 70vh;
+  display: flex; align-items: stretch;
+  position: relative;
+}
+.quiz-screen {
+  display: none; width: 100%;
+}
+.quiz-screen.active { display: flex; }
+
+@keyframes qsSlideIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Intro screen ── */
+.qs-intro {
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+  padding: 0 0 30px;
+}
+.qsi-left  { flex: 1; }
+.qsi-right { flex: 1; position: relative; }
+
+.qsi-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .85rem; font-weight: 700; color: var(--green);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+.eye-dash {
+  display: inline-block; width: 28px; height: 3px;
+  background: linear-gradient(90deg, var(--peach), var(--amber));
+  border-radius: 2px;
+}
+
+.qsi-title {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  line-height: .95;
+  color: var(--dark);
+  margin-bottom: 1.2rem;
+}
+.qt-peach { color: var(--peach); }
+.qsi-title em { font-style: italic; color: var(--green); }
+
+.qsi-desc {
+  font-size: 1rem; line-height: 1.8; color: var(--muted);
+  max-width: 420px; margin-bottom: 2rem;
+}
+
+/* Start button */
+.btn-start {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  color: #fff; border: none; border-radius: 50px;
+  padding: 16px 32px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900; font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255,140,90,.4);
+  transition: transform .25s, box-shadow .25s;
+}
+.btn-start:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 18px 40px rgba(255,140,90,.5); }
+.bs-arrow {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .3s;
+}
+.btn-start:hover .bs-arrow { transform: translateX(4px); }
+
+.qsi-skip { margin-top: 16px; }
+.qsi-skip a {
+  font-size: .88rem; font-weight: 700; color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.qsi-skip a:hover { color: var(--green); }
+
+/* Lottie card right */
+.qsi-lottie-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.1);
+  border: 2px solid #f0ede8;
+  position: relative; z-index: 2;
+}
+.qlc-ribbon {
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  color: #fff;
+  padding: 8px 18px; border-radius: 50px;
+  font-weight: 800; font-size: .78rem;
+  text-align: center; margin-top: 12px;
+}
+
+/* Floating stat chips */
+.qsi-chip {
+  position: absolute;
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+  border: 2px solid #f5f0ea;
+  z-index: 5;
+  animation: chipFloat 5s ease-in-out infinite alternate;
+}
+.qsi-chip i { font-size: 1.3rem; }
+.qsi-chip div { display: flex; flex-direction: column; }
+.qsi-chip strong { font-size: 1.2rem; font-family: 'Playfair Display', serif; line-height: 1; }
+.qsi-chip span   { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+
+.qch1 { top: -10px; left: -30px; animation-delay: 0s; }
+.qch1 i { color: var(--peach); }
+.qch1 strong { color: var(--peach); }
+
+.qch2 { bottom: 20px; left: -20px; animation-delay: .8s; }
+.qch2 i { color: var(--amber); }
+.qch2 strong { color: var(--amber); }
+
+.qch3 { top: 30%; right: -20px; animation-delay: 1.5s; }
+.qch3 i { color: var(--green); }
+.qch3 strong { color: var(--green); }
+
+@keyframes chipFloat {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-16px); }
+}
+
+/* ── Question screens ── */
+.qs-q {
+  flex-direction: column;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 0 40px;
+  width: 100%;
+}
+
+.q-progress {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 32px;
+}
+.qp-bar {
+  flex: 1; height: 6px;
+  background: #f0ede8; border-radius: 6px; overflow: hidden;
+}
+.qp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--peach), var(--amber));
+  border-radius: 6px;
+  transition: width .5s ease;
+}
+.q-progress span { font-size: .82rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+
+.q-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  color: var(--dark); margin-bottom: 28px; line-height: 1.2;
+}
+
+.q-options { display: flex; flex-direction: column; gap: 14px; }
+
+.qopt {
+  display: flex; align-items: center; gap: 18px;
+  background: #fff; border: 2.5px solid #f0ede8;
+  border-radius: 18px; padding: 18px 22px;
+  cursor: pointer; text-align: left;
+  font-family: 'Nunito', sans-serif;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  width: 100%;
+}
+.qopt:hover {
+  border-color: var(--peach);
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(255,140,90,.15);
+}
+.qopt-sel {
+  border-color: var(--green) !important;
+  background: var(--green-light) !important;
+  transform: translateX(10px) !important;
+}
+
+.qopt-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; color: #fff; flex-shrink: 0;
+}
+.qopt-text { flex: 1; }
+.qopt-text strong { display: block; font-size: .98rem; font-weight: 800; color: var(--dark); margin-bottom: 3px; }
+.qopt-text span   { font-size: .83rem; color: var(--muted); }
+.qopt-check {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid #e0ddd8;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .75rem; color: #fff;
+  flex-shrink: 0; transition: background .25s, border-color .25s;
+}
+.qopt-sel .qopt-check { background: var(--green); border-color: var(--green); }
+
+/* ── Result screen ── */
+.qs-result {
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  padding: 30px 0;
+  position: relative;
+}
+
+/* confetti */
+.qr-confetti {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none; overflow: hidden; z-index: 0;
+}
+.conf-piece {
+  position: absolute; top: -12px;
+  animation: confFall 1.6s ease-in forwards;
+}
+@keyframes confFall {
+  to { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+}
+
+.qr-inner {
+  flex: 1; position: relative; z-index: 2;
+}
+.qr-badge-wrap { margin-bottom: 10px; }
+.qr-badge {
+  font-size: 4rem; line-height: 1;
+  display: inline-block;
+  animation: badgePop .6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes badgePop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.qr-eyebrow { font-size: .85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.qr-type {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--dark); margin-bottom: 14px; line-height: 1;
+}
+.qr-desc { font-size: .97rem; line-height: 1.8; color: var(--muted); max-width: 420px; margin-bottom: 20px; }
+
+.qr-highlight {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: linear-gradient(135deg, var(--green-light), #d0f0e0);
+  border: 2px solid rgba(61,155,107,.25);
+  border-radius: 12px; padding: 12px 20px;
+  margin-bottom: 28px;
+  font-weight: 700; color: var(--green-dark);
+}
+.qrh-tag {
+  background: var(--green);
+  color: #fff; padding: 3px 12px; border-radius: 50px;
+  font-size: .72rem; font-weight: 800; letter-spacing: .5px;
+}
+
+.qr-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-explore-down {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-light); color: var(--green-dark);
+  border: 2px solid rgba(61,155,107,.3); border-radius: 50px;
+  padding: 15px 28px;
+  font-family: 'Nunito', sans-serif; font-weight: 800;
+  text-decoration: none;
+  transition: transform .25s, background .25s;
+}
+.btn-explore-down:hover { transform: translateY(-3px); background: var(--green-light); color: var(--green-dark); }
+
+.qr-lottie-side {
+  width: 400px; flex-shrink: 0; position: relative; z-index: 2;
+  background: #fff; border-radius: 24px;
+  padding: 26px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.09);
+  border: 2px solid #f0ede8;
+}
+
+/* ============================================================
+   WHY US — Forest Green Section
+============================================================ */
+.why-section {
+  background: linear-gradient(160deg, #1e5c3a 0%, #2a7a50 50%, #3D9B6B 100%);
+  padding: 0 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+.why-wave-top {
+  width: 100%; overflow: hidden; line-height: 0;
+  height: 80px;
+  background: var(--soft);
+  clip-path: ellipse(55% 100% at 50% 0%);
+  margin-bottom: -10px;
+}
+.why-blob { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(70px); }
+.wyb1 { width: 400px; height: 400px; background: rgba(255,255,255,.06); top: 10%; left: -100px; }
+.wyb2 { width: 350px; height: 350px; background: rgba(245,166,35,.08); bottom: 5%; right: -80px; }
+
+.why-header { text-align: center; padding: 70px 0 50px; }
+
+/* 4 lottie cards */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+.why-card-new {
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,255,255,.15);
+  border-radius: 24px;
+  padding: 28px 22px;
+  backdrop-filter: blur(10px);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), background .3s;
+  overflow: hidden;
+  position: relative;
+}
+.why-card-new:hover {
+  transform: translateY(-12px) scale(1.02);
+  background: rgba(255,255,255,.14);
+}
+.wcn-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.wcn-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem; font-weight: 900;
+  color: rgba(255,255,255,.12); line-height: 1;
+}
+.wcn-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: #fff;
+}
+.wcn-1 .wcn-icon { background: rgba(255,140,90,.35); }
+.wcn-2 .wcn-icon { background: rgba(245,166,35,.35); }
+.wcn-3 .wcn-icon { background: rgba(86,180,211,.35); }
+.wcn-4 .wcn-icon { background: rgba(155,93,229,.35); }
+
+.why-card-new h4 { font-size: 1.1rem; color: #fff; margin-bottom: 10px; }
+.why-card-new p  { font-size: .86rem; color: rgba(255,255,255,.7); line-height: 1.75; margin-bottom: 12px; }
+
+.wcn-lottie { width: 100%; margin: 8px 0; }
+.wcn-lottie-1 { height: 120px; }
+.wcn-lottie-2 { height: 110px; }
+.wcn-lottie-3 { height: 115px; }
+.wcn-lottie-4 { height: 110px; }
+
+.wcn-bottom-tag {
+  font-size: .7rem; font-weight: 800; letter-spacing: .8px;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 10px; margin-top: 4px;
+}
+
+/* ============================================================
+   GRADE JOURNEY — Peach bg
+============================================================ */
+.journey-section {
+  background: linear-gradient(160deg, var(--peach-light) 0%, #fff 60%, #f5faf7 100%);
+  padding: 0 0 90px;
+  position: relative;
+  overflow: hidden;
+}
+.journey-wave-top {
+  width: 100%; height: 70px;
+  background: #2a7a50;
+  clip-path: ellipse(55% 100% at 50% 0%);
+  margin-bottom: 0;
+}
+.journey-header { text-align: center; padding: 60px 0 50px; }
+
+/* Timeline */
+.journey-timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+.journey-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--peach), var(--green), var(--amber));
+  transform: translateX(-50%);
+  border-radius: 3px;
+  opacity: .3;
+}
+
+.jt-step { display: grid; grid-template-columns: 1fr 1fr; position: relative; margin-bottom: 50px; }
+
+.jts-right { direction: rtl; }
+.jts-right > * { direction: ltr; }
+
+.jts-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px 28px;
+  border: 2.5px solid transparent;
+  border-color: var(--jc);
+  box-shadow: 0 12px 40px rgba(0,0,0,.08);
+  position: relative;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+  margin: 0 30px;
+  overflow: hidden;
+}
+.jts-card:hover { transform: translateY(-10px); box-shadow: 0 24px 60px rgba(0,0,0,.14); }
+.jts-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 5px;
+  background: var(--jc);
+  border-radius: 24px 24px 0 0;
+}
+
+.jts-grade {
+  display: inline-flex;
+  background: var(--jc);
+  color: #fff;
+  padding: 6px 18px; border-radius: 50px;
+  font-weight: 900; font-size: .82rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.jts-lottie { margin-bottom: 14px; }
+.jt-lottie-1, .jt-lottie-2, .jt-lottie-3 { width: 100%; height: 160px; }
+
+.jts-card h4 { font-size: 1.2rem; color: var(--dark); margin-bottom: 10px; }
+.jts-card p  { font-size: .9rem; color: var(--muted); line-height: 1.8; margin-bottom: 14px; }
+
+.jts-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.jts-tags span {
+  padding: 5px 14px; border-radius: 50px;
+  font-size: .72rem; font-weight: 800;
+  background: rgba(0,0,0,.05); color: var(--text);
+  letter-spacing: .3px;
+}
+
+/* connector dot on timeline */
+.jts-connector {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--peach);
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 4px rgba(255,140,90,.2);
+  z-index: 2;
+}
+
+@media (max-width:768px) {
+  .jt-step { grid-template-columns: 1fr; }
+  .jts-right { direction: ltr; }
+  .journey-timeline::before { left: 20px; }
+  .jts-connector { left: 20px; }
+  .jts-card { margin: 0 0 0 50px; }
+}
+
+/* ============================================================
+   FACILITIES — White + stagger
+============================================================ */
+.fac-section {
+  background: #fff;
+  padding: 90px 0;
+  position: relative;
+  overflow: hidden;
+}
+.fac-deco { position: absolute; border-radius: 50%; pointer-events: none; opacity: .06; }
+.fd1 { width: 380px; height: 380px; background: var(--peach); top: -100px; right: -100px; }
+.fd2 { width: 300px; height: 300px; background: var(--green); bottom: -80px; left: -80px; }
+
+.fac-header { margin-bottom: 50px; }
+
+/* Masonry-style grid */
+.fac-masonry {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  gap: 18px;
+}
+.fm-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 26px 22px;
+  border: 2.5px solid #f0ede8;
+  border-top: 5px solid var(--fc);
+  position: relative; overflow: hidden;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s, border-color .3s;
+  box-shadow: 0 4px 18px rgba(0,0,0,.05);
+}
+.fm-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 24px 50px rgba(0,0,0,.12);
+  border-color: var(--fc);
+}
+.fmc-tall { grid-row: span 2; }
+
+.fmc-content { position: relative; z-index: 2; }
+.fmc-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: color-mix(in srgb, var(--fc) 15%, white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; color: var(--fc);
+  margin-bottom: 14px;
+}
+.fm-card h5 { font-size: 1rem; color: var(--dark); margin-bottom: 8px; }
+.fm-card p  { font-size: .84rem; color: var(--muted); line-height: 1.75; }
+.fmc-num {
+  position: absolute; bottom: -12px; right: 12px;
+  font-family: 'Playfair Display', serif; font-size: 5.5rem;
+  font-weight: 900; color: var(--fc); opacity: .07; line-height: 1;
+  pointer-events: none;
+}
+
+/* Capacity ribbon */
+.cap-ribbon {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap;
+  background: linear-gradient(135deg, var(--dark), #2a2a3e);
+  border-radius: 20px;
+  margin-top: 40px;
+  padding: 28px 20px;
+}
+.cr-item {
+  flex: 1; min-width: 140px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  color: #fff; text-align: center;
+}
+.cr-item i    { font-size: 1.3rem; color: var(--peach); }
+.cr-item strong { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; line-height: 1; }
+.cr-item span { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: rgba(255,255,255,.55); }
+.cr-sep { color: var(--peach); font-size: 1rem; padding: 0 10px; }
+
+/* ============================================================
+   CTA — Peach gradient
+============================================================ */
+.cta-section {
+  background: linear-gradient(135deg, var(--peach) 0%, var(--amber) 40%, #F59B35 80%, var(--peach) 100%);
+  background-size: 300% 300%;
+  animation: ctaShift 8s ease infinite;
+  padding: 0;
+  position: relative; overflow: hidden;
+}
+@keyframes ctaShift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.cta-bg-blobs { position: absolute; inset: 0; pointer-events: none; }
+.ctab-b { position: absolute; border-radius: 50%; filter: blur(50px); }
+.cb1 { width:300px;height:300px;background:rgba(255,255,255,.1);top:-80px;left:-60px; }
+.cb2 { width:250px;height:250px;background:rgba(0,0,0,.06);bottom:-60px;right:-40px; }
+.cb3 { width:200px;height:200px;background:rgba(255,255,255,.08);top:50%;left:40%; }
+
+.cta-inner {
+  position: relative; z-index: 2;
+  padding: 80px 20px;
+  text-align: center;
+}
+.cta-tag {
+  display: inline-block;
+  background: rgba(255,255,255,.2); color: #fff;
+  padding: 7px 20px; border-radius: 50px;
+  font-weight: 800; font-size: .78rem;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 18px;
+  backdrop-filter: blur(8px);
+}
+.cta-title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #fff; margin-bottom: 14px; line-height: 1.05;
+}
+.cta-title em { font-style: italic; color: rgba(255,255,255,.85); }
+.cta-inner p { color: rgba(255,255,255,.8); font-size: 1rem; max-width: 500px; margin: 0 auto 32px; line-height: 1.8; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.ctab-white {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; color: var(--peach-dark);
+  padding: 14px 32px; border-radius: 50px; border: none;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: .95rem;
+  cursor: pointer; transition: transform .3s, box-shadow .3s;
+}
+.ctab-white:hover { transform: translateY(-4px); box-shadow: 0 14px 35px rgba(0,0,0,.2); }
+.ctab-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.15); color: #fff;
+  border: 2px solid rgba(255,255,255,.5);
+  padding: 14px 32px; border-radius: 50px;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: .95rem;
+  cursor: pointer; backdrop-filter: blur(8px);
+  transition: transform .3s, background .3s;
+}
+.ctab-ghost:hover { transform: translateY(-4px); background: rgba(255,255,255,.25); }
+
+/* ============================================================
+   ADMISSIONS
+============================================================ */
+.admit-section {
+  background: var(--soft);
+  padding: 90px 0;
+  position: relative; overflow: hidden;
+}
+.admit-deco-blob { position: absolute; border-radius: 50%; pointer-events: none; opacity: .06; filter: blur(60px); }
+.adb1 { width:350px;height:350px;background:var(--peach);top:-100px;right:-80px; }
+.adb2 { width:280px;height:280px;background:var(--green);bottom:-80px;left:-60px; }
+
+.admit-header { margin-bottom: 50px; }
+
+/* 4-step grid */
+.admit-steps-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.asg-step {
+  background: #fff;
+  border-radius: 20px; padding: 28px 24px;
+  border: 2px solid #f0ede8;
+  border-top: 5px solid var(--asc);
+  position: relative; overflow: hidden;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+  box-shadow: 0 4px 18px rgba(0,0,0,.05);
+}
+.asg-step:hover { transform: translateY(-8px); box-shadow: 0 20px 45px rgba(0,0,0,.1); }
+.asg-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: var(--asc); opacity: .12; line-height: 1;
+  position: absolute; top: -6px; right: 12px;
+}
+.asg-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; color: #fff; margin-bottom: 14px;
+}
+.asg-step h5 { font-size: 1rem; color: var(--dark); margin-bottom: 8px; }
+.asg-step p  { font-size: .87rem; color: var(--muted); line-height: 1.75; }
+
+/* Documents card */
+.admit-docs {
+  background: #fff;
+  border-radius: 24px; height: 100%;
+  border: 2px solid #f0ede8;
+  box-shadow: 0 12px 40px rgba(0,0,0,.07);
+  overflow: hidden;
+}
+.adoc-top {
+  background: linear-gradient(135deg, var(--dark), #2a2a3e);
+  color: #fff; padding: 22px 28px;
+  font-weight: 900; font-size: 1rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.adoc-top i { color: var(--amber); }
+
+.adoc-list {
+  list-style: none;
+  padding: 24px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.adoc-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: .93rem; font-weight: 600; color: var(--text); line-height: 1.5;
+}
+.adl-pip {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; color: #fff; font-weight: 900; flex-shrink: 0;
+}
+
+.adoc-contact {
+  border-top: 2px dashed #f0ede8;
+  padding: 18px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.adoc-contact div {
+  display: flex; align-items: center; gap: 10px;
+  font-size: .88rem; font-weight: 700; color: var(--text);
+}
+
+/* ============================================================
+   MAP
+============================================================ */
+.map-section {
+  background: linear-gradient(135deg, #f0faf5 0%, #fff 60%);
+  padding: 90px 0;
+}
+.map-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.mc-card {
+  display: flex; align-items: center; gap: 14px;
+  background: #fff; border-radius: 14px; padding: 14px 18px;
+  border: 2px solid #f0ede8;
+  box-shadow: 0 4px 16px rgba(0,0,0,.05);
+  transition: transform .3s;
+}
+.mc-card:hover { transform: translateX(8px); }
+.mcc-ic {
+  width: 42px; height: 42px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; color: #fff; flex-shrink: 0;
+}
+.mcc-l { display: block; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+.mcc-v { display: block; font-size: .9rem; font-weight: 700; color: var(--text); }
+
+.btn-peach-solid {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  color: #fff; padding: 13px 28px; border-radius: 50px; border: none;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: .9rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255,140,90,.35);
+  transition: transform .25s, box-shadow .25s;
+}
+.btn-peach-solid:hover { transform: translateY(-4px); box-shadow: 0 14px 35px rgba(255,140,90,.5); }
+
+.map-frame {
+  border-radius: 24px; overflow: hidden;
+  border: 3px solid #f0ede8;
+  box-shadow: 0 20px 50px rgba(0,0,0,.09);
+}
+
+/* ============================================================
+   BOTTOM NAV
+============================================================ */
+.bnav-section {
+  background: var(--dark);
+  padding: 50px 0 60px;
+}
+.bnav-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.bnav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: .9rem;
+}
+.bnav-brand span { color: rgba(255,255,255,.7); }
+.bnav-pip {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--peach);
+}
+.bnav-sep { color: rgba(255,255,255,.3); }
+.bnav-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 28px; border-radius: 50px;
+  font-family: 'Nunito', sans-serif; font-weight: 900; font-size: .9rem;
+  text-decoration: none;
+  transition: transform .25s, box-shadow .25s;
+}
+.bnav-btn:hover { transform: translateY(-4px); }
+.bnav-peach {
+  background: linear-gradient(135deg, var(--peach), var(--amber));
+  color: #fff; box-shadow: 0 8px 24px rgba(255,140,90,.35);
+}
+.bnav-peach:hover { box-shadow: 0 14px 35px rgba(255,140,90,.5); color: #fff; }
+.bnav-green {
+  background: linear-gradient(135deg, var(--green), #56c98a);
+  color: #fff; box-shadow: 0 8px 24px rgba(61,155,107,.3);
+}
+.bnav-green:hover { box-shadow: 0 14px 35px rgba(61,155,107,.45); color: #fff; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 991px) {
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .fac-masonry { grid-template-columns: repeat(2, 1fr); }
+  .fmc-tall { grid-row: span 1; }
+  .qs-intro { gap: 30px; }
+  .qsi-right { display: none; }
+}
+@media (max-width: 767px) {
+  .hero { padding: 20px 0 40px; }
+  .qs-intro { flex-direction: column; }
+  .qs-result { flex-direction: column; }
+  .qr-lottie-side { width: 100%; }
+  .why-grid { grid-template-columns: 1fr; }
+  .admit-steps-grid { grid-template-columns: 1fr; }
+  .fac-masonry { grid-template-columns: 1fr; }
+  .cap-ribbon { flex-direction: column; gap: 20px; }
+  .bnav-wrap { justify-content: center; }
+  .qsi-chip { display: none; }
+}
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+  CUSTOM CURSOR
+============================================================ -->
+<div class="cur-dot" id="curDot"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- ============================================================
+  GO BACK BUTTON (top right)
+============================================================ -->
+<div style="position: absolute; top: 20px; right: 30px; z-index: 20;">
+  <a href="explore school.html" style="
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    padding: 10px 18px;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1a1a2e;
+    text-decoration: none;
+    border: 1.5px solid #e8e8f0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+  "
+  onmouseover="this.style.background='#f3f0ff'; this.style.borderColor='#FF8C5A';"
+  onmouseout="this.style.background='rgba(255,255,255,0.85)'; this.style.borderColor='#e8e8f0';"
+  >
+    <i class="fas fa-arrow-left" style="color: #FF8C5A;"></i> Go Back
+  </a>
+</div>
+
+<!-- ============================================================
+  HERO — Interactive "What kind of learner are you?" Quiz
+============================================================ -->
+<section class="hero" id="home">
+
+  <!-- Organic blobs bg -->
+  <div class="hero-blob hb1"></div>
+  <div class="hero-blob hb2"></div>
+  <div class="hero-blob hb3"></div>
+  <div class="hero-blob hb4"></div>
+
+  <!-- Scattered decorative icons -->
+  <div class="deco-icons">
+    <span class="di" style="top:8%;left:5%;animation-delay:0s"><i class="fas fa-atom"></i></span>
+    <span class="di" style="top:15%;right:8%;animation-delay:.5s"><i class="fas fa-music"></i></span>
+    <span class="di" style="top:40%;left:2%;animation-delay:1s"><i class="fas fa-paint-brush"></i></span>
+    <span class="di" style="bottom:20%;right:5%;animation-delay:1.5s"><i class="fas fa-football-ball"></i></span>
+    <span class="di" style="bottom:10%;left:15%;animation-delay:2s"><i class="fas fa-book"></i></span>
+    <span class="di" style="top:60%;right:3%;animation-delay:2.5s"><i class="fas fa-calculator"></i></span>
+    <span class="di" style="top:25%;left:40%;animation-delay:.8s"><i class="fas fa-star"></i></span>
+    <span class="di" style="bottom:35%;left:8%;animation-delay:3s"><i class="fas fa-flask"></i></span>
+  </div>
+
+  <div class="container hero-container">
+
+    <!-- Top nav strip -->
+    <div class="hero-nav reveal active">
+      <div class="hn-left">
+        <div class="hn-pip"></div>
+        <span class="hn-school">Schools Info</span>
+        <span class="hn-sep">·</span>
+        <span class="hn-name">Middle School</span>
+      </div>
+    </div>
+
+    <!-- QUIZ WRAPPER -->
+    <div class="quiz-wrap" id="quizWrap">
+
+      <!-- ── STEP 0: Intro screen ── -->
+      <div class="quiz-screen qs-intro active" id="qsIntro">
+        <div class="qsi-left reveal active">
+          <p class="qsi-eyebrow">
+            <span class="eye-dash"></span> Welcome to Middle School
+          </p>
+          <h1 class="qsi-title">
+            What Kind of<br/>
+            <span class="qt-peach">Learner</span><br/>
+            Are <em>You?</em>
+          </h1>
+          <p class="qsi-desc">Answer 3 quick questions and discover which part of our Middle School was made just for you — then explore the full page below!</p>
+          <button class="btn-start" id="btnStart">
+            <span>Start the Quiz</span>
+            <div class="bs-arrow"><i class="fas fa-arrow-right"></i></div>
+          </button>
+          <div class="qsi-skip">
+            <a href="#whyus" id="skipQuiz">Skip quiz, explore the school <i class="fas fa-chevron-down"></i></a>
+          </div>
+        </div>
+        <div class="qsi-right reveal active" style="animation-delay:.2s">
+          <div class="qsi-lottie-card">
+            <lottie-player
+              src="images/773a7daa-1170-11ee-a2b1-ef928c2e4aab.json"
+              background="transparent" speed="1" loop autoplay
+              style="width:100%;height:280px">
+            </lottie-player>
+            <div class="qlc-ribbon">Discover Your Learning Style</div>
+          </div>
+          <!-- floating stat chips -->
+          <div class="qsi-chip qch1">
+            <i class="fas fa-users"></i>
+            <div><strong id="cnt1">0</strong><span>Students</span></div>
+          </div>
+          <div class="qsi-chip qch2">
+            <i class="fas fa-trophy"></i>
+            <div><strong id="cnt2">0</strong><span>Achievements</span></div>
+          </div>
+          <div class="qsi-chip qch3">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <div><strong id="cnt3">0</strong><span>Teachers</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 1 ── -->
+      <div class="quiz-screen qs-q" id="qs1">
+        <div class="q-progress">
+          <div class="qp-bar"><div class="qp-fill" style="width:33%"></div></div>
+          <span>Question 1 of 3</span>
+        </div>
+        <h2 class="q-title">When you have a free period at school, you usually…</h2>
+        <div class="q-options">
+          <button class="qopt" data-val="scientist">
+            <div class="qopt-icon" style="background:#3D9B6B"><i class="fas fa-flask"></i></div>
+            <div class="qopt-text">
+              <strong>Run an experiment</strong>
+              <span>Head to the science lab and try something new</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="artist">
+            <div class="qopt-icon" style="background:#FF8C5A"><i class="fas fa-paint-brush"></i></div>
+            <div class="qopt-text">
+              <strong>Create something</strong>
+              <span>Draw, sketch, make music or write a story</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="leader">
+            <div class="qopt-icon" style="background:#F5A623"><i class="fas fa-users"></i></div>
+            <div class="qopt-text">
+              <strong>Organise something</strong>
+              <span>Rally friends, plan an activity or start a club</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+            
+          </button>
+          <button class="qopt" data-val="athlete">
+            <div class="qopt-icon" style="background:#56B4D3"><i class="fas fa-futbol"></i></div>
+            <div class="qopt-text">
+              <strong>Move your body</strong>
+              <span>Play a sport, stretch, run around outside</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2 ── -->
+      <div class="quiz-screen qs-q" id="qs2">
+        <div class="q-progress">
+          <div class="qp-bar"><div class="qp-fill" style="width:66%"></div></div>
+          <span>Question 2 of 3</span>
+        </div>
+        <h2 class="q-title">Your favourite kind of school project is…</h2>
+        <div class="q-options">
+          <button class="qopt" data-val="scientist">
+            <div class="qopt-icon" style="background:#3D9B6B"><i class="fas fa-microscope"></i></div>
+            <div class="qopt-text">
+              <strong>A research investigation</strong>
+              <span>Collect data, analyse results, present findings</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="artist">
+            <div class="qopt-icon" style="background:#FF8C5A"><i class="fas fa-palette"></i></div>
+            <div class="qopt-text">
+              <strong>A creative portfolio</strong>
+              <span>Express yourself through art, writing or design</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="leader">
+            <div class="qopt-icon" style="background:#F5A623"><i class="fas fa-comments"></i></div>
+            <div class="qopt-text">
+              <strong>A group debate or presentation</strong>
+              <span>Speak up, persuade, lead the discussion</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="athlete">
+            <div class="qopt-icon" style="background:#56B4D3"><i class="fas fa-running"></i></div>
+            <div class="qopt-text">
+              <strong>An active hands-on challenge</strong>
+              <span>Build it, field-trip it, move and do</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3 ── -->
+      <div class="quiz-screen qs-q" id="qs3">
+        <div class="q-progress">
+          <div class="qp-bar"><div class="qp-fill" style="width:99%"></div></div>
+          <span>Question 3 of 3</span>
+        </div>
+        <h2 class="q-title">Your dream school moment would be…</h2>
+        <div class="q-options">
+          <button class="qopt" data-val="scientist">
+            <div class="qopt-icon" style="background:#3D9B6B"><i class="fas fa-award"></i></div>
+            <div class="qopt-text">
+              <strong>Winning a science olympiad</strong>
+              <span>Representing school with your brain power</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="artist">
+            <div class="qopt-icon" style="background:#FF8C5A"><i class="fas fa-star"></i></div>
+            <div class="qopt-text">
+              <strong>Performing on the main stage</strong>
+              <span>Drama night, art exhibition or music concert</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="leader">
+            <div class="qopt-icon" style="background:#F5A623"><i class="fas fa-crown"></i></div>
+            <div class="qopt-text">
+              <strong>Being elected to student council</strong>
+              <span>Making a real change in your school</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+          <button class="qopt" data-val="athlete">
+            <div class="qopt-icon" style="background:#56B4D3"><i class="fas fa-medal"></i></div>
+            <div class="qopt-text">
+              <strong>Lifting the inter-school sports trophy</strong>
+              <span>Scoring the winning goal for your team</span>
+            </div>
+            <div class="qopt-check"><i class="fas fa-check"></i></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── RESULT ── -->
+      <div class="quiz-screen qs-result" id="qsResult">
+        <div class="qr-confetti" id="qrConfetti"></div>
+        <div class="qr-inner">
+          <div class="qr-badge-wrap">
+            <div class="qr-badge" id="qrBadge">🔬</div>
+          </div>
+          <p class="qr-eyebrow">You are a…</p>
+          <h2 class="qr-type" id="qrType">The Scientist</h2>
+          <p class="qr-desc" id="qrDesc">Your curiosity drives everything. Our Science & Research programme was built for minds like yours — with real labs, olympiad prep and independent research projects every term.</p>
+          <div class="qr-highlight" id="qrHighlight">
+            <i class="fas fa-flask"></i>
+            <span id="qrSection">Science & Research</span>
+            <span class="qrh-tag">Explore below ↓</span>
+          </div>
+          <div class="qr-btns">
+            <button class="btn-start" id="btnRetake">
+              <span>Retake Quiz</span>
+              <div class="bs-arrow"><i class="fas fa-redo"></i></div>
+            </button>
+            <a href="#whyus" class="btn-explore-down">
+              Explore the School <i class="fas fa-arrow-down"></i>
+            </a>
+          </div>
+        </div>
+        <div class="qr-lottie-side" id="qrLottie">
+          <lottie-player
+            src="images/773a7daa-1170-11ee-a2b1-ef928c2e4aab.json"
+            background="transparent" speed="1" loop autoplay
+            id="qrLottiePlayer"
+            style="width:100%;height:280px">
+          </lottie-player>
+        </div>
+      </div>
+
+    </div><!-- /quiz-wrap -->
+  </div>
+</section>
+
+<!-- ============================================================
+  WHY US — Forest Green, wavy top, 4 lottie cards
+============================================================ -->
+<section class="why-section" id="whyus">
+
+  <div class="why-wave-top"></div>
+  <div class="why-blob wyb1"></div>
+  <div class="why-blob wyb2"></div>
+
+  <div class="container">
+    <div class="why-header reveal">
+      <div class="section-pill sp-peach"><i class="fas fa-seedling"></i> Why Middle School Here?</div>
+      <h2 class="sec-title st-white">
+        The Four Things That<br/><em>Make Us Different</em>
+      </h2>
+      <p class="sec-sub-white">Grade 7–9 is where curiosity becomes confidence — we make sure every student finds their spark.</p>
+    </div>
+
+    <div class="why-grid reveal">
+
+      <div class="why-card-new wcn-1">
+        <div class="wcn-top">
+          <div class="wcn-num">01</div>
+          <div class="wcn-icon"><i class="fas fa-brain"></i></div>
+        </div>
+        <h4>Critical Thinking</h4>
+        <p>Debate clubs, Socratic classrooms and problem-solving challenges that build minds ready for any subject.</p>
+        <lottie-player src="images/4f072772-1178-11ee-b999-afdb9bf287d0.json"
+          background="transparent" speed="1" loop autoplay
+          class="wcn-lottie wcn-lottie-1">
+        </lottie-player>
+        <div class="wcn-bottom-tag">STEM · Humanities · Arts</div>
+      </div>
+
+      <div class="why-card-new wcn-2">
+        <div class="wcn-top">
+          <div class="wcn-num">02</div>
+          <div class="wcn-icon"><i class="fas fa-palette"></i></div>
+        </div>
+        <h4>Creative Freedom</h4>
+        <p>Art studios, music rooms, drama workshop and a student magazine — every voice deserves a stage.</p>
+        <lottie-player src="images/580b01e7-6091-4592-aea6-2735192d5851.json"
+          background="transparent" speed="1" loop autoplay
+          class="wcn-lottie wcn-lottie-2">
+        </lottie-player>
+        <div class="wcn-bottom-tag">Arts · Media · Design</div>
+      </div>
+
+      <div class="why-card-new wcn-3">
+        <div class="wcn-top">
+          <div class="wcn-num">03</div>
+          <div class="wcn-icon"><i class="fas fa-flask"></i></div>
+        </div>
+        <h4>Hands-On Science</h4>
+        <p>Real experiments, science fairs, robotics club and STEM challenges that make learning electric.</p>
+        <lottie-player src="images/4aab8012-1162-11ee-b418-53f86754f24a.json"
+          background="transparent" speed="1" loop autoplay
+          class="wcn-lottie wcn-lottie-3">
+        </lottie-player>
+        <div class="wcn-bottom-tag">Biology · Chemistry · Physics</div>
+      </div>
+
+      <div class="why-card-new wcn-4">
+        <div class="wcn-top">
+          <div class="wcn-num">04</div>
+          <div class="wcn-icon"><i class="fas fa-running"></i></div>
+        </div>
+        <h4>Sports & Wellness</h4>
+        <p>Daily PE, inter-school tournaments, yoga and mindfulness to keep every student energised and balanced.</p>
+        <lottie-player src="images/20c94b0a-116f-11ee-b84c-33eb3bc5300d.json"
+          background="transparent" speed="1" loop autoplay
+          class="wcn-lottie wcn-lottie-4">
+        </lottie-player>
+        <div class="wcn-bottom-tag">Sports · Fitness · Mindfulness</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  GRADE JOURNEY — Peach bg, animated step timeline
+============================================================ -->
+<section class="journey-section" id="journey">
+
+  <div class="journey-wave-top"></div>
+
+  <div class="container">
+    <div class="journey-header reveal">
+      <div class="section-pill sp-green"><i class="fas fa-route"></i> Student Journey</div>
+      <h2 class="sec-title st-dark">
+        From Grade 7<br/><em>to Grade 9</em>
+      </h2>
+      <p class="sec-sub">Three years, three transformations — watch your child grow into a confident, curious achiever.</p>
+    </div>
+
+    <div class="journey-timeline">
+
+      <div class="jt-step jts-left reveal-left">
+        <div class="jts-card" style="--jc:#FF8C5A">
+          <div class="jts-grade">Grade 7</div>
+          <div class="jts-lottie">
+            <lottie-player src="images/6d1ef268-1172-11ee-8ea6-2789f15ff6d2.json"
+              background="transparent" speed="1" loop autoplay
+              class="jt-lottie-1">
+            </lottie-player>
+          </div>
+          <h4>Foundation & Discovery</h4>
+          <p>Students settle in, explore every subject and discover what excites them. Core skills in Maths, English, Science and Urdu are deeply established.</p>
+          <div class="jts-tags">
+            <span>Core Subjects</span>
+            <span>Study Skills</span>
+            <span>First Labs</span>
+          </div>
+        </div>
+        <div class="jts-connector"></div>
+      </div>
+
+      <div class="jt-step jts-right reveal-right">
+        <div class="jts-card" style="--jc:#3D9B6B">
+          <div class="jts-grade">Grade 8</div>
+          <div class="jts-lottie">
+            <lottie-player src="images/faf2a6ce-7911-4c15-a2a9-5bbe8f403336.json"
+              background="transparent" speed="1" loop autoplay
+              class="jt-lottie-2">
+            </lottie-player>
+          </div>
+          <h4>Curiosity & Confidence</h4>
+          <p>Students dive deeper into electives, join clubs, take on leadership roles and begin their first independent research and creative projects.</p>
+          <div class="jts-tags">
+            <span>Elective Subjects</span>
+            <span>Club Leadership</span>
+            <span>Research Projects</span>
+          </div>
+        </div>
+        <div class="jts-connector"></div>
+      </div>
+
+      <div class="jt-step jts-left reveal-left">
+        <div class="jts-card" style="--jc:#F5A623">
+          <div class="jts-grade">Grade 9</div>
+          <div class="jts-lottie">
+            <lottie-player src="images/5883069c-2ee8-11f0-812a-8320a88b8581.json"
+              background="transparent" speed="1" loop autoplay
+              class="jt-lottie-3">
+            </lottie-player>
+          </div>
+          <h4>Mastery & Ambition</h4>
+          <p>Full prep for O-Level transition — advanced academic tracks, inter-school competitions, portfolio building and personalised university-readiness planning.</p>
+          <div class="jts-tags">
+            <span>O-Level Prep</span>
+            <span>Competitions</span>
+            <span>Portfolio Building</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  FACILITIES — White, staggered hover cards
+============================================================ -->
+<section class="fac-section" id="facilities">
+
+  <div class="fac-deco fd1"></div>
+  <div class="fac-deco fd2"></div>
+
+  <div class="container">
+    <div class="fac-header reveal">
+      <div class="section-pill sp-peach"><i class="fas fa-building"></i> Campus & Facilities</div>
+      <h2 class="sec-title st-dark">
+        Every Space Built<br/>to <em>Spark Something</em>
+      </h2>
+    </div>
+
+    <div class="fac-masonry reveal">
+
+      <div class="fm-card fmc-tall" style="--fc:#FF8C5A">
+        <div class="fmc-content">
+          <lottie-player src="images/4aab8012-1162-11ee-b418-53f86754f24a.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:180px">
+          </lottie-player>
+          <div class="fmc-icon"><i class="fas fa-flask"></i></div>
+          <h5>Science Labs</h5>
+          <p>Physics, Chemistry & Biology labs with experiment stations, safety gear and weekly hands-on sessions</p>
+        </div>
+        <div class="fmc-num">01</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#3D9B6B">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-laptop-code"></i></div>
+          <h5>Computer Lab</h5>
+          <p>60 workstations, coding software, digital literacy and creative design tools</p>
+        </div>
+        <div class="fmc-num">02</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#F5A623">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-book-open"></i></div>
+          <h5>Library</h5>
+          <p>6,000 books, reading nooks, e-library access and a dedicated research corner</p>
+        </div>
+        <div class="fmc-num">03</div>
+      </div>
+
+      <div class="fm-card fmc-tall" style="--fc:#56B4D3">
+        <div class="fmc-content">
+          <lottie-player src="images/580b01e7-6091-4592-aea6-2735192d5851.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:160px">
+          </lottie-player>
+          <div class="fmc-icon"><i class="fas fa-music"></i></div>
+          <h5>Arts & Music Studio</h5>
+          <p>Instruments, recording gear, painting studio and a drama rehearsal space</p>
+        </div>
+        <div class="fmc-num">04</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#E85D9A">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-futbol"></i></div>
+          <h5>Sports Complex</h5>
+          <p>Indoor gym, cricket net, football ground and swimming pool for all grades</p>
+        </div>
+        <div class="fmc-num">05</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#9B5DE5">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-utensils"></i></div>
+          <h5>Cafeteria</h5>
+          <p>Nutritionist-curated fresh menu with allergen-free options every day</p>
+        </div>
+        <div class="fmc-num">06</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#FF8C5A">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-theater-masks"></i></div>
+          <h5>Auditorium</h5>
+          <p>600-seat stage with sound, lighting and an annual arts gala every year</p>
+        </div>
+        <div class="fmc-num">07</div>
+      </div>
+
+      <div class="fm-card" style="--fc:#3D9B6B">
+        <div class="fmc-content">
+          <div class="fmc-icon"><i class="fas fa-bus"></i></div>
+          <h5>Transport</h5>
+          <p>GPS-tracked buses on all major city routes with trained staff on board</p>
+        </div>
+        <div class="fmc-num">08</div>
+      </div>
+
+    </div>
+
+    <!-- Capacity ribbon -->
+    <div class="cap-ribbon reveal">
+      <div class="cr-item">
+        <i class="fas fa-users"></i>
+        <strong id="cnt4">0</strong>
+        <span>Max Students</span>
+      </div>
+      <div class="cr-sep">✦</div>
+      <div class="cr-item">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <strong>14:1</strong>
+        <span>Student–Teacher</span>
+      </div>
+      <div class="cr-sep">✦</div>
+      <div class="cr-item">
+        <i class="fas fa-clock"></i>
+        <strong>7:45 AM</strong>
+        <span>School Starts</span>
+      </div>
+      <div class="cr-sep">✦</div>
+      <div class="cr-item">
+        <i class="fas fa-star"></i>
+        <strong>A+</strong>
+        <span>Board Results</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+  CTA — Peach gradient
+============================================================ -->
+<section class="cta-section" id="download">
+  <div class="cta-bg-blobs">
+    <div class="ctab-b cb1"></div>
+    <div class="ctab-b cb2"></div>
+    <div class="ctab-b cb3"></div>
+  </div>
+  <div class="container cta-inner reveal">
+    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json"
+      background="transparent" speed="1" loop autoplay
+      style="width:100px;height:100px;margin:0 auto 16px">
+    </lottie-player>
+    <div class="cta-tag">Grade 7-9 · Admissions Open Now</div>
+    <h2 class="cta-title">
+      Get the Complete<br/><em>Middle School Guide</em>
+    </h2>
+    <p>Curriculum, clubs, facilities, fee structure and step-by-step admission process — all in one beautiful brochure.</p>
+    <div class="cta-btns">
+      <a href="images/Middle_School_Facilities.docx" class="ctab-ghost"><i class="fas fa-download"></i> Download Brochure</a>
+      <!-- NEW "Apply Now" button -->
+      <a href="adm 4.html" class="ctab-white" style="background: #fff; color: #FF8C5A; border: none; box-shadow: 0 6px 24px rgba(255,140,90,.25);">
+        <i class="fas fa-pen-fancy"></i> Apply Now
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  ADMISSIONS — White, step grid
+============================================================ -->
+<section class="admit-section" id="admissions">
+
+  <div class="admit-deco-blob adb1"></div>
+  <div class="admit-deco-blob adb2"></div>
+
+  <div class="container">
+    <div class="admit-header reveal">
+      <div class="section-pill sp-green"><i class="fas fa-file-alt"></i> Admissions</div>
+      <h2 class="sec-title st-dark">
+        Begin Your<br/><em>Story Here</em>
+      </h2>
+    </div>
+
+    <div class="row g-5 align-items-stretch">
+
+      <div class="col-lg-7 reveal-left">
+        <div class="admit-steps-grid">
+          <div class="asg-step" style="--asc:#FF8C5A">
+            <div class="asg-num">01</div>
+            <div class="asg-icon" style="background:#FF8C5A"><i class="fas fa-file-alt"></i></div>
+            <h5>Apply</h5>
+            <p>Fill the online form or visit our office. The prospectus is free of charge.</p>
+          </div>
+          <div class="asg-step" style="--asc:#3D9B6B">
+            <div class="asg-num">02</div>
+            <div class="asg-icon" style="background:#3D9B6B"><i class="fas fa-pencil-alt"></i></div>
+            <h5>Assessment</h5>
+            <p>Written aptitude test in English, Maths & Science at Grade 6–8 level.</p>
+          </div>
+          <div class="asg-step" style="--asc:#F5A623">
+            <div class="asg-num">03</div>
+            <div class="asg-icon" style="background:#F5A623"><i class="fas fa-comments"></i></div>
+            <h5>Interview</h5>
+            <p>A friendly chat with the principal — relaxed, warm and encouraging.</p>
+          </div>
+          <div class="asg-step" style="--asc:#56B4D3">
+            <div class="asg-num">04</div>
+            <div class="asg-icon" style="background:#56B4D3"><i class="fas fa-check-circle"></i></div>
+            <h5>Enrol</h5>
+            <p>Offer letter → submit documents → pay fee → you're officially in!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5 reveal-right">
+        <div class="admit-docs">
+          <div class="adoc-top">
+            <i class="fas fa-folder-open"></i> Required Documents
+          </div>
+          <ul class="adoc-list">
+            <li><span class="adl-pip" style="background:#FF8C5A">①</span> Completed application form</li>
+            <li><span class="adl-pip" style="background:#3D9B6B">②</span> Previous school report card (Grade 6-8)</li>
+            <li><span class="adl-pip" style="background:#F5A623">③</span> School leaving / transfer certificate</li>
+            <li><span class="adl-pip" style="background:#56B4D3">④</span> Birth certificate (attested copy)</li>
+            <li><span class="adl-pip" style="background:#9B5DE5">⑤</span> 4 recent passport-size photographs</li>
+            <li><span class="adl-pip" style="background:#E85D9A">⑥</span> Parent / Guardian CNIC copy</li>
+          </ul>
+          <div class="adoc-contact">
+            <div><i class="fas fa-envelope" style="color:#FF8C5A"></i> admissions@middle.schools.edu.pk</div>
+            <div><i class="fas fa-phone" style="color:#3D9B6B"></i> +92-21-XXXXXXX</div>
+            <div><i class="fas fa-clock" style="color:#F5A623"></i> Mon-Fri, 9:00 AM - 3:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  MAP — Soft mint bg
+============================================================ -->
+<section class="map-section" id="location">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-md-5 reveal-left">
+        <div class="section-pill sp-peach" style="margin-bottom:18px"><i class="fas fa-map-pin"></i> Find Us</div>
+        <h2 class="sec-title st-dark" style="margin-bottom:14px">Visit Our<br/><em>Campus</em></h2>
+        <p style="color:#666;line-height:1.8;font-size:.95rem;margin-bottom:24px">
+          A warm, welcoming campus with open green spaces, bright classrooms and a vibrant community atmosphere that students love coming to every day.
+        </p>
+        <div class="map-cards">
+          <div class="mc-card">
+            <div class="mcc-ic" style="background:#FF8C5A"><i class="fas fa-map-marker-alt"></i></div>
+            <div><span class="mcc-l">Address</span><span class="mcc-v">7 Learning Avenue, Scholar's District, Karachi</span></div>
+          </div>
+          <div class="mc-card">
+            <div class="mcc-ic" style="background:#3D9B6B"><i class="fas fa-phone"></i></div>
+            <div><span class="mcc-l">Phone</span><span class="mcc-v">+92-21-XXXXXXX</span></div>
+          </div>
+          <div class="mc-card">
+            <div class="mcc-ic" style="background:#56B4D3"><i class="fas fa-envelope"></i></div>
+            <div><span class="mcc-l">Email</span><span class="mcc-v">info@middle.schools.edu.pk</span></div>
+          </div>
+        </div>
+        <button class="btn-peach-solid"><i class="fas fa-directions"></i> Get Directions</button>
+      </div>
+      <div class="col-md-7 reveal-right">
+        <div class="map-frame">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835!2d144.953!3d-37.816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b65f5a1b2b3b4b5%3A0x2b3b4b5a6b7c8d9e!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
+            width="100%" height="420" style="border:0;display:block" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<section class="bnav-section">
+  <div class="container bnav-wrap">
+    <div class="bnav-brand">
+      <div class="bnav-pip"></div>
+      <span>Middle School</span>
+      <span class="bnav-sep">·</span>
+      <span>Grade 7–9</span>
+      <span class="bnav-sep">·</span>
+      <span style="color:#aaa;font-weight:500">Schools Info</span>
+    </div>
+    <div class="d-flex gap-3 flex-wrap justify-content-center">
+      <a href="explore school.html" class="bnav-btn bnav-peach"><i class="fas fa-th-large"></i> Explore Schools</a>
+      <a href="sports school.html" class="bnav-btn bnav-green">Next School <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  JS
+============================================================ -->
+<script>
+/* ── Custom Cursor ── */
+const curDot = document.getElementById('curDot');
+const curRing = document.getElementById('curRing');
+let rx=0,ry=0,mx=0,my=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  curDot.style.cssText=`left:${mx}px;top:${my}px`;
+});
+(function animCursor(){
+  rx+=(mx-rx)*.11; ry+=(my-ry)*.11;
+  curRing.style.cssText=`left:${rx}px;top:${ry}px`;
+  requestAnimationFrame(animCursor);
+})();
+document.querySelectorAll('button,a,.qopt,.fm-card,.why-card-new,.jts-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{curRing.classList.add('cr-grow');curDot.style.opacity='0';});
+  el.addEventListener('mouseleave',()=>{curRing.classList.remove('cr-grow');curDot.style.opacity='1';});
+});
+
+/* ── Scroll Reveal ── */
+const revEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active');ro.unobserve(e.target);}});
+},{threshold:.08});
+revEls.forEach(el=>ro.observe(el));
+
+/* ── Counters ── */
+function countUp(id,target,suf,dur){
+  const el=document.getElementById(id);if(!el)return;
+  let s=0,step=Math.ceil(target/(dur/30));
+  const t=setInterval(()=>{s=Math.min(s+step,target);el.textContent=s+suf;if(s>=target)clearInterval(t);},30);
+}
+window.addEventListener('load',()=>{
+  countUp('cnt1',420,'+',1600);
+  countUp('cnt2',80,'+',1100);
+  countUp('cnt3',35,'+',1000);
+  countUp('cnt4',420,'+',1500);
+});
+
+/* ── Quiz Logic ── */
+const screens={intro:document.getElementById('qsIntro'),q1:document.getElementById('qs1'),q2:document.getElementById('qs2'),q3:document.getElementById('qs3'),result:document.getElementById('qsResult')};
+let answers=[];
+let currentQ=0;
+
+const profiles={
+  scientist:{emoji:'🔬',type:'The Scientist',desc:"Your curiosity drives everything. Our Science & Research programme was built for minds like yours — real labs, olympiad prep and independent research projects every term.",section:'Science & Research',lottie:'https://assets1.lottiefiles.com/packages/lf20_yd8fbnml.json'},
+  artist:{emoji:'🎨',type:'The Creative',desc:"You see the world differently and express it beautifully. Our Arts & Creative programme — drama, music, design and writing — is where you will truly shine.",section:'Arts & Creativity',lottie:'https://assets4.lottiefiles.com/packages/lf20_myejiggj.json'},
+  leader:{emoji:'👑',type:'The Leader',desc:"You are a natural motivator who brings people together. Our Leadership & Character programme — student council, debate club, Model UN — is where your potential will soar.",section:'Leadership & Character',lottie:'https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json'},
+  athlete:{emoji:'🏆',type:'The Champion',desc:"You thrive when you are active and challenged. Our Sports & Wellness programme — daily PE, inter-school tournaments and wellness coaching — was made for you.",section:'Sports & Wellness',lottie:'https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json'}
+};
+
+function showScreen(id){
+  document.querySelectorAll('.quiz-screen').forEach(s=>{s.classList.remove('active');s.style.animation='';});
+  setTimeout(()=>{
+    const s=document.getElementById(id);
+    s.classList.add('active');
+    s.style.animation='qsSlideIn .45s cubic-bezier(.22,1,.36,1) both';
+  },60);
+}
+
+document.getElementById('btnStart').addEventListener('click',()=>{
+  answers=[];currentQ=1;
+  showScreen('qs1');
+});
+
+document.querySelectorAll('.qopt').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    // highlight selected
+    this.closest('.q-options').querySelectorAll('.qopt').forEach(b=>b.classList.remove('qopt-sel'));
+    this.classList.add('qopt-sel');
+    const val=this.dataset.val;
+    answers.push(val);
+    setTimeout(()=>{
+      currentQ++;
+      if(currentQ===2) showScreen('qs2');
+      else if(currentQ===3) showScreen('qs3');
+      else showResult();
+    },400);
+  });
+});
+
+function showResult(){
+  // tally
+  const count={scientist:0,artist:0,leader:0,athlete:0};
+  answers.forEach(a=>count[a]++);
+  const winner=Object.keys(count).reduce((a,b)=>count[a]>=count[b]?a:b);
+  const p=profiles[winner];
+
+  document.getElementById('qrBadge').textContent=p.emoji;
+  document.getElementById('qrType').textContent=p.type;
+  document.getElementById('qrDesc').textContent=p.desc;
+  document.getElementById('qrSection').textContent=p.section;
+  document.getElementById('qrLottiePlayer').src=p.lottie;
+
+  // confetti
+  const conf=document.getElementById('qrConfetti');
+  conf.innerHTML='';
+  const colors=['#FF8C5A','#3D9B6B','#F5A623','#56B4D3','#9B5DE5','#E85D9A','#FFD93D'];
+  for(let i=0;i<55;i++){
+    const d=document.createElement('div');
+    d.className='conf-piece';
+    d.style.cssText=`left:${Math.random()*100}%;width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*.8}s;animation-duration:${1.2+Math.random()*1}s;border-radius:${Math.random()>.5?'50%':'2px'}`;
+    conf.appendChild(d);
+  }
+
+  showScreen('qsResult');
+}
+
+document.getElementById('btnRetake').addEventListener('click',()=>{
+  answers=[];currentQ=0;
+  showScreen('qsIntro');
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

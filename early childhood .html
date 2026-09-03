@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Early Childhood Centre · Schools Info</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+  <style>
+    :root {
+      --pink: #FF6B9D;
+      --orange: #FF7F50;
+      --yellow: #FFD93D;
+      --green: #06D6A0;
+      --teal: #4ECDC4;
+      --blue: #4361EE;
+      --purple: #9B5DE5;
+      --red: #EF233C;
+      --white: #ffffff;
+      --soft-bg: #FFFBF4;
+      --dark: #1a1a2e;
+      --text: #2d2d2d;
+      --muted: #7b7b9a;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--soft-bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 800;
+    }
+
+    .grad-pink-purple {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 60%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .grad-orange-yellow {
+      background: linear-gradient(135deg, var(--orange) 0%, var(--yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .grad-green-teal {
+      background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .grad-blue-purple {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .75s cubic-bezier(.25, .46, .45, .94), transform .75s cubic-bezier(.25, .46, .45, .94);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal-left.active,
+    .reveal-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .sec {
+      padding: 80px 0;
+    }
+
+    .sec-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: .4rem;
+    }
+
+    .sec-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .btn-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 30px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: .95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+      font-family: 'Nunito', sans-serif;
+      text-decoration: none;
+    }
+
+    .btn-brand:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .btn-solid {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(155, 93, 229, .35);
+    }
+
+    .btn-solid:hover {
+      box-shadow: 0 16px 35px rgba(155, 93, 229, .5);
+      color: #fff;
+    }
+
+    /* ===== GO BACK BUTTON — top right ===== */
+    .go-back-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 2px solid var(--pink);
+      color: var(--purple);
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: .88rem;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(155, 93, 229, .18);
+      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .go-back-btn:hover {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      border-color: transparent;
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 30px rgba(155, 93, 229, .35);
+    }
+
+    .go-back-btn i {
+      font-size: .85rem;
+    }
+
+    /* ----- HERO ----- */
+    .hero {
+      min-height: 90vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #fef9ff;
+      padding: 80px 0 60px;
+    }
+
+    .hero-blobs {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: .85rem;
+      letter-spacing: .5px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 20px rgba(255, 107, 157, .35);
+      animation: badgeFloat 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes badgeFloat {
+      0% {
+        transform: translateY(0);
+      }
+
+      100% {
+        transform: translateY(-6px);
+      }
+    }
+
+    .school-name-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid var(--pink);
+      border-radius: 16px;
+      padding: 8px 18px;
+      font-family: 'Baloo 2', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      color: var(--purple);
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      line-height: 1.1;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-lottie-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hstat-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .hstat {
+      background: #fff;
+      border-radius: 18px;
+      padding: 12px 18px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .07);
+      min-width: 90px;
+      border: 2px solid transparent;
+      transition: transform .3s, border-color .3s;
+    }
+
+    .hstat:hover {
+      transform: translateY(-5px);
+    }
+
+    .hstat:nth-child(1) {
+      border-color: var(--pink);
+    }
+
+    .hstat:nth-child(2) {
+      border-color: var(--orange);
+    }
+
+    .hstat:nth-child(3) {
+      border-color: var(--green);
+    }
+
+    .hstat:nth-child(4) {
+      border-color: var(--blue);
+    }
+
+    .hstat-num {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      display: block;
+      line-height: 1;
+    }
+
+    .hstat-lbl {
+      font-size: .65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--muted);
+    }
+
+    /* why parents */
+    .wpl-section {
+      background: #fff5fa;
+    }
+
+    .wpl-card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 28px 22px;
+      text-align: center;
+      height: 100%;
+      border: 2px solid transparent;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), border-color .3s, box-shadow .3s;
+    }
+
+    .wpl-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 24px 50px rgba(0, 0, 0, .12);
+    }
+
+    .wpl-card:nth-child(1) {
+      border-color: var(--pink);
+    }
+
+    .wpl-card:nth-child(2) {
+      border-color: var(--orange);
+    }
+
+    .wpl-card:nth-child(3) {
+      border-color: var(--green);
+    }
+
+    .wpl-card:nth-child(4) {
+      border-color: var(--blue);
+    }
+
+    .wpl-icon-wrap {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin: 0 auto 16px;
+      transition: transform .3s;
+    }
+
+    .wpl-card:hover .wpl-icon-wrap {
+      transform: rotate(-8deg) scale(1.12);
+    }
+
+    /* zigzag */
+    .zig-section {
+      background: var(--soft-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .zig-bg-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .zig-shape {
+      position: absolute;
+      border: 2.5px solid;
+      opacity: 0.15;
+    }
+
+    .shape-square {
+      width: 60px;
+      height: 60px;
+      border-color: var(--pink);
+      top: 8%;
+      left: 5%;
+      transform: rotate(15deg);
+    }
+
+    .shape-rect {
+      width: 80px;
+      height: 40px;
+      border-color: var(--blue);
+      bottom: 15%;
+      right: 8%;
+      transform: rotate(-10deg);
+    }
+
+    .shape-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border-color: var(--purple);
+      top: 60%;
+      left: 3%;
+    }
+
+    .shape-diamond {
+      width: 40px;
+      height: 40px;
+      border-color: var(--green);
+      bottom: 8%;
+      left: 12%;
+      transform: rotate(45deg);
+    }
+
+    .zig-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+
+    .zig-wrap.reverse {
+      direction: rtl;
+    }
+
+    .zig-wrap.reverse>* {
+      direction: ltr;
+    }
+
+    .zig-img-box {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .1);
+    }
+
+    .zig-img-box lottie-player {
+      width: 100%;
+      background: transparent;
+      display: block;
+    }
+
+    .zig-text-wrap {
+      padding: 16px 0;
+    }
+
+    .zig-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+    }
+
+    .zig-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .zig-desc {
+      color: var(--muted);
+      font-size: .97rem;
+      line-height: 1.8;
+    }
+
+    /* facilities roadmap */
+    .road-section {
+      background: linear-gradient(160deg, #f0f8ff 0%, #fef9ff 40%, #fff5fa 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0;
+    }
+
+    .road-bg-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .road-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.06;
+    }
+
+    .shape-1 {
+      width: 300px;
+      height: 300px;
+      background: var(--pink);
+      top: -80px;
+      right: -80px;
+    }
+
+    .shape-2 {
+      width: 200px;
+      height: 200px;
+      background: var(--blue);
+      bottom: -60px;
+      left: -60px;
+    }
+
+    .shape-3 {
+      width: 150px;
+      height: 150px;
+      background: var(--yellow);
+      top: 40%;
+      left: 10%;
+    }
+
+    .shape-4 {
+      width: 180px;
+      height: 180px;
+      background: var(--purple);
+      bottom: 20%;
+      right: 5%;
+    }
+
+    .shape-5 {
+      width: 120px;
+      height: 120px;
+      background: var(--orange);
+      top: 15%;
+      right: 20%;
+    }
+
+    .roadmap-outer {
+      position: relative;
+      padding: 40px 0 20px;
+      overflow-x: auto;
+      z-index: 1;
+    }
+
+    .roadmap-svg-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: visible;
+    }
+
+    .roadmap-svg-wrap svg {
+      max-width: 950px;
+      width: 100%;
+      overflow: visible;
+    }
+
+    .rm-node {
+      cursor: pointer;
+      transition: filter .3s;
+    }
+
+    .rm-node:hover {
+      filter: brightness(1.2) drop-shadow(0 0 12px rgba(255, 255, 255, .7));
+    }
+
+    .rm-labels {
+      display: flex;
+      justify-content: space-between;
+      max-width: 950px;
+      width: 100%;
+      padding: 0 8px;
+      margin-top: 6px;
+    }
+
+    .rm-lbl {
+      font-size: .78rem;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 50px;
+      color: #fff;
+      text-align: center;
+      min-width: 80px;
+      transition: transform .3s;
+      white-space: nowrap;
+    }
+
+    .rm-lbl:hover {
+      transform: translateY(-3px);
+    }
+
+    .rm-popup {
+      position: absolute;
+      background: #fff;
+      border-radius: 20px;
+      padding: 16px 18px;
+      width: 220px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .13);
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.85) translateY(10px);
+      transition: opacity .3s, transform .3s;
+      z-index: 40;
+      border-top: 4px solid var(--pink);
+    }
+
+    .rm-popup.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+
+    .rm-popup h6 {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: .9rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .rm-popup p {
+      font-size: .8rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* gallery */
+    .gallery-section {
+      background: #f3f8ff;
+    }
+
+    .pol {
+      background: #fff;
+      padding: 10px 10px 28px;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .07);
+      border: 1px solid #f0eef8;
+      transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .pol:hover {
+      transform: rotate(3deg) scale(1.04);
+      box-shadow: 0 28px 55px rgba(0, 0, 0, .12);
+    }
+
+    .pol-img {
+      border-radius: 12px;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pol-caption {
+      text-align: center;
+      font-weight: 800;
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #FF6B9D 0%, #9B5DE5 40%, #4361EE 80%, #4ECDC4 100%);
+      background-size: 300% 300%;
+      animation: ctaShift 8s ease infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes ctaShift {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      animation: patternScroll 20s linear infinite;
+    }
+
+    @keyframes patternScroll {
+      from {
+        background-position: 0 0;
+      }
+
+      to {
+        background-position: 60px 60px;
+      }
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .cta-inner p {
+      color: rgba(255, 255, 255, .82);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin: 0 auto 28px;
+    }
+
+    .cta-btn-wrap {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: .95rem;
+      border: none;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+      font-family: 'Nunito', sans-serif;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, .25);
+    }
+
+    .cta-btn-white {
+      background: #fff;
+      color: var(--purple);
+    }
+
+    .cta-btn-outline {
+      background: rgba(255, 255, 255, .15);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, .5);
+      backdrop-filter: blur(8px);
+    }
+
+    /* ===== APPLY NOW BUTTON — special glowing style ===== */
+    .cta-btn-apply {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(255, 127, 80, .45);
+      font-weight: 900;
+      animation: applyPulse 2.5s ease-in-out infinite;
+    }
+
+    .cta-btn-apply:hover {
+      box-shadow: 0 14px 40px rgba(255, 127, 80, .65);
+      color: #fff;
+    }
+
+    @keyframes applyPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 28px rgba(255, 127, 80, .45);
+      }
+
+      50% {
+        box-shadow: 0 12px 40px rgba(255, 127, 80, .7), 0 0 0 6px rgba(255, 127, 80, .15);
+      }
+    }
+
+    /* admissions */
+    .admit-section {
+      background: linear-gradient(160deg, #fff9ee 0%, #fff0f9 50%, #f0f8ff 100%);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admit-bg-shape {
+      position: absolute;
+      pointer-events: none;
+      opacity: .07;
+      z-index: 0;
+    }
+
+    .admit-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .admit-pill {
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    .admit-line {
+      flex: 1;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .admit-shape-card {
+      background: #fff;
+      border-radius: 40px 12px 40px 12px;
+      padding: 38px 32px;
+      height: 100%;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, .08);
+      border: 2px solid transparent;
+      transition: transform .4s, box-shadow .4s;
+    }
+
+    .admit-shape-card:hover {
+      transform: translateY(-10px) rotate(-1deg);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, .13);
+    }
+
+    .admit-card-docs {
+      border-color: var(--pink);
+      border-radius: 40px 12px 40px 12px;
+    }
+
+    .admit-card-process {
+      border-color: var(--blue);
+      border-radius: 12px 40px 12px 40px;
+    }
+
+    .admit-card-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+      padding-bottom: 14px;
+      border-bottom: 2px dashed #f0eef8;
+    }
+
+    .title-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .admit-card-docs .title-icon {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+    }
+
+    .admit-card-process .title-icon {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+    }
+
+    .admit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .admit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .97rem;
+      color: #444;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .admit-bullet {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .72rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .admit-card-docs .admit-bullet {
+      background: linear-gradient(135deg, var(--pink), var(--orange));
+    }
+
+    .admit-card-process .admit-bullet {
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+    }
+
+    .admit-lottie-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .admit-lottie-badge {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      color: #fff;
+      font-weight: 900;
+      font-size: .85rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+    }
+
+    /* map */
+    .map-section {
+      background: #fff;
+      padding: 80px 0;
+    }
+
+    .contact-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, #f9f5ff, #fff0f9);
+      border-radius: 18px;
+      padding: 14px 18px;
+      border: 2px solid transparent;
+      transition: all .3s;
+    }
+
+    .cc-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .cc-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cc-label {
+      font-size: .7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cc-value {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .map-embed {
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, .09);
+    }
+
+    /* bottom nav */
+    .bottom-nav-section {
+      background: var(--soft-bg);
+      padding: 50px 0 60px;
+      border-top: 2px dashed #f0eef8;
+    }
+
+    .bottom-nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .btn-nav-explore {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: #fff;
+    }
+
+    .btn-nav-next {
+      background: linear-gradient(135deg, var(--green), var(--teal));
+      color: #fff;
+    }
+
+    /* responsive */
+    @media (max-width: 991px) {
+      .hero-lottie-wrapper {
+        margin-top: 30px;
+      }
+
+      .sec {
+        padding: 60px 0;
+      }
+
+      .admit-shape-card {
+        padding: 28px 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding-top: 90px;
+      }
+
+      .map-info-wrap {
+        padding-right: 0;
+        margin-bottom: 30px;
+      }
+
+      .bottom-nav-wrap {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .zig-wrap,
+      .zig-wrap.reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+
+      .zig-img-box lottie-player {
+        height: auto !important;
+        max-height: 260px;
+      }
+
+      .zig-title {
+        font-size: 1.3rem;
+      }
+
+      .rm-popup {
+        display: none;
+      }
+
+      .rm-labels {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .rm-lbl {
+        white-space: nowrap;
+        min-width: auto;
+        font-size: 0.7rem;
+        padding: 4px 12px;
+      }
+
+      .roadmap-svg-wrap svg {
+        min-width: 600px;
+      }
+
+      .roadmap-outer {
+        overflow-x: auto;
+      }
+
+      .hstat-row {
+        justify-content: center;
+      }
+
+      .hstat {
+        min-width: 75px;
+        padding: 8px 12px;
+      }
+
+      .hstat-num {
+        font-size: 1.3rem;
+      }
+
+      .cta-btn-wrap {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cta-btn {
+        width: 100%;
+        justify-content: center;
+        max-width: 300px;
+      }
+
+      .admit-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .admit-line {
+        width: 100%;
+        flex: none;
+      }
+
+      .go-back-btn {
+        top: 12px;
+        right: 12px;
+        padding: 8px 16px;
+        font-size: .78rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .sec-title {
+        font-size: 1.8rem;
+      }
+
+      .hero-title {
+        font-size: 1.9rem;
+      }
+
+      .school-name-tag {
+        font-size: 0.85rem;
+        padding: 5px 12px;
+      }
+
+      .hero-badge {
+        font-size: 0.7rem;
+        padding: 5px 16px;
+      }
+
+      .wpl-card {
+        padding: 22px 16px;
+      }
+
+      .admit-shape-card {
+        padding: 22px 18px;
+      }
+
+      .map-embed iframe {
+        height: 260px;
+      }
+
+      .btn-brand {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+      }
+
+      .go-back-btn span {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== GO BACK BUTTON — fixed top right ===== -->
+  <a href="explore school.html" class="go-back-btn">
+    <i class="fas fa-arrow-left"></i>
+    <span>Go Back</span>
+  </a>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <div class="hero-blobs">
+      <svg style="position:absolute;width:100%;height:100%;top:0;left:0" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="none">
+        <ellipse cx="8%" cy="15%" rx="14%" ry="14%" fill="var(--pink)" opacity=".31">
+          <animate attributeName="cx" values="8%;12%;8%" dur="14s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="15%;22%;15%" dur="14s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse cx="90%" cy="10%" rx="11%" ry="11%" fill="var(--orange)" opacity=".23">
+          <animate attributeName="cx" values="90%;85%;90%" dur="12s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="10%;18%;10%" dur="12s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse cx="80%" cy="55%" rx="13%" ry="13%" fill="var(--yellow)" opacity=".35">
+          <animate attributeName="cx" values="80%;74%;80%" dur="16s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse cx="15%" cy="80%" rx="10%" ry="10%" fill="var(--green)" opacity=".23">
+          <animate attributeName="cy" values="80%;73%;80%" dur="10s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse cx="50%" cy="50%" rx="9%" ry="9%" fill="var(--blue)" opacity=".18">
+          <animate attributeName="cx" values="50%;55%;50%" dur="18s" repeatCount="indefinite" />
+        </ellipse>
+        <ellipse cx="88%" cy="85%" rx="12%" ry="12%" fill="var(--purple)" opacity=".21">
+          <animate attributeName="cx" values="88%;82%;88%" dur="13s" repeatCount="indefinite" />
+        </ellipse>
+      </svg>
+    </div>
+    <div class="container hero-content">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 reveal active">
+          <div class="school-name-tag"><i class="fas fa-school"></i> Schools Info — Early Childhood Centre</div>
+          <div class="hero-badge"><i class="fas fa-pencil-alt"></i> Preschool – Grade 2</div>
+          <h1 class="hero-title"><span class="grad-pink-purple">A Magical Place</span><br /><span
+              style="color:var(--dark);">Where Little Minds</span><br /><span class="grad-orange-yellow">Begin To
+              Shine</span></h1>
+          <p class="hero-desc">A safe, nurturing & creative environment where we spark curiosity and make learning
+            joyful for every child.</p>
+          <div class="hstat-row">
+            <div class="hstat"><span class="hstat-num grad-pink-purple" id="cnt1">0</span><span
+                class="hstat-lbl">Students</span></div>
+            <div class="hstat"><span class="hstat-num grad-orange-yellow" id="cnt2">0</span><span
+                class="hstat-lbl">Teachers</span></div>
+            <div class="hstat"><span class="hstat-num grad-green-teal" id="cnt3">0</span><span
+                class="hstat-lbl">Facilities</span></div>
+            <div class="hstat"><span class="hstat-num grad-blue-purple" id="cnt4">0</span><span
+                class="hstat-lbl">Activities</span></div>
+          </div>
+        </div>
+        <div class="col-lg-6 reveal active" style="animation-delay:.15s">
+          <div class="hero-lottie-wrapper"><lottie-player src="images/5d484778-116c-11ee-b298-935e65025ef2.json"
+              background="transparent" speed="1" style="width: 100%; max-width: 500px; height: auto;" loop
+              autoplay></lottie-player></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY PARENTS LOVE US ========== -->
+  <section class="sec wpl-section" id="whyus">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="pill-label" style="background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;"><i
+            class="fas fa-heart"></i> Trusted by Families</div>
+        <h2 class="sec-title grad-pink-purple">Why Parents Love Us</h2>
+        <p class="sec-sub">Everything your child needs to flourish — all under one roof.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3 reveal">
+          <div class="wpl-card">
+            <div class="wpl-icon-wrap" style="background:linear-gradient(135deg,#fff0f5,#fce7f3)"><i
+                class="fas fa-shield-alt" style="color:var(--pink)"></i></div>
+            <h5>Safe Environment</h5>
+            <p class="small">Secure campus, caring staff, and 24/7 safety protocols.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal" style="transition-delay:.1s">
+          <div class="wpl-card">
+            <div class="wpl-icon-wrap" style="background:linear-gradient(135deg,#fff5f0,#ffedd5)"><i
+                class="fas fa-puzzle-piece" style="color:var(--orange)"></i></div>
+            <h5>Play-Based Learning</h5>
+            <p class="small">Hands-on activities that build foundational skills through play.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal" style="transition-delay:.2s">
+          <div class="wpl-card">
+            <div class="wpl-icon-wrap" style="background:linear-gradient(135deg,#f0fff8,#dcfce7)"><i
+                class="fas fa-user-graduate" style="color:var(--green)"></i></div>
+            <h5>Qualified Teachers</h5>
+            <p class="small">Passionate educators trained in early childhood development.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 reveal" style="transition-delay:.3s">
+          <div class="wpl-card">
+            <div class="wpl-icon-wrap" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)"><i
+                class="fas fa-palette" style="color:var(--blue)"></i></div>
+            <h5>Creative Activities</h5>
+            <p class="small">Art, music, drama & storytelling to nurture imagination.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ZIGZAG STORY ========== -->
+  <section class="sec zig-section" id="story">
+    <div class="zig-bg-shapes">
+      <div class="zig-shape shape-square"></div>
+      <div class="zig-shape shape-rect"></div>
+      <div class="zig-shape shape-circle"></div>
+      <div class="zig-shape shape-diamond"></div>
+    </div>
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="pill-label" style="background:linear-gradient(135deg,var(--orange),var(--yellow));color:#fff;"><i
+            class="fas fa-book-open"></i> Our Story</div>
+        <h2 class="sec-title grad-orange-yellow">How We Shape Little Lives</h2>
+        <p class="sec-sub">Each step is a magical journey of growth</p>
+      </div>
+      <div class="zig-wrap reveal">
+        <div class="zig-img-box"><lottie-player src="images/7b60edc2-1168-11ee-8c92-2fe11f3aeeba.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:auto;max-height:320px"></lottie-player></div>
+        <div class="zig-text-wrap">
+          <div class="zig-icon" style="background:linear-gradient(135deg,var(--pink),var(--purple))"><i
+              class="fas fa-gamepad" style="color:#fff"></i></div>
+          <h3 class="zig-title grad-pink-purple">Learning Through Play</h3>
+          <p class="zig-desc">Every activity is designed as a playful experience — from building blocks to sensory
+            exploration.</p>
+        </div>
+      </div>
+      <div class="zig-wrap reverse reveal">
+        <div class="zig-img-box"><lottie-player src="images/4f0f5ae0-117e-11ee-9106-a30715eabb43.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:auto;max-height:300px"></lottie-player></div>
+        <div class="zig-text-wrap">
+          <div class="zig-icon" style="background:linear-gradient(135deg,var(--purple),var(--blue))"><i
+              class="fas fa-paint-brush" style="color:#fff"></i></div>
+          <h3 class="zig-title grad-blue-purple">Creative Development</h3>
+          <p class="zig-desc">Art corners, music sessions, and imaginative storytelling fuel creative thinking.</p>
+        </div>
+      </div>
+      <div class="zig-wrap reveal">
+        <div class="zig-img-box"><lottie-player src="images/fc4eb55e-1168-11ee-9e91-0f7a9727e7bf.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:auto;max-height:320px"></lottie-player></div>
+        <div class="zig-text-wrap">
+          <div class="zig-icon" style="background:linear-gradient(135deg,var(--green),var(--teal))"><i
+              class="fas fa-users" style="color:#fff"></i></div>
+          <h3 class="zig-title grad-green-teal">Social Growth</h3>
+          <p class="zig-desc">Group activities and collaborative play teach empathy, sharing, and friendship.</p>
+        </div>
+      </div>
+      <div class="zig-wrap reverse reveal">
+        <div class="zig-img-box"><lottie-player src="images/46a5ef86-1179-11ee-bca2-1b7009972d3f.json"
+            background="transparent" speed="1" loop autoplay
+            style="width:100%;height:auto;max-height:280px"></lottie-player></div>
+        <div class="zig-text-wrap">
+          <div class="zig-icon" style="background:linear-gradient(135deg,var(--orange),var(--yellow))"><i
+              class="fas fa-star" style="color:#fff"></i></div>
+          <h3 class="zig-title grad-orange-yellow">Confidence Building</h3>
+          <p class="zig-desc">Every child is encouraged to express ideas, take small risks, and celebrate effort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FACILITIES ROADMAP ========== -->
+  <section class="sec road-section" id="facilities">
+    <div class="road-bg-shapes">
+      <div class="road-shape shape-1"></div>
+      <div class="road-shape shape-2"></div>
+      <div class="road-shape shape-3"></div>
+      <div class="road-shape shape-4"></div>
+      <div class="road-shape shape-5"></div>
+    </div>
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="pill-label" style="background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;"><i
+            class="fas fa-map-marked-alt"></i> Facilities</div>
+        <h2 class="sec-title grad-blue-purple">Facilities Roadmap</h2>
+        <p class="sec-sub">Hover over each node to explore</p>
+      </div>
+      <div class="roadmap-outer reveal">
+        <div id="rm-pop1" class="rm-popup" style="top:10px;left:3%;width:220px;border-top-color:var(--pink);">
+          <h6><i class="fas fa-book me-2"></i> Library</h6>
+          <p>Reading corner, story books & interactive resources.</p>
+        </div>
+        <div id="rm-pop2" class="rm-popup" style="top:10px;left:22%;width:220px;border-top-color:var(--orange);">
+          <h6><i class="fas fa-utensils me-2"></i> Canteen</h6>
+          <p>Healthy meals, child-friendly menu, hygienic kitchen.</p>
+        </div>
+        <div id="rm-pop3" class="rm-popup" style="top:10px;left:41%;width:220px;border-top-color:#d97706;">
+          <h6><i class="fas fa-home me-2"></i> Boarding</h6>
+          <p>Safe accommodation, supervised care & comfortable stay.</p>
+        </div>
+        <div id="rm-pop4" class="rm-popup" style="top:10px;left:60%;width:220px;border-top-color:var(--green);">
+          <h6><i class="fas fa-futbol me-2"></i> Sports</h6>
+          <p>Indoor & outdoor activities for physical development.</p>
+        </div>
+        <div id="rm-pop5" class="rm-popup" style="top:10px;left:78%;width:220px;border-top-color:var(--blue);">
+          <h6><i class="fas fa-users me-2"></i> Capacity</h6>
+          <p>Max intake 200 students. Student-teacher ratio 12:1.</p>
+        </div>
+        <div class="roadmap-svg-wrap"><svg viewBox="0 0 900 200" class="w-100" style="max-width:950px;overflow:visible">
+            <defs>
+              <linearGradient id="roadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#FF6B9D" />
+                <stop offset="25%" stop-color="#FF7F50" />
+                <stop offset="50%" stop-color="#FFD93D" />
+                <stop offset="75%" stop-color="#4ECDC4" />
+                <stop offset="100%" stop-color="#4361EE" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <path d="M60,120 Q180,30 360,120 T660,120 T860,120" fill="none" stroke="url(#roadGrad)" stroke-width="5"
+              stroke-dasharray="14 8" opacity=".55" stroke-linecap="round" />
+            <circle r="8" fill="#FFD93D" filter="url(#glow)" opacity=".9">
+              <animateMotion dur="7s" repeatCount="indefinite" path="M60,120 Q180,30 360,120 T660,120 T860,120" />
+            </circle>
+            <g class="rm-node" data-popup="rm-pop1">
+              <circle cx="60" cy="120" r="24" fill="#FF6B9D" filter="url(#glow)" opacity=".9" />
+              <circle cx="60" cy="120" r="24" fill="none" stroke="#fff" stroke-width="4" opacity=".7" /><text x="60"
+                y="126" text-anchor="middle" font-size="14" fill="#fff" font-family="Font Awesome 6 Free"
+                font-weight="900">&#xf02d;</text>
+            </g>
+            <g class="rm-node" data-popup="rm-pop2">
+              <circle cx="240" cy="120" r="24" fill="#FF7F50" filter="url(#glow)" opacity=".9" />
+              <circle cx="240" cy="120" r="24" fill="none" stroke="#fff" stroke-width="4" opacity=".7" /><text x="240"
+                y="126" text-anchor="middle" font-size="14" fill="#fff" font-family="Font Awesome 6 Free"
+                font-weight="900">&#xf2e7;</text>
+            </g>
+            <g class="rm-node" data-popup="rm-pop3">
+              <circle cx="440" cy="120" r="24" fill="#FFD93D" filter="url(#glow)" opacity=".9" />
+              <circle cx="440" cy="120" r="24" fill="none" stroke="#fff" stroke-width="4" opacity=".7" /><text x="440"
+                y="126" text-anchor="middle" font-size="14" fill="#fff" font-family="Font Awesome 6 Free"
+                font-weight="900">&#xf015;</text>
+            </g>
+            <g class="rm-node" data-popup="rm-pop4">
+              <circle cx="640" cy="120" r="24" fill="#4ECDC4" filter="url(#glow)" opacity=".9" />
+              <circle cx="640" cy="120" r="24" fill="none" stroke="#fff" stroke-width="4" opacity=".7" /><text x="640"
+                y="126" text-anchor="middle" font-size="14" fill="#fff" font-family="Font Awesome 6 Free"
+                font-weight="900">&#xf1e3;</text>
+            </g>
+            <g class="rm-node" data-popup="rm-pop5">
+              <circle cx="840" cy="120" r="24" fill="#4361EE" filter="url(#glow)" opacity=".9" />
+              <circle cx="840" cy="120" r="24" fill="none" stroke="#fff" stroke-width="4" opacity=".7" /><text x="840"
+                y="126" text-anchor="middle" font-size="14" fill="#fff" font-family="Font Awesome 6 Free"
+                font-weight="900">&#xf0c0;</text>
+            </g>
+          </svg>
+          <div class="rm-labels"><span class="rm-lbl" style="background:var(--pink);"><i class="fas fa-book me-1"></i>
+              Library</span><span class="rm-lbl" style="background:var(--orange);"><i class="fas fa-utensils me-1"></i>
+              Canteen</span><span class="rm-lbl" style="background:#d97706;"><i class="fas fa-home me-1"></i>
+              Boarding</span><span class="rm-lbl" style="background:#4ECDC4;"><i class="fas fa-futbol me-1"></i>
+              Sports</span><span class="rm-lbl" style="background:var(--blue);"><i class="fas fa-users me-1"></i>
+              Capacity</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="sec gallery-section" id="gallery">
+    <div class="container">
+      <div class="text-center mb-5 reveal">
+        <div class="pill-label" style="background:linear-gradient(135deg,var(--teal),var(--blue));color:#fff;"><i
+            class="fas fa-images"></i> Gallery</div>
+        <h2 class="sec-title grad-blue-purple">Moments of Joy</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 1.jpg" class="pol-img" alt="classroom" />
+            <p class="pol-caption">Bright Classrooms</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 2.jpg" class="pol-img" alt="reading" />
+            <p class="pol-caption">Reading Corner</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 3.jpg" class="pol-img" alt="play" />
+            <p class="pol-caption">Outdoor Play Area</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 4.jpg" class="pol-img" alt="art" />
+            <p class="pol-caption">Art Studio</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 5.jpg" class="pol-img" alt="music" />
+            <p class="pol-caption">Music Room</p>
+          </div>
+        </div>
+        <div class="col-md-4 reveal">
+          <div class="pol"><img src="images/early 6.jpg" class="pol-img" alt="group" />
+            <p class="pol-caption">Group Activities</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA — Download + Apply Now ========== -->
+  <section class="cta-section" id="download">
+    <div class="cta-inner">
+      <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json" background="transparent"
+        speed="1" style="width:100px;height:100px;margin:0 auto 14px" loop autoplay></lottie-player>
+      <h2>Ready to Join Our Family?</h2>
+      <p>Download our complete school guide or apply for admission directly online.</p>
+      <div class="cta-btn-wrap">
+        <a href="images/Early_Childhood_School_Facilities.docx" class="cta-btn cta-btn-outline">
+          <i class="fas fa-download"></i> Download Brochure
+        </a>
+        <!-- ===== APPLY NOW — links to admission form ===== -->
+        <a href="adm 1.html" class="cta-btn cta-btn-apply">
+          <i class="fas fa-paper-plane"></i> Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ADMISSIONS INFO ========== -->
+  <section class="admit-section" id="admissions"><svg class="admit-bg-shape" style="top:-60px;left:-60px;width:300px"
+      viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="90" fill="var(--pink)" />
+    </svg><svg class="admit-bg-shape" style="bottom:-80px;right:-80px;width:350px" viewBox="0 0 200 200">
+      <polygon points="100,10 190,190 10,190" fill="var(--blue)" />
+    </svg>
+    <div class="container">
+      <div class="admit-header reveal">
+        <div class="admit-pill"><i class="fas fa-file-alt"></i> Admissions</div>
+        <div class="admit-line"></div>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-md-5 reveal-left">
+          <div class="admit-shape-card admit-card-docs">
+            <div class="admit-card-title">
+              <div class="title-icon"><i class="fas fa-file-invoice"></i></div>Required Documents
+            </div>
+            <ul class="admit-list">
+              <li><span class="admit-bullet"><i class="fas fa-check"></i></span>Completed application form</li>
+              <li><span class="admit-bullet"><i class="fas fa-check"></i></span>Child's birth certificate (copy)</li>
+              <li><span class="admit-bullet"><i class="fas fa-check"></i></span>Previous academic records</li>
+              <li><span class="admit-bullet"><i class="fas fa-check"></i></span>4 recent passport-size photographs</li>
+              <li><span class="admit-bullet"><i class="fas fa-check"></i></span>Parent / Guardian CNIC copy</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-2 d-none d-md-flex admit-lottie-col reveal"><lottie-player
+            src="https://assets9.lottiefiles.com/packages/lf20_qp1q7mct.json" background="transparent" speed="1"
+            style="width:130px;height:190px" loop autoplay></lottie-player>
+
+        </div>
+        <div class="col-md-5 reveal-right">
+          <div class="admit-shape-card admit-card-process">
+            <div class="admit-card-title">
+              <div class="title-icon"><i class="fas fa-clipboard-list"></i></div>Process & Contact
+            </div>
+            <ul class="admit-list">
+              <li><span class="admit-bullet" style="background:linear-gradient(135deg,var(--blue),var(--teal))"><i
+                    class="fas fa-check"></i></span>Apply online or visit us</li>
+              <li><span class="admit-bullet" style="background:linear-gradient(135deg,var(--blue),var(--teal))"><i
+                    class="fas fa-check"></i></span>Written admission test required</li>
+              <li><span class="admit-bullet" style="background:linear-gradient(135deg,var(--blue),var(--teal))"><i
+                    class="fas fa-check"></i></span>Interview for shortlisted candidates</li>
+              <li><span class="admit-bullet" style="background:linear-gradient(135deg,var(--blue),var(--teal))"><i
+                    class="fas fa-check"></i></span>Email: admissions@schools.info.edu.pk</li>
+              <li><span class="admit-bullet" style="background:linear-gradient(135deg,var(--blue),var(--teal))"><i
+                    class="fas fa-check"></i></span>Phone: +92-21-XXXXXXX</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAP ========== -->
+  <section class="map-section" id="location">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-md-5 reveal-left">
+          <div class="map-info-wrap">
+            <div class="pill-label" style="background:linear-gradient(135deg,var(--blue),var(--teal));color:#fff"><i
+                class="fas fa-map-pin"></i> Find Us</div>
+            <h2 class="grad-blue-purple">We're Right Here</h2>
+            <p style="color:var(--muted);margin-bottom:22px;">Our campus is located in the heart of the city, easily
+              accessible and surrounded by green open spaces.</p>
+            <div class="contact-cards-grid">
+              <div class="contact-card">
+                <div class="cc-icon" style="background:linear-gradient(135deg,var(--pink),var(--orange))"><i
+                    class="fas fa-map-pin"></i></div>
+                <div class="cc-text"><span class="cc-label">Address</span><span class="cc-value">123 Learning Lane,
+                    Knowledge City, PK</span></div>
+              </div>
+              <div class="contact-card">
+                <div class="cc-icon" style="background:linear-gradient(135deg,var(--blue),var(--purple))"><i
+                    class="fas fa-phone"></i></div>
+                <div class="cc-text"><span class="cc-label">Phone</span><span class="cc-value">+92-21-XXXXXXX</span>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="cc-icon" style="background:linear-gradient(135deg,var(--green),var(--teal))"><i
+                    class="fas fa-envelope"></i></div>
+                <div class="cc-text"><span class="cc-label">Email</span><span
+                    class="cc-value">info@schools.info.edu.pk</span></div>
+              </div>
+            </div><button class="btn-brand btn-solid mt-2"><i class="fas fa-directions"></i> Get Directions</button>
+          </div>
+        </div>
+        <div class="col-md-7 reveal-right">
+          <div class="map-embed"><iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835!2d144.953!3d-37.816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b65f5a1b2b3b4b5%3A0x2b3b4b5a6b7c8d9e!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sus!4v1699999999999!5m2!1sen!2sus"
+              width="100%" height="380" style="border:0;display:block" allowfullscreen="" loading="lazy"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOTTOM NAV ========== -->
+  <section class="bottom-nav-section">
+    <div class="container">
+      <div class="bottom-nav-wrap"><span class="bottom-nav-label"><i class="fas fa-school me-2"
+            style="color:var(--pink)"></i>Early Childhood Centre</span>
+        <div class="d-flex gap-3 flex-wrap justify-content-center"><a href="explore school.html"
+            class="btn-brand btn-nav-explore"><i class="fas fa-th-large"></i> Explore Schools</a><a
+            href="elementry school.html" class="btn-brand btn-nav-next">Next School <i
+              class="fas fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const allReveal = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revObs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); revObs.unobserve(e.target); } }); }, { threshold: 0.12 });
+    allReveal.forEach(el => revObs.observe(el));
+    document.querySelectorAll('.rm-node').forEach(node => { const popId = node.getAttribute('data-popup'); const pop = document.getElementById(popId); if (pop) { node.addEventListener('mouseenter', () => pop.classList.add('show')); node.addEventListener('mouseleave', () => pop.classList.remove('show')); } });
+    function countUp(id, target, duration) { const el = document.getElementById(id); if (!el) return; let start = 0; const step = Math.ceil(target / (duration / 30)); const t = setInterval(() => { start = Math.min(start + step, target); el.textContent = start + (target > 20 ? '+' : ''); if (start >= target) clearInterval(t); }, 30); }
+    window.addEventListener('load', () => { countUp('cnt1', 200, 1400); countUp('cnt2', 25, 1000); countUp('cnt3', 8, 800); countUp('cnt4', 15, 900); });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

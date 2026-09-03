@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admission Form · Art & Science Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <style>
+        /* ================================================================
+           ROOT (matching Art & Science theme)
+        ================================================================ */
+        :root {
+            --offwhite: #F5F0E8;
+            --offwhite2: #EDE8DC;
+            --red: #E63946;
+            --red-d: #C1121F;
+            --navy: #023E8A;
+            --navy-l: #0353A4;
+            --cyan: #4CC9F0;
+            --white: #FFFFFF;
+            --dark: #1A1A2E;
+            --text: #1A1A2E;
+            --muted: #6B6560;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Karla', sans-serif;
+            background: var(--offwhite);
+            color: var(--text);
+            overflow-x: hidden;
+            cursor: none;
+            padding-top: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: .5px;
+        }
+        em {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ================================================================
+           BACKGROUND SHAPES
+        ================================================================ */
+        .bg-shapes {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+        }
+        .bs-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--red);
+            top: -100px;
+            right: -100px;
+            animation: floatShape 12s ease-in-out infinite alternate;
+        }
+        .bs-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--navy);
+            bottom: -80px;
+            left: -80px;
+            animation: floatShape 15s ease-in-out infinite alternate-reverse;
+        }
+        .bs-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--cyan);
+            top: 40%;
+            left: -60px;
+            animation: floatShape 10s ease-in-out infinite alternate;
+        }
+        .bs-4 {
+            width: 150px;
+            height: 150px;
+            background: var(--red);
+            bottom: 30%;
+            right: -50px;
+            animation: floatShape 8s ease-in-out infinite alternate-reverse;
+        }
+        .bs-5 {
+            width: 100px;
+            height: 100px;
+            background: var(--navy);
+            top: 20%;
+            right: 15%;
+            animation: floatShape 9s ease-in-out infinite alternate;
+        }
+        .bs-6 {
+            width: 80px;
+            height: 80px;
+            background: var(--cyan);
+            bottom: 15%;
+            left: 20%;
+            animation: floatShape 11s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatShape {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            100% {
+                transform: translate(30px, -30px) scale(1.1) rotate(10deg);
+            }
+        }
+
+        /* Decorative floating icons */
+        .bg-icons {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.06;
+            animation: iconFloat 6s ease-in-out infinite alternate;
+        }
+        .bg-icon:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            color: var(--red);
+            animation-delay: 0s;
+        }
+        .bg-icon:nth-child(2) {
+            top: 25%;
+            right: 8%;
+            color: var(--navy);
+            animation-delay: 1s;
+        }
+        .bg-icon:nth-child(3) {
+            bottom: 30%;
+            left: 3%;
+            color: var(--cyan);
+            animation-delay: 2s;
+        }
+        .bg-icon:nth-child(4) {
+            bottom: 15%;
+            right: 10%;
+            color: var(--red);
+            animation-delay: 0.5s;
+        }
+        .bg-icon:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            color: var(--navy);
+            animation-delay: 1.5s;
+        }
+        .bg-icon:nth-child(6) {
+            top: 5%;
+            left: 30%;
+            color: var(--cyan);
+            animation-delay: 2.5s;
+        }
+        .bg-icon:nth-child(7) {
+            bottom: 40%;
+            right: 5%;
+            color: var(--red);
+            animation-delay: 0.8s;
+        }
+        .bg-icon:nth-child(8) {
+            top: 60%;
+            left: 8%;
+            color: var(--navy);
+            animation-delay: 1.8s;
+        }
+
+        @keyframes iconFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-20px) rotate(15deg);
+            }
+        }
+
+        /* ================================================================
+           CUSTOM CURSOR
+        ================================================================ */
+        .cur-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: background .4s, opacity .3s;
+        }
+        .cur-ring {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--red);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9997;
+            transform: translate(-50%, -50%);
+            transition: width .3s, height .3s, border-color .4s, background .3s;
+        }
+        .cur-ring.cr-big {
+            width: 54px;
+            height: 54px;
+            background: rgba(230, 57, 70, .07);
+        }
+
+        /* PILL LABELS */
+        .pill-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 20px;
+            border-radius: 50px;
+            font-family: 'Karla', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .pl-red {
+            background: var(--red);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(230, 57, 70, .3);
+        }
+        .pl-blue {
+            background: var(--navy);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(2, 62, 138, .3);
+        }
+
+        /* BUTTONS */
+        .btn-red-solid {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--red);
+            color: #fff;
+            padding: 14px 30px;
+            border-radius: 6px;
+            border: none;
+            font-family: 'Karla', sans-serif;
+            font-weight: 800;
+            font-size: .95rem;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 6px 6px 0 var(--red-d);
+            transition: transform .2s, box-shadow .2s;
+        }
+        .btn-red-solid:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--red-d);
+            color: #fff;
+        }
+        .btn-outline-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--dark);
+            padding: 13px 28px;
+            border-radius: 6px;
+            border: 2.5px solid var(--dark);
+            font-family: 'Karla', sans-serif;
+            font-weight: 800;
+            font-size: .95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all .2s;
+        }
+        .btn-outline-dark:hover {
+            background: var(--dark);
+            color: #fff;
+        }
+
+        /* ================================================================
+           FORM STYLES - Reduced width
+        ================================================================ */
+        .form-wrapper {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px 36px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .08);
+            border: 2px solid rgba(230, 57, 70, .12);
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        .form-container .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--dark);
+            border-bottom: 2px solid var(--offwhite);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .form-container .section-title i {
+            color: var(--red);
+            margin-right: 10px;
+        }
+        .form-container .section-title .blue-icon {
+            color: var(--navy);
+        }
+        .form-container .form-label {
+            font-weight: 700;
+            font-size: .9rem;
+            color: var(--text);
+        }
+        .form-container .form-label .required-star {
+            color: var(--red);
+            margin-left: 4px;
+        }
+        .form-container .form-control,
+        .form-container .form-select {
+            border-radius: 8px;
+            border: 2px solid #e0ddd8;
+            padding: 12px 16px;
+            font-family: 'Karla', sans-serif;
+            transition: border-color .3s, box-shadow .3s;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .form-container .form-control:focus,
+        .form-container .form-select:focus {
+            border-color: var(--navy);
+            box-shadow: 0 0 0 3px rgba(2, 62, 138, .15);
+        }
+        .form-container .form-control-file {
+            border: 2px dashed #e0ddd8;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color .3s, background .3s;
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .form-container .form-control-file:hover {
+            border-color: var(--navy);
+            background: rgba(2, 62, 138, .05);
+        }
+        .form-container .form-check-input:checked {
+            background-color: var(--navy);
+            border-color: var(--navy);
+        }
+        .form-container .form-check-label {
+            font-weight: 600;
+            font-size: .9rem;
+        }
+
+        /* Submit button - gradient red + navy */
+        .btn-submit {
+            background: linear-gradient(135deg, var(--red), var(--navy));
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 24px rgba(230, 57, 70, .4);
+            transition: transform .3s, box-shadow .3s;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 35px rgba(2, 62, 138, .5);
+            color: #fff;
+        }
+
+        /* ================================================================
+           SUCCESS POPUP - no emoji
+        ================================================================ */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .6);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .popup-overlay.active {
+            display: flex;
+        }
+        .popup-box {
+            background: #fff;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .3);
+            animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .popup-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red), var(--navy));
+        }
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(.8) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .popup-box h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        .popup-box h2 i {
+            color: var(--red);
+            margin-right: 6px;
+        }
+        .popup-box p {
+            color: var(--muted);
+            font-size: .95rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        .popup-box .btn-back {
+            background: var(--navy);
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Karla', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform .3s, box-shadow .3s;
+            box-shadow: 0 6px 20px rgba(2, 62, 138, .3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .popup-box .btn-back:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(2, 62, 138, .4);
+            color: #fff;
+        }
+        .popup-lottie {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 10px;
+        }
+
+        /* ================================================================
+           RESPONSIVE
+        ================================================================ */
+        @media(max-width:991px) {
+            .cur-dot,
+            .cur-ring {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+            button,
+            a {
+                cursor: pointer;
+            }
+            .bs-1,
+            .bs-2,
+            .bs-3,
+            .bs-4 {
+                opacity: 0.05;
+            }
+        }
+        @media(max-width:767px) {
+            .form-container {
+                padding: 24px 18px;
+            }
+            .popup-box {
+                padding: 30px 20px;
+            }
+            .popup-box h2 {
+                font-size: 1.8rem;
+            }
+            .btn-submit {
+                font-size: 1.3rem;
+                padding: 14px 20px;
+            }
+            .form-wrapper {
+                padding: 0 10px;
+            }
+            .bg-shape {
+                opacity: 0.04;
+            }
+            .bg-icon {
+                opacity: 0.04;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    BACKGROUND SHAPES
+    ============================================================ -->
+    <div class="bg-shapes">
+        <div class="bg-shape bs-1"></div>
+        <div class="bg-shape bs-2"></div>
+        <div class="bg-shape bs-3"></div>
+        <div class="bg-shape bs-4"></div>
+        <div class="bg-shape bs-5"></div>
+        <div class="bg-shape bs-6"></div>
+    </div>
+
+    <!-- Decorative Icons -->
+    <div class="bg-icons">
+        <div class="bg-icon"><i class="fas fa-paint-brush"></i></div>
+        <div class="bg-icon"><i class="fas fa-flask"></i></div>
+        <div class="bg-icon"><i class="fas fa-palette"></i></div>
+        <div class="bg-icon"><i class="fas fa-atom"></i></div>
+        <div class="bg-icon"><i class="fas fa-music"></i></div>
+        <div class="bg-icon"><i class="fas fa-dna"></i></div>
+        <div class="bg-icon"><i class="fas fa-theater-masks"></i></div>
+        <div class="bg-icon"><i class="fas fa-robot"></i></div>
+    </div>
+
+    <!-- ============================================================
+    CUSTOM CURSOR
+    ============================================================ -->
+    <div class="cur-dot" id="curDot"></div>
+    <div class="cur-ring" id="curRing"></div>
+
+    <!-- ============================================================
+    GO BACK BUTTON (top right)
+    ============================================================ -->
+    <div style="position: absolute; top: 20px; right: 30px; z-index: 20;">
+        <a href="art and science school.html" style="
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(6px);
+            padding: 10px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a1a2e;
+            text-decoration: none;
+            border: 1.5px solid #e8e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: all 0.2s;
+            font-family: 'Karla', sans-serif;
+        "
+        onmouseover="this.style.background='#f3f0ff'; this.style.borderColor='#E63946';"
+        onmouseout="this.style.background='rgba(255,255,255,0.85)'; this.style.borderColor='#e8e8f0';"
+        >
+            <i class="fas fa-arrow-left" style="color: #E63946;"></i> Go Back
+        </a>
+    </div>
+
+    <!-- ============================================================
+    MAIN CONTAINER - Reduced width
+    ============================================================ -->
+    <div class="form-wrapper" style="padding-top: 80px;">
+
+        <!-- Header -->
+        <div class="text-center">
+            <div class="pill-label pl-red" style="margin:0 auto 12px;">
+                <i class="fas fa-pen-fancy"></i> Apply for Admission
+            </div>
+            <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4rem); color:var(--dark); line-height:1;">
+                Start Your <em style="color:var(--red);">Story</em>
+            </h1>
+            <p style="color:var(--muted); font-size:1rem; max-width:560px; margin:8px auto 0;">
+                Fill in the details below to begin your child's journey with our Art &amp; Science Academy.
+            </p>
+        </div>
+
+        <!-- ============================================================
+        ADMISSION FORM
+        ============================================================ -->
+        <div class="form-container" id="admissionForm">
+            <form id="applyForm" novalidate>
+
+                <!-- ========== STUDENT INFORMATION ========== -->
+                <div class="section-title"><i class="fas fa-user-graduate"></i> Student Information</div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label" for="studentName">Student Full Name <span class="required-star">*</span></label>
+                        <input type="text" class="form-control" id="studentName" placeholder="e.g. Hamza Ali" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="dob">Date of Birth <span class="required-star">*</span></label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="gender">Gender <span class="required-star">*</span></label>
+                        <select class="form-select" id="gender" required>
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="grade">Applying for Grade <span class="required-star">*</span></label>
+                        <select class="form-select" id="grade" required>
+                            <option value="">Select grade</option>
+                            <option value="1">Grade 1</option>
+                            <option value="2">Grade 2</option>
+                            <option value="3">Grade 3</option>
+                            <option value="4">Grade 4</option>
+                            <option value="5">Grade 5</option>
+                            <option value="6">Grade 6</option>
+                            <option value="7">Grade 7</option>
+                            <option value="8">Grade 8</option>
+                            <option value="9">Grade 9</option>
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11</option>
+                            <option value="12">Grade 12</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="stream">Preferred Stream <span class="required-star">*</span></label>
+                        <select class="form-select" id="stream" required>
+                            <option value="">Select stream</option>
+                            <option value="Art">Art</option>
+                            <option value="Science">Science</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="photoUpload">Student Photo Upload <span class="required-star">*</span></label>
+                        <div class="form-control-file" id="photoDrop">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--navy); opacity:.5; display:block; margin-bottom:8px;"></i>
+                            <span style="font-weight:600; color:var(--muted);">Click to upload photo (JPG/PNG)</span>
+                            <input type="file" class="form-control" id="photoUpload" accept="image/*" style="display:none;" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== ACADEMIC INFORMATION ========== -->
+                <div class="section-title mt-5"><i class="fas fa-book-open blue-icon"></i> Academic Information</div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label" for="prevSchool">Previous School Name <span class="required-star">*</span></label>
+                        <input type="text" class="form-control" id="prevSchool" placeholder="e.g. Sunrise Academy" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="reportCard">Upload Previous School Report Card <span class="required-star">*</span></label>
+                        <div class="form-control-file" id="reportDrop">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--navy); opacity:.5; display:block; margin-bottom:8px;"></i>
+                            <span style="font-weight:600; color:var(--muted);">Click to upload (PDF/JPG)</span>
+                            <input type="file" class="form-control" id="reportCard" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== PARENT / GUARDIAN INFORMATION ========== -->
+                <div class="section-title mt-5"><i class="fas fa-users"></i> Parent / Guardian Information</div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <label class="form-label" for="parentName">Parent / Guardian Name <span class="required-star">*</span></label>
+                        <input type="text" class="form-control" id="parentName" placeholder="e.g. Ahmed Khan" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="mobile">Mobile Number <span class="required-star">*</span></label>
+                        <input type="tel" class="form-control" id="mobile" placeholder="03XX-XXXXXXX" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="email">Email Address <span class="required-star">*</span></label>
+                        <input type="email" class="form-control" id="email" placeholder="parent@example.com" required>
+                    </div>
+                </div>
+
+                <!-- ========== CONTACT INFORMATION ========== -->
+                <div class="section-title mt-5"><i class="fas fa-map-pin blue-icon"></i> Contact Information</div>
+                <div class="row g-4">
+                    <div class="col-12">
+                        <label class="form-label" for="address">Home Address <span class="required-star">*</span></label>
+                        <textarea class="form-control" id="address" rows="2" placeholder="House #, Street, City" required></textarea>
+                    </div>
+                </div>
+
+                <!-- ========== REQUIRED DOCUMENTS ========== -->
+                <div class="section-title mt-5"><i class="fas fa-folder-open"></i> Required Documents</div>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label" for="birthCert">Upload Birth Certificate / B-Form <span class="required-star">*</span></label>
+                        <div class="form-control-file" id="birthDrop">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--navy); opacity:.5; display:block; margin-bottom:8px;"></i>
+                            <span style="font-weight:600; color:var(--muted);">Click to upload (PDF/JPG)</span>
+                            <input type="file" class="form-control" id="birthCert" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="cnic">Upload Parent/Guardian CNIC <span class="required-star">*</span></label>
+                        <div class="form-control-file" id="cnicDrop">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:2rem; color:var(--navy); opacity:.5; display:block; margin-bottom:8px;"></i>
+                            <span style="font-weight:600; color:var(--muted);">Click to upload (PDF/JPG)</span>
+                            <input type="file" class="form-control" id="cnic" accept=".pdf,.jpg,.jpeg,.png" style="display:none;" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========== ADDITIONAL INFORMATION ========== -->
+                <div class="section-title mt-5"><i class="fas fa-pen blue-icon"></i> Additional Information</div>
+                <div class="row g-4">
+                    <div class="col-12">
+                        <label class="form-label" for="whyJoin">"Why do you want to join this school?" (Optional)</label>
+                        <textarea class="form-control" id="whyJoin" rows="3" placeholder="Tell us what excites you about our Art & Science Academy..."></textarea>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="declaration" required>
+                            <label class="form-check-label" for="declaration">
+                                I confirm that the information provided is correct. <span class="required-star">*</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <div class="mt-5">
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Apply for Admission
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- ============================================================
+    SUCCESS POPUP - no emoji
+    ============================================================ -->
+    <div class="popup-overlay" id="successPopup">
+        <div class="popup-box">
+            <div class="popup-lottie">
+                <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_szlepvdh.json"
+                    background="transparent" speed="1" loop autoplay>
+                </lottie-player>
+            </div>
+            <h2><i class="fas fa-check-circle"></i> Application Submitted!</h2>
+            <p>
+                Your admission form has been successfully submitted. Please check your email
+                for further instructions regarding the next steps.
+            </p>
+            <a href="art and science school.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i> Back to School
+            </a>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ============================================================
+        // CUSTOM CURSOR
+        // ============================================================
+        const cDot = document.getElementById('curDot'),
+            cRing = document.getElementById('curRing');
+        let rx = 0,
+            ry = 0,
+            mx = 0,
+            my = 0;
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX;
+            my = e.clientY;
+            cDot.style.cssText = `left:${mx}px;top:${my}px`;
+        });
+        (function loop() {
+            rx += (mx - rx) * .1;
+            ry += (my - ry) * .1;
+            cRing.style.cssText = `left:${rx}px;top:${ry}px`;
+            requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll('button, a, .form-control, .form-select, .form-check-input, .form-control-file').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cRing.classList.add('cr-big');
+                cDot.style.opacity = '0';
+            });
+            el.addEventListener('mouseleave', () => {
+                cRing.classList.remove('cr-big');
+                cDot.style.opacity = '1';
+            });
+        });
+
+        // ============================================================
+        // FILE INPUT TRIGGER (click on drop zones)
+        // ============================================================
+        document.querySelectorAll('.form-control-file').forEach(zone => {
+            const input = zone.querySelector('input[type="file"]');
+            zone.addEventListener('click', () => {
+                if (input) input.click();
+            });
+            if (input) {
+                input.addEventListener('change', (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                        const fileName = e.target.files[0].name;
+                        const span = zone.querySelector('span');
+                        if (span) {
+                            span.textContent = '📎 ' + fileName;
+                            span.style.color = 'var(--navy)';
+                        }
+                    }
+                });
+            }
+        });
+
+        // ============================================================
+        // FORM SUBMIT
+        // ============================================================
+        document.getElementById('applyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Basic validation check
+            const requiredFields = this.querySelectorAll('[required]');
+            let valid = true;
+            requiredFields.forEach(f => {
+                if (!f.value || (f.type === 'checkbox' && !f.checked)) {
+                    valid = false;
+                    f.style.borderColor = 'var(--red)';
+                    f.classList.add('is-invalid');
+                } else {
+                    f.classList.remove('is-invalid');
+                    f.style.borderColor = '';
+                }
+            });
+
+            // Check file inputs
+            const fileInputs = this.querySelectorAll('input[type="file"][required]');
+            fileInputs.forEach(f => {
+                if (!f.files || f.files.length === 0) {
+                    valid = false;
+                    f.closest('.form-control-file').style.borderColor = 'var(--red)';
+                } else {
+                    f.closest('.form-control-file').style.borderColor = '';
+                }
+            });
+
+            if (!valid) {
+                const firstError = this.querySelector('.is-invalid, .form-control-file[style*="red"]');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
+            // ---- SUCCESS ----
+            document.getElementById('successPopup').classList.add('active');
+        });
+
+        // ============================================================
+        // CLOSE POPUP ON CLICK OUTSIDE
+        // ============================================================
+        document.getElementById('successPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        // REMOVE INVALID STYLES ON INPUT
+        // ============================================================
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+                this.style.borderColor = '';
+                const parent = this.closest('.form-control-file');
+                if (parent) parent.style.borderColor = '';
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    </script>
+</body>
+</html>
